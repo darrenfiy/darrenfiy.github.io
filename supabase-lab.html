@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BLU 小實驗室 v4.0 - 靈魂覺醒版</title>
+  </head>
+  <body>
+    <h1>BLU 小實驗室 v4.0 - 靈魂覺醒版</h1>
+
+    <h2>1. 登入 / 註冊</h2>
+    <p>
+      <input id="email" type="email" placeholder="Email" />
+      <input id="password" type="password" placeholder="Password" />
+    </p>
+    <p>
+      <button id="signupBtn">註冊（第一次用）</button>
+      <button id="loginBtn">登入</button>
+    </p>
+    <p id="authStatus"></p>
+
+    <hr />
+
+    <div id="appArea" style="display: none">
+      <h2>2. 靈魂狀態與 BLU 累積</h2>
+      <p>目前登入使用者 id：<span id="userId"></span></p>
+
+      <p>總累積 BLU 厚度：<span id="totalBlu">載入中...</span></p>
+      <p>生命靈數：<span id="lifeNumber">載入中...</span></p>
+      <p>靈魂入口標籤：<span id="entryLabel">載入中...</span></p>
+
+      <hr />
+
+      <h2>3. 建立 / 初始化 Profile（靈魂誕生）</h2>
+      <p>
+        <label for="birthDate">你的生日：</label>
+        <input id="birthDate" type="date" />
+      </p>
+      <p>
+        <button id="initProfileBtn">初始化靈魂檔案（計算生命靈數並生成標籤）</button>
+      </p>
+      <p id="profileStatus">（需輸入生日並初始化才能生成靈魂標籤）</p>
+
+      <hr />
+
+      <h2>4. 測試 BLU 寫入</h2>
+      <button id="addBluBtn">+0.5 BLU （一次親愛的）</button>
+      <p id="bluStatus"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      // **請確認這兩行是妳的 Supabase 專案密鑰**
+      const SUPABASE_URL = "https://amqgpwrhxzrhvaknsasl.supabase.co";
+      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtcWdwd3JoeHpyaHZha25zYXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NzExMDYsImV4cCI6MjA4MDM0NzEwNn0.cOVpCvBS42_GIBR2zA4J0TqatYMZgeQ-mwLwYjmPTKU";
+
+      const { createClient } = supabase;
+      const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // DOM 元素定義
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const authStatus = document.getElementById("authStatus");
+      const appArea = document.getElementById("appArea");
+      const userIdSpan = document.getElementById("userId");
+      const bluStatus = document.getElementById("bluStatus");
+      const totalBluSpan = document.getElementById("totalBlu");
+      const lifeNumberSpan = document.getElementById("lifeNumber");
+      const entryLabelSpan = document.getElementById("entryLabel");
+      const birthDateInput = document.getElementById("birthDate");
+      const initProfileBtn = document.getElementById("initProfileBtn");
+      const profileStatus = document.getElementById("profileStatus");
+
+      // ====== 工具函式：計算生命靈數（1~9） ======
+      function calculateLifePath(dateStr) {
+        if (!dateStr) return null;
+
+        // 只保留數字，例如 "1990-07-15" -> "19900715"
+        const digits = dateStr.replace(/\D/g, "");
+        if (!digits) return null;
+
+        let sum = 0;
+        for (let i = 0; i < digits.length; i++) {
+          sum += Number(digits[i]);
+        }
+
+        // 持續把位數相加，直到剩一位數（1~9）
+        while (sum > 9) {
+          sum = sum
+            .toString()
+            .split("")
+            .reduce((acc, d) => acc + Number(d), 0);
+        }
+
+        return sum; // 目前先不處理 11/22 等大師數，保持簡單
+      }
+
+      // ====== 工具函式：生成入口標籤 ======
+      function generateEntryLabel(lifeNumber, bluTotal) {
+        if (!lifeNumber) return "未知・探索者｜BLU 0.0";
+        return `${lifeNumber}號人｜BLU ${bluTotal.toFixed(1)}`;
+      }
+
+
+      // 讀取 BLU 總量和 Profile
+      async function fetchTotalBluAndProfile(userId) {
+        // 1. 讀取 BLU Logs
+        const { data: bluData, error: bluError } = await client
+          .from("blu_logs")
+          .select("blu_value")
+          .eq("user_id", userId);
+
+        let totalBlu = 0;
+        if (bluError) {
+          totalBluSpan.textContent = "載入 BLU 錯誤！";
+          console.error("BLU Fetch Error:", bluError);
+        } else {
+          totalBlu = bluData.reduce((sum, log) => sum + (parseFloat(log.blu_value) || 0), 0);
+          totalBluSpan.textContent = totalBlu.toFixed(1);
+        }
+
+        // 2. 讀取 Profile（包含 entry_label, life_number, birth_date）
+        const { data: profileData, error: profileError } = await client
+          .from("profiles")
+          .select("entry_label, life_number, birth_date")
+          .eq("id", userId)
+          .single();
+
+        if (profileError && profileError.code !== 'PGRST116') { // PGRST116 找不到資料
+            entryLabelSpan.textContent = "載入標籤錯誤！";
+            lifeNumberSpan.textContent = "載入錯誤";
+            console.error("Profile Fetch Error:", profileError);
+            profileStatus.textContent = "❌ 錯誤：Profile 讀取失敗。";
+        } else if (profileData) {
+          // 顯示 entry_label
+          entryLabelSpan.textContent = profileData.entry_label || "未設定";
+
+          // 顯示 life_number
+          if (profileData.life_number) {
+            lifeNumberSpan.textContent = profileData.life_number + " 號";
+          } else {
+            lifeNumberSpan.textContent = "尚未計算（請輸入生日並初始化）";
+          }
+
+          // 如果有 birth_date，自動填入日期欄位
+          if (profileData.birth_date) {
+            birthDateInput.value = profileData.birth_date;
+          }
+
+          // 檢查是否需要更新 life_number
+          if (!profileData.life_number && profileData.birth_date) {
+            profileStatus.textContent = "⚠ 已有生日資料，但尚未計算生命靈數，請點擊初始化按鈕更新。";
+          } else if (!profileData.life_number) {
+            profileStatus.textContent = "⚠ 尚未設定生日，請輸入生日後點擊初始化按鈕。";
+          } else {
+            profileStatus.textContent = "✅ 靈魂檔案完整（生命靈數：" + profileData.life_number + "號）";
+          }
+        } else {
+            entryLabelSpan.textContent = "未找到標籤，請先初始化";
+            lifeNumberSpan.textContent = "尚未初始化";
+            profileStatus.textContent = "⚠ Profile 不存在，請輸入生日並點擊初始化按鈕。";
+        }
+      }
+
+
+      // 更新使用者狀態
+      async function refreshUser() {
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (user) {
+          appArea.style.display = "block";
+          userIdSpan.textContent = user.id;
+          authStatus.textContent = "已登入";
+          await fetchTotalBluAndProfile(user.id);
+        } else {
+          appArea.style.display = "none";
+          authStatus.textContent = "尚未登入";
+          totalBluSpan.textContent = '0';
+          entryLabelSpan.textContent = '載入中...';
+          profileStatus.textContent = '請先登入';
+        }
+      }
+
+      // **[核心功能升級]** 建立 / 更新 Profile（含生命靈數計算與標籤生成）
+      initProfileBtn.onclick = async () => {
+        profileStatus.textContent = "🌟 靈魂檔案處理中...";
+
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (!user) {
+          profileStatus.textContent = "❌ 尚未登入。";
+          return;
+        }
+
+        // 讀取生日
+        const birthDate = birthDateInput.value;
+        if (!birthDate) {
+          profileStatus.textContent = "⚠ 請先輸入你的生日。";
+          return;
+        }
+
+        // 計算生命靈數
+        const lifeNumber = calculateLifePath(birthDate);
+        if (!lifeNumber) {
+          profileStatus.textContent = "❌ 生日格式錯誤，無法計算生命靈數。";
+          return;
+        }
+
+        // 讀取 BLU 總量
+        const { data: bluData } = await client
+          .from("blu_logs")
+          .select("blu_value")
+          .eq("user_id", user.id);
+
+        const totalBlu = bluData
+          ? bluData.reduce((sum, log) => sum + (parseFloat(log.blu_value) || 0), 0)
+          : 0;
+
+        // 生成入口標籤
+        const entryLabel = generateEntryLabel(lifeNumber, totalBlu);
+
+        // 使用 upsert：如果沒有 profile 就新增，有的話就更新
+        const { error } = await client.from("profiles").upsert({
+          id: user.id,
+          birth_date: birthDate,
+          life_number: lifeNumber,
+          entry_label: entryLabel
+        });
+
+        if (error) {
+          profileStatus.textContent = "❌ 初始化失敗：" + error.message;
+          console.error("Profile Init Error:", error);
+        } else {
+          profileStatus.textContent = `✅ 靈魂覺醒完成！你是 ${lifeNumber} 號人，標籤：${entryLabel}`;
+          // 重新讀取 profile 狀態
+          await fetchTotalBluAndProfile(user.id);
+        }
+      };
+
+
+      // 註冊功能 (不變)
+      document.getElementById("signupBtn").onclick = async () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        authStatus.textContent = "註冊中...";
+        const { data, error } = await client.auth.signUp({
+          email,
+          password,
+        });
+
+        if (error) {
+          authStatus.textContent = "註冊失敗：" + error.message;
+        } else {
+          authStatus.textContent = "註冊成功，請再按一次『登入』";
+        }
+      };
+
+      // 登入功能
+      document.getElementById("loginBtn").onclick = async () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        authStatus.textContent = "登入中...";
+        const { data, error } = await client.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          authStatus.textContent = "登入失敗：" + error.message;
+        } else {
+          authStatus.textContent = "登入成功！";
+          await refreshUser();
+        }
+      };
+
+      // 寫入 BLU 功能（並自動更新 entry_label）
+      document.getElementById("addBluBtn").onclick = async () => {
+        bluStatus.textContent = "寫入中...";
+
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (!user) {
+          bluStatus.textContent = "尚未登入，請先登入。";
+          return;
+        }
+
+        const { error } = await client.from("blu_logs").insert({
+          user_id: user.id,
+          blu_value: 0.5,
+          description: "手動測試 +0.5 BLU",
+        });
+
+        if (error) {
+          bluStatus.textContent = "寫入失敗：" + error.message;
+        } else {
+          bluStatus.textContent = "✅ 成功寫入一筆 +0.5 BLU！";
+
+          // 成功後重新讀取並更新 entry_label
+          const { data: profileData } = await client
+            .from("profiles")
+            .select("life_number")
+            .eq("id", user.id)
+            .single();
+
+          if (profileData && profileData.life_number) {
+            // 重新計算 BLU 總量
+            const { data: bluData } = await client
+              .from("blu_logs")
+              .select("blu_value")
+              .eq("user_id", user.id);
+
+            const totalBlu = bluData
+              ? bluData.reduce((sum, log) => sum + (parseFloat(log.blu_value) || 0), 0)
+              : 0;
+
+            // 重新生成 entry_label
+            const newEntryLabel = generateEntryLabel(profileData.life_number, totalBlu);
+
+            // 更新 entry_label
+            await client.from("profiles").update({
+              entry_label: newEntryLabel
+            }).eq("id", user.id);
+
+            bluStatus.textContent = `✅ 成功寫入 +0.5 BLU！標籤已更新為：${newEntryLabel}`;
+          }
+
+          await fetchTotalBluAndProfile(user.id); // 重新整理畫面
+        }
+      };
+
+      // 一進來先檢查是否已登入
+      refreshUser();
+    </script>
+  </body>
+</html>

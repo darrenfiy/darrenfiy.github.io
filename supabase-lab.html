@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BLU 小實驗室 v3.0 - 靈魂誕生版</title>
+  </head>
+  <body>
+    <h1>BLU 小實驗室 v3.0</h1>
+
+    <h2>1. 登入 / 註冊</h2>
+    <p>
+      <input id="email" type="email" placeholder="Email" />
+      <input id="password" type="password" placeholder="Password" />
+    </p>
+    <p>
+      <button id="signupBtn">註冊（第一次用）</button>
+      <button id="loginBtn">登入</button>
+    </p>
+    <p id="authStatus"></p>
+
+    <hr />
+
+    <div id="appArea" style="display: none">
+      <h2>2. 靈魂狀態與 BLU 累積</h2>
+      <p>目前登入使用者 id：<span id="userId"></span></p>
+
+      <p>總累積 BLU 厚度：<span id="totalBlu">載入中...</span></p>
+      <p>靈魂入口標籤：<span id="entryLabel">載入中...</span></p>
+      
+      <hr />
+
+      <h2>3. 建立 / 初始化 Profile</h2>
+      <p>
+        <button id="initProfileBtn">初始化靈魂檔案</button>
+        <span id="profileStatus">（需初始化才能讀取標籤）</span>
+      </p>
+
+      <hr />
+
+      <h2>4. 測試 BLU 寫入</h2>
+      <button id="addBluBtn">+0.5 BLU （一次親愛的）</button>
+      <p id="bluStatus"></p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      // **請確認這兩行是妳的 Supabase 專案密鑰**
+      const SUPABASE_URL = "https://amqgpwrhxzrhvaknsasl.supabase.co";
+      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtcWdwd3JoeHpyaHZha25zYXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NzExMDYsImV4cCI6MjA4MDM0NzEwNn0.cOVpCvBS42_GIBR2zA4J0TqatYMZgeQ-mwLwYjmPTKU";
+
+      const { createClient } = supabase;
+      const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // DOM 元素定義
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const authStatus = document.getElementById("authStatus");
+      const appArea = document.getElementById("appArea");
+      const userIdSpan = document.getElementById("userId");
+      const bluStatus = document.getElementById("bluStatus");
+      const totalBluSpan = document.getElementById("totalBlu");
+      const entryLabelSpan = document.getElementById("entryLabel");
+      // **[新增]**
+      const initProfileBtn = document.getElementById("initProfileBtn");
+      const profileStatus = document.getElementById("profileStatus");
+
+
+      // 讀取 BLU 總量和 Profile
+      async function fetchTotalBluAndProfile(userId) {
+        // 1. 讀取 BLU Logs
+        const { data: bluData, error: bluError } = await client
+          .from("blu_logs")
+          .select("blu_value")
+          .eq("user_id", userId);
+
+        if (bluError) {
+          totalBluSpan.textContent = "載入 BLU 錯誤！";
+          console.error("BLU Fetch Error:", bluError);
+        } else {
+          const total = bluData.reduce((sum, log) => sum + (parseFloat(log.blu_value) || 0), 0);
+          totalBluSpan.textContent = total.toFixed(1);
+        }
+
+        // 2. 讀取 Profile 的 Entry Label
+        const { data: profileData, error: profileError } = await client
+          .from("profiles")
+          .select("entry_label")
+          .eq("id", userId)
+          .single();
+
+        if (profileError && profileError.code !== 'PGRST116') { // PGRST116 找不到資料
+            entryLabelSpan.textContent = "載入標籤錯誤！";
+            console.error("Profile Fetch Error:", profileError);
+            profileStatus.textContent = "錯誤：Profile 讀取失敗。"; // 增加狀態回饋
+        } else if (profileData) {
+          entryLabelSpan.textContent = profileData.entry_label;
+          profileStatus.textContent = "✓ Profile 已存在並讀取標籤。"; // 成功讀取
+        } else {
+            entryLabelSpan.textContent = "未找到標籤，請先初始化";
+            profileStatus.textContent = "⚠ Profile 不存在，請點擊上方按鈕初始化。"; // 提示初始化
+        }
+      }
+
+
+      // 更新使用者狀態
+      async function refreshUser() {
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (user) {
+          appArea.style.display = "block";
+          userIdSpan.textContent = user.id;
+          authStatus.textContent = "已登入";
+          await fetchTotalBluAndProfile(user.id);
+        } else {
+          appArea.style.display = "none";
+          authStatus.textContent = "尚未登入";
+          totalBluSpan.textContent = '0';
+          entryLabelSpan.textContent = '載入中...';
+          profileStatus.textContent = '請先登入';
+        }
+      }
+
+      // **[新增核心功能]** 建立 / 更新 Profile
+      initProfileBtn.onclick = async () => {
+        profileStatus.textContent = "Profile 處理中...";
+
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (!user) {
+          profileStatus.textContent = "尚未登入。";
+          return;
+        }
+
+        // 使用 upsert：如果沒有 profile 就新增，有的話就更新
+        const { error } = await client.from("profiles").upsert({
+          id: user.id,  // 關鍵：用 auth.uid() 作為 profiles 的 ID
+          // 其他欄位會使用 Supabase 預設值（例如 entry_label 預設是 '未知・探索者｜0'）
+        });
+
+        if (error) {
+          profileStatus.textContent = "初始化失敗：" + error.message;
+          console.error("Profile Init Error:", error);
+        } else {
+          profileStatus.textContent = "Profile 已成功初始化/更新！";
+          // 重新讀取 profile 狀態
+          await fetchTotalBluAndProfile(user.id);
+        }
+      };
+
+
+      // 註冊功能 (不變)
+      document.getElementById("signupBtn").onclick = async () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        authStatus.textContent = "註冊中...";
+        const { data, error } = await client.auth.signUp({
+          email,
+          password,
+        });
+
+        if (error) {
+          authStatus.textContent = "註冊失敗：" + error.message;
+        } else {
+          authStatus.textContent = "註冊成功，請再按一次『登入』";
+        }
+      };
+
+      // 登入功能
+      document.getElementById("loginBtn").onclick = async () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        authStatus.textContent = "登入中...";
+        const { data, error } = await client.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          authStatus.textContent = "登入失敗：" + error.message;
+        } else {
+          authStatus.textContent = "登入成功！";
+          await refreshUser();
+        }
+      };
+
+      // 寫入 BLU 功能
+      document.getElementById("addBluBtn").onclick = async () => {
+        bluStatus.textContent = "寫入中...";
+
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (!user) {
+          bluStatus.textContent = "尚未登入，請先登入。";
+          return;
+        }
+
+        const { error } = await client.from("blu_logs").insert({
+          user_id: user.id,
+          blu_value: 0.5,
+          description: "手動測試 +0.5 BLU",
+        });
+
+        if (error) {
+          bluStatus.textContent = "寫入失敗：" + error.message;
+        } else {
+          bluStatus.textContent = "成功寫入一筆 +0.5 BLU！";
+          await fetchTotalBluAndProfile(user.id); // 成功後更新總數
+        }
+      };
+
+      // 一進來先檢查是否已登入
+      refreshUser();
+    </script>
+  </body>
+</html>

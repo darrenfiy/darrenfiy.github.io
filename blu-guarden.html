@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BLU 小花園 v5.5 ｜ 溫柔覺醒版</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg: #faf8ff;
+      --card: #ffffffee;
+      --accent: #c9a7ff;
+      --glow: #e0c8ff88;
+      --text: #333;
+      --soft: #777;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(135deg, #fdf2ff, #f0e8ff);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 20px 16px;
+    }
+    .container { max-width: 460px; width: 100%; }
+    .card {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 12px 32px #0000000a;
+      margin-bottom: 20px;
+      border: 1px solid #f0e8ff;
+    }
+    h1 { font-size: 1.7rem; text-align: center; margin: 0 0 8px; background: linear-gradient(90deg, #b388ff, #7c3aed); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    h2 { font-size: 1.25rem; margin: 24px 0 12px; color: #6b46c1; }
+    input, button {
+      width: 100%; padding: 12px 16px; margin: 8px 0;
+      border-radius: 16px; border: 1.5px solid #e2d9ff;
+      font-size: 1rem;
+    }
+    input { background: white; }
+    button {
+      background: linear-gradient(135deg, #d8b4ff, #9f7aea);
+      color: white; font-weight: 600; cursor: pointer;
+      border: none; box-shadow: 0 4px 12px var(--glow);
+      transition: all 0.2s;
+    }
+    button:hover { transform: translateY(-2px); box-shadow: 0 8px 20px var(--glow); }
+    .mood-buttons {
+      display: flex; gap: 12px; margin: 16px 0; justify-content: center;
+    }
+    .mood-btn {
+      font-size: 2.8rem; padding: 12px; width: 72px; height: 72px;
+      border-radius: 50%; background: white; border: 2px solid #e2d9ff;
+      cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px #00000008;
+    }
+    .mood-btn:hover { transform: scale(1.1); }
+    .mood-btn.selected { border-color: #9f7aea; background: #f0e8ff; box-shadow: 0 0 20px var(--glow); }
+    .streak {
+      display: inline-block; padding: 6px 14px; background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+      border-radius: 20px; font-weight: 700; color: #6b4700; font-size: 0.9rem;
+    }
+    .status { text-align: center; margin: 12px 0; font-size: 0.95rem; min-height: 24px; }
+    .welcome { text-align: center; font-size: 1.1rem; line-height: 1.6; color: #5b46a1; }
+    .blu { font-size: 1.4rem; font-weight: 700; color: #7c3aed; }
+    .history { font-size: 0.9rem; max-height: 200px; overflow-y: auto; }
+    .mood-item { padding: 6px 0; border-bottom: 1px solid #f0e8ff; display: flex; justify-content: space-between; }
+    .back-link { text-align: center; margin-top: 10px; }
+    .back-link a { color: #9f7aea; text-decoration: none; font-size: 0.9rem; }
+    .back-link a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="card">
+      <h1>🌸 BLU 小花園</h1>
+      <p style="text-align:center;color:#777;margin:0;">愛的重量，從這裡開始被看見</p>
+    </div>
+
+    <!-- 登入區 -->
+    <div id="authCard" class="card">
+      <h2>🌿 回到你的花園</h2>
+      <input id="email" type="email" placeholder="email" />
+      <input id="password" type="password" placeholder="密碼（至少 6 位）" />
+      <button id="signupBtn">🌱 第一次來 ｜ 種下一顆種子</button>
+      <button id="loginBtn">🌸 已經有花園 ｜ 回家</button>
+      <p class="status" id="authStatus"></p>
+      <div class="back-link">
+        <a href="index.html">← 回到鏡子庭院</a>
+      </div>
+    </div>
+
+    <!-- 主畫面 -->
+    <div id="appArea" style="display:none">
+      <div class="card">
+        <div class="welcome" id="welcomeMsg">載入中…</div>
+        <p style="text-align:center;margin:8px 0;">
+          總累積 BLU 厚度：<span class="blu" id="totalBlu">0</span> <br>
+          <span style="color:#777;">（每一次覺察，都會讓愛更厚實一點）</span>
+        </p>
+        <p style="text-align:center;">
+          靈魂入口標籤：<span id="entryLabel">載入中…</span>
+        </p>
+        <div style="text-align:center;margin:16px 0;">
+          <span class="streak" id="streakBadge">🔥 連續 0 天</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>🌙 今天你感覺如何？</h2>
+        <div class="mood-buttons">
+          <button class="mood-btn" data-mood="good">🥰</button>
+          <button class="mood-btn" data-mood="neutral">🙂</button>
+          <button class="mood-btn" data-mood="bad">🥺</button>
+        </div>
+        <p class="status" id="moodStatus">（輕輕點一個，記錄今天的你）</p>
+      </div>
+
+      <div class="card">
+        <h2>📜 最近的心情足跡</h2>
+        <div class="history" id="moodHistory">載入中…</div>
+      </div>
+
+      <div class="card" style="text-align:center;">
+        <button id="logoutBtn">🌿 安靜離開花園</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+  // ⚠️ 重要：請在下面兩行填入你的 Supabase 專案資訊
+  // 可以在 Supabase Dashboard > Settings > API 找到
+  const supabaseUrl = 'https://amqgpwrhxzrhvaknsasl.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtcWdwd3JoeHpyaHZha25zYXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NzExMDYsImV4cCI6MjA4MDM0NzEwNn0.cOVpCvBS42_GIBR2zA4J0TqatYMZgeQ-mwLwYjmPTKU';
+
+  const client = supabase.createClient(supabaseUrl, supabaseKey);
+
+  const moodButtons = document.querySelectorAll('.mood-btn');
+  const authStatus = document.getElementById('authStatus');
+  const moodStatus = document.getElementById('moodStatus');
+  const totalBluEl = document.getElementById('totalBlu');
+  const entryLabelEl = document.getElementById('entryLabel');
+  const welcomeMsg = document.getElementById('welcomeMsg');
+  const streakBadge = document.getElementById('streakBadge');
+  const moodHistory = document.getElementById('moodHistory');
+
+  // ====== 工具函數 ======
+  function calculateLifeNumber(birthDate) {
+    const digits = birthDate.replace(/-/g, '');
+    let sum = digits.split('').reduce((a, b) => a + +b, 0);
+    while (sum > 9) sum = String(sum).split('').reduce((a, b) => a + +b, 0);
+    return sum;
+  }
+
+  function generateEntryLabel(lifeNumber, totalBlu) {
+    const labels = [
+      "剛發芽的小種子", "悄悄綻放的花苞", "在風中搖曳的小草", "開始結果的小樹",
+      "沐浴陽光的向日葵", "靜靜守護的夜來香", "自由飛翔的蒲公英", "沉靜深根的老樹",
+      "與月光共舞的精靈", "永恆呼吸的森林"
+    ];
+    const index = Math.min(Math.floor(totalBlu / 2), labels.length - 1);
+    return `${lifeNumber}號靈魂｜${labels[index]}`;
+  }
+
+  // ====== 登入相關 ======
+  document.getElementById('signupBtn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    if (!email || !password || password.length < 6) {
+      authStatus.textContent = "請填完整喔（密碼至少 6 位）🌱";
+      return;
+    }
+    authStatus.textContent = "註冊中...";
+    const { error } = await client.auth.signUp({ email, password });
+    if (error) {
+      authStatus.textContent = "❌ " + error.message;
+    } else {
+      authStatus.textContent = "🌸 註冊成功！請直接按「登入」按鈕進入花園";
+      // 註：如果你的 Supabase 啟用了 Email 確認，使用者需要先收信確認
+      // 可以在 Supabase Dashboard > Authentication > Settings > Email Auth 調整
+    }
+  });
+
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    authStatus.textContent = "登入中...";
+    const { data, error } = await client.auth.signInWithPassword({ email, password });
+    if (error) {
+      authStatus.textContent = "❌ " + error.message;
+    } else {
+      authStatus.textContent = "🌸 登入成功！";
+      refreshUser(data.user);
+    }
+  });
+
+  document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+    await client.auth.signOut();
+    location.reload();
+  });
+
+  // ====== 主要渲染 ======
+  async function refreshUser(user) {
+    if (!user) {
+      document.getElementById('appArea').style.display = 'none';
+      document.getElementById('authCard').style.display = 'block';
+      return;
+    }
+    document.getElementById('authCard').style.display = 'none';
+    document.getElementById('appArea').style.display = 'block';
+
+    // 檢查 profile
+    let { data: profile } = await client.from('profiles').select('*').eq('id', user.id).single();
+    if (!profile || !profile.birth_date) {
+      // ✅ 加入格式驗證
+      let birth = prompt("🌱 第一次來，請告訴我你的生日（格式：YYYY-MM-DD，例如 1990-07-15）");
+      if (!birth) {
+        alert("沒關係，改天再告訴我也可以喔");
+        await client.auth.signOut();
+        location.reload();
+        return;
+      }
+      // 驗證格式
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(birth)) {
+        alert("格式小提示：要像 1990-07-15 這樣喔～請重新登入後再試");
+        await client.auth.signOut();
+        location.reload();
+        return;
+      }
+      const lifeNumber = calculateLifeNumber(birth);
+      await client.from('profiles').upsert({ id: user.id, birth_date: birth, life_number: lifeNumber });
+      profile = { birth_date: birth, life_number: lifeNumber, entry_label: generateEntryLabel(lifeNumber, 0) };
+    }
+
+    welcomeMsg.textContent = `歡迎回家，${profile.life_number}號靈魂 🌸`;
+    await renderAll(user.id, profile);
+  }
+
+  async function renderAll(userId, profile) {
+    const { data: bluData } = await client.from('blu_logs').select('blu_value').eq('user_id', userId);
+    const totalBlu = bluData?.reduce((sum, l) => sum + (parseFloat(l.blu_value) || 0), 0) || 0;
+    totalBluEl.textContent = totalBlu.toFixed(1);
+
+    const newLabel = generateEntryLabel(profile.life_number, totalBlu);
+    if (newLabel !== profile.entry_label) {
+      await client.from('profiles').update({ entry_label: newLabel }).eq('id', userId);
+    }
+    entryLabelEl.textContent = newLabel;
+
+    // 心情歷史 + streak
+    const { data: logs } = await client.from('mood_logs').select('date,mood').eq('user_id', userId).order('date', { ascending: false });
+    renderMoodHistory(logs || []);
+
+    // 今天是否已記錄
+    const today = new Date().toISOString().split('T')[0];
+    const todayLog = logs?.find(l => l.date === today);
+    moodButtons.forEach(b => b.classList.toggle('selected', b.dataset.mood === todayLog?.mood));
+    moodStatus.textContent = todayLog ? "🌿 今天已經被溫柔記錄，可以隨時更新喔" : "（輕輕點一個，記錄今天的你）";
+  }
+
+  function renderMoodHistory(logs) {
+    if (!logs.length) {
+      moodHistory.innerHTML = "<p style='color:#999;text-align:center;'>還沒有足跡喔～</p>";
+      streakBadge.textContent = "🌱 開始記錄吧";
+      return;
+    }
+
+    let streak = 0;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    let cur = new Date(today);
+
+    while (true) {
+      const d = cur.toISOString().split('T')[0];
+      if (logs.some(l => l.date === d)) {
+        streak++;
+        cur.setDate(cur.getDate() - 1);
+      } else {
+        break;
+      }
+    }
+    streakBadge.textContent = streak ? `🔥 連續 ${streak} 天` : "🌱 開始記錄吧";
+
+    const html = logs.slice(0, 30).map(l => {
+      const emo = { good: "🥰", neutral: "🙂", bad: "🥺" }[l.mood];
+      const date = new Date(l.date);
+      const isToday = l.date === new Date().toISOString().split('T')[0];
+      const dateStr = isToday ? "今天" : `${date.getMonth() + 1}/${date.getDate()}`;
+      return `<div class="mood-item"><span>${dateStr}</span><span>${emo}</span></div>`;
+    }).join('');
+    moodHistory.innerHTML = html || "還沒有足跡";
+  }
+
+  // ====== 心情記錄 ======
+  moodButtons.forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const { data: { user } } = await client.auth.getUser();
+      if (!user) {
+        moodStatus.textContent = "請先登入喔 🌱";
+        return;
+      }
+
+      const mood = btn.dataset.mood;
+      const today = new Date().toISOString().split('T')[0];
+      moodStatus.textContent = "正在種下一朵小花…";
+
+      const { error } = await client.from('mood_logs').upsert({
+        user_id: user.id, date: today, mood
+      }, { onConflict: 'user_id,date' });
+
+      if (error) {
+        moodStatus.textContent = "❌ 出錯了：" + error.message;
+        console.error("Mood Log Error:", error);
+        return;
+      }
+
+      moodButtons.forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+
+      // ✅ 修復：改用 description 而非 note
+      const insertResult = await client.from('blu_logs').insert({
+        user_id: user.id,
+        blu_value: 0.5,
+        description: `心情記錄 ${mood}`
+      });
+
+      if (insertResult.error) {
+        console.error("BLU Log Error:", insertResult.error);
+      }
+
+      const texts = {
+        good: "今天像被陽光親吻",
+        neutral: "今天像雲朵一樣平靜",
+        bad: "今天有點卡，沒關係，明天會更好"
+      };
+      moodStatus.textContent = `🌸 ${texts[mood]} ｜ +0.5 BLU 已種下`;
+
+      const { data: profile } = await client.from('profiles').select('*').eq('id', user.id).single();
+      await renderAll(user.id, profile);
+    });
+  });
+
+  // 啟動
+  (async () => {
+    const { data: { user } } = await client.auth.getUser();
+    refreshUser(user);
+  })();
+</script>
+
+<!--
+⚠️ 重要提醒：
+1. 請確認 Supabase 中 mood_logs 表有設定 RLS (Row Level Security)
+   - Policy: using (auth.uid() = user_id) with check (auth.uid() = user_id)
+
+2. 請確認 Supabase 中 blu_logs 表的欄位名稱是 'description' 而非 'note'
+
+3. 如果要啟用 Email 確認功能：
+   - 前往 Supabase Dashboard > Authentication > Settings
+   - 設定 SMTP 或使用 Supabase 內建的郵件服務
+-->
+</body>
+</html>

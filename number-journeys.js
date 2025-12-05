@@ -2847,10 +2847,128 @@ window.throneJourneys = {
 };
 
 // ====== 最終版的獲取旅程解析函式 ======
+// ====== 能量互動分析 ======
+window.getEnergyInteraction = function(start, process, result) {
+  const interactions = {
+    // 和諧組合
+    same: {
+      advice: "起點與過程能量相同，這表示你在這個領域有純粹而專注的能量品質"
+    },
+    ascending: {
+      advice: "數字逐漸上升，顯示你的成長路徑是擴張與提升的"
+    },
+    descending: {
+      advice: "數字逐漸下降，顯示你的路徑是內化與深化的過程"
+    },
+    balanced: {
+      advice: "起點與過程能量平衡，顯示你需要在這兩者間找到和諧點"
+    }
+  };
+
+  if (start === process) return interactions.same;
+  if (start < process && process < result) return interactions.ascending;
+  if (start > process && process > result) return interactions.descending;
+  return interactions.balanced;
+};
+
+// ====== 備用方案 ======
+window.getFallbackJourney = function(codes, type) {
+  return {
+    title: `探索 ${codes.join(' → ')} 的旅程`,
+    journey: {
+      start: {
+        number: codes[0],
+        name: "起點",
+        energy: "能量正在覺醒",
+        influence: "這是你的開始"
+      },
+      process: {
+        number: codes[1],
+        name: "過程",
+        energy: "轉化正在發生",
+        influence: "這是你的學習"
+      },
+      result: {
+        number: codes[2],
+        name: "結果",
+        energy: "天賦正在展現",
+        influence: "這是你的禮物"
+      }
+    },
+    summary: "這組獨特的數字組合正在等待更深的理解。",
+    advice: "每個人的旅程都是獨一無二的，繼續探索會發現更多屬於你的寶藏。",
+    isGenerated: true
+  };
+};
+
+// ====== 改良版通用旅程生成器 ======
+window.generateJourney = function(codes, type) {
+  const [start, process, result] = codes;
+  const startInfo = window.numberMeanings[start];
+  const processInfo = window.numberMeanings[process];
+  const resultInfo = window.numberMeanings[result];
+
+  if (!startInfo || !processInfo || !resultInfo) {
+    return window.getFallbackJourney(codes, type);
+  }
+
+  // 根據類型調整語氣和重點
+  const typeThemes = {
+    career: {
+      focus: "工作、事業、創造價值",
+      action: "在工作中",
+      gift: "你的工作天賦"
+    },
+    family: {
+      focus: "關係、情感、家庭連結",
+      action: "在關係中",
+      gift: "你的情感天賦"
+    },
+    throne: {
+      focus: "生命道路、靈魂使命",
+      action: "在生命旅程中",
+      gift: "你的生命禮物"
+    }
+  };
+
+  const theme = typeThemes[type] || typeThemes.career;
+
+  // 計算能量互動
+  const interaction = window.getEnergyInteraction(start, process, result);
+
+  return {
+    title: `${startInfo.name}與${processInfo.name}的${resultInfo.name}`,
+    journey: {
+      start: {
+        number: start,
+        name: startInfo.name,
+        energy: `${startInfo.essence}是你的起點能量`,
+        influence: `你在${theme.focus}領域，始於${startInfo.essence.split('、')[0]}的特質`
+      },
+      process: {
+        number: process,
+        name: processInfo.name,
+        energy: `透過${processInfo.essence}來轉化與成長`,
+        influence: `${theme.action}，你學習運用${processInfo.essence.split('、')[0]}的能量`
+      },
+      result: {
+        number: result,
+        name: resultInfo.name,
+        energy: `最終融合為${resultInfo.essence}的展現`,
+        influence: `${theme.gift}在於${resultInfo.essence.split('、')[0]}的獨特表達`
+      }
+    },
+    summary: `從${startInfo.name}出發，經歷${processInfo.name}的洗禮，你成為${resultInfo.name}。`,
+    advice: `${interaction.advice}。這是屬於你的獨特旅程。`,
+    isGenerated: true // 標記這是自動生成的
+  };
+};
+
+// ====== 獲取旅程解析（優先使用特定組合，沒有則用通用模板）======
 window.getJourneyInterpretation = function(codes, type) {
   const codeKey = codes.join('');
   let journeyData = null;
-  
+
   // 根據類型選擇對應的資料庫
   switch(type) {
     case 'career':
@@ -2865,21 +2983,11 @@ window.getJourneyInterpretation = function(codes, type) {
     default:
       console.warn(`未知的旅程類型：${type}`);
   }
-  
-  // 如果真的找不到（理論上不會發生）
-  if (!journeyData) {
-    console.warn(`未找到 ${type} 類型的 ${codeKey} 組合解析`);
-    return {
-      title: `${codes[0]} → ${codes[1]} → ${codes[2]}`,
-      journey: {
-        start: { number: codes[0], name: "探索中", energy: "能量正在流動", influence: "起點能量" },
-        process: { number: codes[1], name: "轉化中", energy: "過程正在發展", influence: "轉化過程" },
-        result: { number: codes[2], name: "展現中", energy: "結果正在形成", influence: "最終展現" }
-      },
-      summary: "這個獨特的數字組合正在等待更深的詮釋",
-      advice: "你的旅程是獨一無二的，繼續探索會發現更多驚喜"
-    };
+
+  // 如果找不到特定組合，使用通用生成器
+  if (!journeyData && window.generateJourney) {
+    journeyData = window.generateJourney(codes, type);
   }
-  
+
   return journeyData;
 };

@@ -55,6 +55,9 @@ window.throneCodeMeanings = {
 
 // ====== 工具函式：數字化簡到 1-9 ======
 function reduceToSingleDigit(n) {
+  // 特殊規則：0 在數字學中等於 5（轉化能量）
+  if (n === 0) return 5;
+
   let sum = n;
   while (sum > 9) {
     sum = sum
@@ -91,12 +94,12 @@ window.calculateTalentCodes = function(birthdateStr) {
   // 事業碼三個數字
   const careerFirst = reduceToSingleDigit(ddSum);           // 6
   const careerSecond = reduceToSingleDigit(mmSum);          // 1
-  const careerThird = reduceToSingleDigit(ddSum + mmSum);   // 7
+  const careerThird = reduceToSingleDigit(careerFirst + careerSecond);   // 使用已化簡的數字
 
   // 家庭碼三個數字
   const familyFirst = reduceToSingleDigit(yLeftSum);              // 1
-  const familySecond = reduceToSingleDigit(yRightSum);            // 4
-  const familyThird = reduceToSingleDigit(yLeftSum + yRightSum);  // 5
+  const familySecond = reduceToSingleDigit(yRightSum);            // 4（2000年會變成5）
+  const familyThird = reduceToSingleDigit(familyFirst + familySecond);  // 使用已化簡的數字（2000年: 2+5=7）
 
   // 坐鎮碼三個數字
   const throneFirst = careerThird;   // 7

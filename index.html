@@ -289,6 +289,108 @@
       margin-bottom: 12px;
     }
 
+    /* ====== 天賦密碼卡片 ====== */
+    .talent-section {
+      border-radius: 12px;
+      border: 1px solid #e6dcff;
+      padding: 14px;
+      background: linear-gradient(135deg, #fff9f0, #fff5e6);
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+
+    .talent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .talent-label {
+      font-size: 0.8rem;
+      color: #d97706;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .deep-reading-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 4px 12px;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
+      transition: all 0.2s;
+    }
+
+    .deep-reading-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
+    }
+
+    .deep-reading-btn:active {
+      transform: translateY(0);
+    }
+
+    .talent-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    @media (min-width: 400px) {
+      .talent-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .talent-card {
+      background: white;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid #fed7aa;
+      text-align: center;
+    }
+
+    .talent-type {
+      font-size: 0.7rem;
+      color: #92400e;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .talent-number {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #92400e;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 6px auto;
+      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
+    }
+
+    .talent-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #78350f;
+      margin-bottom: 4px;
+    }
+
+    .talent-desc {
+      font-size: 0.75rem;
+      color: #a16207;
+      line-height: 1.3;
+    }
+
     .energy-row {
       display: flex;
       align-items: center;
@@ -459,6 +561,37 @@
         </div>
       </div>
 
+      <!-- 天賦密碼 -->
+      <div class="talent-section">
+        <div class="talent-header">
+          <div class="talent-label">📊 你的天賦密碼</div>
+          <button class="deep-reading-btn" id="deep-reading-btn">深入解讀 ✨</button>
+        </div>
+
+        <div class="talent-grid">
+          <div class="talent-card">
+            <div class="talent-type">事業天賦</div>
+            <div class="talent-number" id="talent-career-num">—</div>
+            <div class="talent-name" id="talent-career-name">—</div>
+            <div class="talent-desc" id="talent-career-desc">—</div>
+          </div>
+
+          <div class="talent-card">
+            <div class="talent-type">家庭天賦</div>
+            <div class="talent-number" id="talent-family-num">—</div>
+            <div class="talent-name" id="talent-family-name">—</div>
+            <div class="talent-desc" id="talent-family-desc">—</div>
+          </div>
+
+          <div class="talent-card">
+            <div class="talent-type">坐鎮碼</div>
+            <div class="talent-number" id="talent-throne-num">—</div>
+            <div class="talent-name" id="talent-throne-name">—</div>
+            <div class="talent-desc" id="talent-throne-desc">—</div>
+          </div>
+        </div>
+      </div>
+
       <div class="tip-card">
         <div class="tip-label">今天的小小提醒</div>
         <div class="tip-text" id="life-tip">
@@ -492,6 +625,7 @@
   </div>
 
   <script src="combo-tips.js"></script>
+  <script src="numerology-pyramid.js"></script>
   <script>
     // ====== LocalStorage 工具函式 ======
     const STORAGE_KEY = {
@@ -810,6 +944,35 @@
       }
     }
 
+    // ====== 工具函式：更新天賦密碼顯示 ======
+    function updateTalentDisplay(dateStr) {
+      if (!window.calculateTalentCodes) {
+        console.warn('天賦密碼計算函式尚未載入');
+        return;
+      }
+
+      const talentCodes = window.calculateTalentCodes(dateStr);
+      if (!talentCodes) return;
+
+      const interpretation = window.getTalentInterpretation(talentCodes);
+      if (!interpretation) return;
+
+      // 更新事業天賦
+      document.getElementById('talent-career-num').textContent = interpretation.career.number;
+      document.getElementById('talent-career-name').textContent = interpretation.career.name;
+      document.getElementById('talent-career-desc').textContent = interpretation.career.desc;
+
+      // 更新家庭天賦
+      document.getElementById('talent-family-num').textContent = interpretation.family.number;
+      document.getElementById('talent-family-name').textContent = interpretation.family.name;
+      document.getElementById('talent-family-desc').textContent = interpretation.family.desc;
+
+      // 更新坐鎮碼
+      document.getElementById('talent-throne-num').textContent = interpretation.throne.number;
+      document.getElementById('talent-throne-name').textContent = interpretation.throne.name;
+      document.getElementById('talent-throne-desc').textContent = interpretation.throne.desc;
+    }
+
     // ====== 綁定畫面元素 ======
     const birthInput = document.getElementById("birthdate");
     const calcBtn = document.getElementById("calc-btn");
@@ -853,6 +1016,10 @@
 
             // 使用結合建議
             lifeTipEl.textContent = getCombinedDailyTip(num);
+
+            // 顯示天賦密碼
+            updateTalentDisplay(savedBirthdate);
+
             resultCard.classList.add("show");
           }
         }
@@ -917,6 +1084,9 @@
       // 使用結合建議
       lifeTipEl.textContent = getCombinedDailyTip(num);
 
+      // 顯示天賦密碼
+      updateTalentDisplay(dateStr);
+
       resultCard.classList.add("show");
 
       // 檢查今天是否已經記錄過
@@ -938,6 +1108,15 @@
         moodNoteEl.textContent = "（選一個表情，記錄一下今天的你）";
       }
     });
+
+    // ====== 深入解讀按鈕事件 ======
+    const deepReadingBtn = document.getElementById("deep-reading-btn");
+    if (deepReadingBtn) {
+      deepReadingBtn.addEventListener("click", () => {
+        // 未來這裡會接上付費機制
+        alert("✨ 深入解讀功能即將推出！\n\n這將包含：\n• 完整的天賦金字塔解析\n• 事業與家庭的深度洞察\n• 個人化的成長建議\n• AI 專屬對話諮詢\n\n敬請期待 💜");
+      });
+    }
 
     // ====== 情緒選擇事件 ======
     moodButtons.forEach((btn) => {

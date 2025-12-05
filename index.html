@@ -1113,8 +1113,15 @@
     const deepReadingBtn = document.getElementById("deep-reading-btn");
     if (deepReadingBtn) {
       deepReadingBtn.addEventListener("click", () => {
-        // 未來這裡會接上付費機制
-        alert("✨ 深入解讀功能即將推出！\n\n這將包含：\n• 完整的天賦金字塔解析\n• 事業與家庭的深度洞察\n• 個人化的成長建議\n• AI 專屬對話諮詢\n\n敬請期待 💜");
+        const birthdate = birthInput.value || localStorage.getItem('lifepath_birthdate');
+
+        if (!birthdate) {
+          alert("請先輸入生日計算你的生命靈數 😊");
+          return;
+        }
+
+        // 導向深度解析頁面，帶上生日參數
+        window.location.href = `deep-reading.html?birthdate=${encodeURIComponent(birthdate)}`;
       });
     }
 

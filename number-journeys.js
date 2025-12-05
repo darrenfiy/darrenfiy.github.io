@@ -950,136 +950,1907 @@ window.careerJourneys = {
   }
 };
 
-// ====== 家庭碼旅程解析 ======
+// ====== 完整的家庭碼旅程解析 ======
 window.familyJourneys = {
-  // 示例：145 組合（用戶的家庭碼）
-  "145": {
-    title: "獨立穩定的探索者",
+  // 第1組：123 - 開創→協調→表達
+  "123": {
+    title: "開創協調的表達之家",
     journey: {
       start: {
         number: 1,
         name: "獨立空間",
         energy: "情感始於需要自主性與個人空間",
-        influence: "你在關係中首先需要保有自我"
+        influence: "你在關係中首先需要保有自我的獨立性"
+      },
+      process: {
+        number: 2,
+        name: "合作協調", 
+        energy: "透過情感交流與平衡來連結",
+        influence: "在關係中你學習與人分享感受，尋找共識"
+      },
+      result: {
+        number: 3,
+        name: "創意表達",
+        energy: "最終展現快樂的溝通能力",
+        influence: "你的家庭天賦是用輕鬆有趣的方式表達愛"
+      }
+    },
+    summary: "你從獨立出發，透過協調連結，最終成為快樂的表達者。",
+    advice: "在關係中，先確立自己的獨立空間，再學習溫柔地連結，最後用創意的方式表達你的愛。"
+  },
+
+  // 第2組：213 - 協調→開創→表達  
+  "213": {
+    title: "協調開創的表達之家",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "情感始於需要連結與和諧",
+        influence: "你在關係中首先追求情感上的親密感"
+      },
+      process: {
+        number: 1,
+        name: "獨立空間",
+        energy: "透過保持自我界線來成長", 
+        influence: "在關係中你學習如何在親密中保有自我"
+      },
+      result: {
+        number: 3,
+        name: "創意表達",
+        energy: "最終展現快樂的溝通能力",
+        influence: "你的家庭天賦是在和諧關係中創造歡樂"
+      }
+    },
+    summary: "你從協調出發，透過獨立成長，最終成為快樂的表達者。",
+    advice: "在關係中，先建立情感連結，再學習保持自我界線，最後在這個平衡中創造歡樂的表達。"
+  },
+
+  // 第3組：134 - 開創→表達→穩定
+  "134": {
+    title: "開創表達的穩定之家",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立空間",
+        energy: "情感始於需要自主性與個人空間",
+        influence: "你在關係中首先需要保有自我的獨立性"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過分享歡樂與創意來連結",
+        influence: "在關係中你用有趣的方式表達情感"
+      },
+      result: {
+        number: 4,
+        name: "穩定基石",
+        energy: "最終展現可靠的承諾能力",
+        influence: "你的家庭天賦是為歡樂建立穩固的基礎"
+      }
+    },
+    summary: "你從獨立出發，透過創意表達，最終成為穩定基石。",
+    advice: "在關係中，先確立自己的獨立空間，再用創意表達情感，最後為這些歡樂建立穩固的承諾。"
+  },
+
+  // 第4組：314 - 表達→開創→穩定
+  "314": {
+    title: "表達開創的穩定之家",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "情感始於想要分享歡樂與趣味",
+        influence: "你在關係中首先追求輕鬆愉快的互動"
+      },
+      process: {
+        number: 1,
+        name: "獨立空間",
+        energy: "透過確立自我界線來成長",
+        influence: "在關係中你學習在歡樂中保有自主性"
+      },
+      result: {
+        number: 4,
+        name: "穩定基石",
+        energy: "最終展現可靠的承諾能力",
+        influence: "你的家庭天賦是為創意表達建立穩固的家"
+      }
+    },
+    summary: "你從表達出發，透過獨立成長，最終成為穩定基石。",
+    advice: "在關係中，先分享歡樂與創意，再學習保持自我界線，最後為這些美好建立穩固的家。"
+  },
+
+  // 第5組：224 - 協調→協調→穩定
+  "224": {
+    title: "雙重協調的穩定之家",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "情感始於需要連結與和諧",
+        influence: "你在關係中首先追求情感上的親密感"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "持續透過情感交流來深化",
+        influence: "在關係中你特別擅長感受他人的情緒"
+      },
+      result: {
+        number: 4,
+        name: "穩定基石",
+        energy: "最終展現可靠的承諾能力",
+        influence: "你的家庭天賦是為親密關係建立穩固的根基"
+      }
+    },
+    summary: "你從協調出發，持續協調深化，最終成為穩定基石。",
+    advice: "在關係中，你的強項是情感的連結與協調，先建立深刻的親密感，再為這份親密建立穩固的承諾。"
+  },
+
+  // 第6組：145 - 開創→穩定→自由
+  "145": {
+    title: "開創穩定的自由之家",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立空間",
+        energy: "情感始於需要自主性與個人空間",
+        influence: "你在關係中首先需要保有自我的獨立性"
       },
       process: {
         number: 4,
         name: "穩定基石",
-        energy: "透過建立安全感來連結",
+        energy: "透過建立安全感來成長",
         influence: "在關係中你需要可靠的結構和承諾"
       },
       result: {
         number: 5,
         name: "自由呼吸",
-        energy: "最終需要情感上的自由空間",
-        influence: "你的情感天賦是在穩定中保有彈性"
+        energy: "最終展現靈活適應的能力",
+        influence: "你的家庭天賦是在穩定基礎上保有自由的空間"
       }
     },
-    summary: "你從獨立出發，透過穩定連結，最終需要自由呼吸的空間。",
-    advice: "在關係中，先確立自己的獨立性，建立穩固的基礎，然後給彼此自由探索的空間。"
-  }
+    summary: "你從獨立出發，透過穩定成長，最終需要自由呼吸。",
+    advice: "在關係中，先確立自己的獨立空間，再建立穩固的承諾，最後在這個安全基礎上保有自由的彈性。"
+  },
 
-  // 更多組合會逐步補充...
-};
-
-// ====== 坐鎮碼旅程解析 ======
-window.throneJourneys = {
-  // 示例：753 組合（用戶的坐鎮碼）
-  "753": {
-    title: "研究自由的表達者",
+  // 第7組：415 - 穩定→開創→自由
+  "415": {
+    title: "穩定開創的自由之家",
     journey: {
       start: {
-        number: 7,
-        name: "靜心探索",
-        energy: "生命始於深度思考與追尋真相",
-        influence: "你最初的生命課題是理解世界的本質"
+        number: 4,
+        name: "穩定基石",
+        energy: "情感始於需要安全感與承諾",
+        influence: "你在關係中首先追求可靠穩固的結構"
+      },
+      process: {
+        number: 1,
+        name: "獨立空間",
+        energy: "透過保持自我界線來成長",
+        influence: "在關係中你學習在安全中保有自主性"
+      },
+      result: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "最終展現靈活適應的能力",
+        influence: "你的家庭天賦是在穩定承諾中保有自由的空間"
+      }
+    },
+    summary: "你從穩定出發，透過獨立成長，最終需要自由呼吸。",
+    advice: "在關係中，先建立穩固的安全感，再學習保持自我界線，最後在這個框架內保有自由的彈性。"
+  },
+
+  // 第8組：235 - 協調→表達→自由
+  "235": {
+    title: "協調表達的自由之家",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "情感始於需要連結與和諧",
+        influence: "你在關係中首先追求情感上的親密感"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過分享歡樂與創意來深化",
+        influence: "在關係中你用有趣的方式表達情感"
+      },
+      result: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "最終展現靈活適應的能力",
+        influence: "你的家庭天賦是在親密關係中保有自由的空間"
+      }
+    },
+    summary: "你從協調出發，透過創意表達，最終需要自由呼吸。",
+    advice: "在關係中，先建立情感的連結，再用創意方式表達，最後在這個親密中保有自由的空間。"
+  },
+
+  // 第9組：325 - 表達→協調→自由
+  "325": {
+    title: "表達協調的自由之家",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "情感始於想要分享歡樂與趣味",
+        influence: "你在關係中首先追求輕鬆愉快的互動"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過情感交流來深化",
+        influence: "在關係中你學習在歡樂中建立親密感"
+      },
+      result: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "最終展現靈活適應的能力",
+        influence: "你的家庭天賦是在歡樂關係中保有自由的空間"
+      }
+    },
+    summary: "你從表達出發，透過協調深化，最終需要自由呼吸。",
+    advice: "在關係中，先分享歡樂與創意，再建立情感的連結，最後在這個和諧中保有自由的空間。"
+  },
+
+  // 第10組：156 - 開創→自由→完美關愛
+  "156": {
+    title: "開創自由的完美之家",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立空間",
+        energy: "情感始於需要自主性與個人空間",
+        influence: "你在關係中首先需要保有自我的獨立性"
       },
       process: {
         number: 5,
-        name: "自由體驗",
-        energy: "透過多樣經驗來成長",
-        influence: "生命道路上你需要各種嘗試和冒險"
+        name: "自由呼吸",
+        energy: "透過靈活適應來成長",
+        influence: "在關係中你需要變化的空間，不喜歡被束縛"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終展現理想化的照顧能力",
+        influence: "你的家庭天賦是在自由獨立中創造完美的關愛"
+      }
+    },
+    summary: "你從獨立出發，透過自由探索，最終成為完美關愛者。",
+    advice: "在關係中，先確立自己的獨立空間，再保持自由的彈性，最後用理想的方式創造關愛的環境。"
+  },
+
+  // 第11組：516 - 自由→開創→完美關愛
+  "516": {
+    title: "自由開創的完美之家",
+    journey: {
+      start: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "情感始於需要變化與冒險",
+        influence: "你在關係中首先追求新鮮感與自由"
+      },
+      process: {
+        number: 1,
+        name: "獨立空間",
+        energy: "透過確立自我界線來成長",
+        influence: "在關係中你學習在自由中保有自我"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終展現理想化的照顧能力",
+        influence: "你的家庭天賦是在自由探索中創造完美的關愛"
+      }
+    },
+    summary: "你從自由出發，透過獨立成長，最終成為完美關愛者。",
+    advice: "在關係中，先保持自由的空間，再確立自己的獨立性，最後用理想的方式創造關愛的環境。"
+  },
+
+  // 第12組：246 - 協調→穩定→完美關愛
+  "246": {
+    title: "協調穩定的完美之家",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "情感始於需要連結與和諧",
+        influence: "你在關係中首先追求情感上的親密感"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "透過建立安全感來深化",
+        influence: "在關係中你需要可靠的結構和承諾"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終展現理想化的照顧能力",
+        influence: "你的家庭天賦是為親密關係創造完美的和諧"
+      }
+    },
+    summary: "你從協調出發，透過穩定成長，最終成為完美關愛者。",
+    advice: "在關係中，先建立情感的連結，再建立穩固的承諾，最後用理想的方式創造完美的和諧。"
+  },
+
+  // 第13組：426 - 穩定→協調→完美關愛
+  "426": {
+    title: "穩定協調的完美之家",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "情感始於需要安全感與承諾",
+        influence: "你在關係中首先追求可靠穩固的結構"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過情感交流來深化",
+        influence: "在關係中你學習在安全中建立親密感"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終展現理想化的照顧能力",
+        influence: "你的家庭天賦是在穩定基礎上創造完美的和諧"
+      }
+    },
+    summary: "你從穩定出發，透過協調深化，最終成為完美關愛者。",
+    advice: "在關係中，先建立穩固的安全感，再建立情感的連結，最後用理想的方式創造完美的和諧。"
+  },
+
+  // 第14組：336 - 表達→表達→完美關愛
+  "336": {
+    title: "雙重表達的完美之家",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "情感始於想要分享歡樂與趣味",
+        influence: "你在關係中首先追求輕鬆愉快的互動"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "持續透過歡樂分享來深化",
+        influence: "在關係中你特別擅長用創意創造快樂"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終展現理想化的照顧能力",
+        influence: "你的家庭天賦是用創意歡樂創造完美的關愛環境"
+      }
+    },
+    summary: "你從表達出發，持續表達深化，最終成為完美關愛者。",
+    advice: "在關係中，你的強項是創意與歡樂的表達，先用它來創造快樂，再深化為完美的關愛環境。"
+  },
+
+  // 第15組：167 - 開創→完美關愛→靜心
+  "167": {
+    title: "開創完美的思考之家",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立空間",
+        energy: "情感始於需要自主性與個人空間",
+        influence: "你在關係中首先需要保有自我的獨立性"
+      },
+      process: {
+        number: 6,
+        name: "完美關愛",
+        energy: "透過創造理想和諧來成長",
+        influence: "在關係中你追求完美的照顧與和諧"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終展現深度理解的能力",
+        influence: "你的家庭天賦是在完美關愛中發展深刻的理解"
+      }
+    },
+    summary: "你從獨立出發，透過完美關愛，最終成為深度思考者。",
+    advice: "在關係中，先確立自己的獨立空間，再創造完美的關愛環境，最後在這個和諧中發展深刻的理解。"
+  },
+
+  // 第16組：617 - 完美關愛→開創→靜心
+  "617": {
+    title: "完美開創的思考之家",
+    journey: {
+      start: {
+        number: 6,
+        name: "完美關愛",
+        energy: "情感始於想要創造理想和諧",
+        influence: "你在關係中首先追求完美的照顧與和諧"
+      },
+      process: {
+        number: 1,
+        name: "獨立空間",
+        energy: "透過保持自我界線來成長",
+        influence: "在關係中你學習在完美關愛中保有自我"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終展現深度理解的能力",
+        influence: "你的家庭天賦是在完美關愛中發展深刻的理解"
+      }
+    },
+    summary: "你從完美關愛出發，透過獨立成長，最終成為深度思考者。",
+    advice: "在關係中，先創造完美的關愛環境，再確立自己的獨立性，最後在這個平衡中發展深刻的理解。"
+  },
+
+  // 第17組：257 - 協調→自由→靜心
+  "257": {
+    title: "協調自由的思考之家",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "情感始於需要連結與和諧",
+        influence: "你在關係中首先追求情感上的親密感"
+      },
+      process: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "透過靈活適應來成長",
+        influence: "在關係中你需要變化的空間，不喜歡被束縛"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終展現深度理解的能力",
+        influence: "你的家庭天賦是在親密與自由中發展深刻的理解"
+      }
+    },
+    summary: "你從協調出發，透過自由探索，最終成為深度思考者。",
+    advice: "在關係中，先建立情感的連結，再保持自由的彈性，最後在這個動態平衡中發展深刻的理解。"
+  },
+
+  // 第18組：527 - 自由→協調→靜心
+  "527": {
+    title: "自由協調的思考之家",
+    journey: {
+      start: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "情感始於需要變化與冒險",
+        influence: "你在關係中首先追求新鮮感與自由"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過情感交流來成長",
+        influence: "在關係中你學習在自由中建立親密感"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終展現深度理解的能力",
+        influence: "你的家庭天賦是在自由探索中發展親密的理解"
+      }
+    },
+    summary: "你從自由出發，透過協調成長，最終成為深度思考者。",
+    advice: "在關係中，先保持自由的空間，再建立情感的連結，最後在這個結合中發展深刻的理解。"
+  },
+
+  // 第19組：347 - 表達→穩定→靜心
+  "347": {
+    title: "表達穩定的思考之家",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "情感始於想要分享歡樂與趣味",
+        influence: "你在關係中首先追求輕鬆愉快的互動"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "透過建立安全感來成長",
+        influence: "在關係中你需要可靠的結構和承諾"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終展現深度理解的能力",
+        influence: "你的家庭天賦是在歡樂承諾中發展深刻的理解"
+      }
+    },
+    summary: "你從表達出發，透過穩定成長，最終成為深度思考者。",
+    advice: "在關係中，先分享歡樂與創意，再建立穩固的承諾，最後在這個基礎上發展深刻的理解。"
+  },
+
+  // 第20組：437 - 穩定→表達→靜心
+  "437": {
+    title: "穩定表達的思考之家",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "情感始於需要安全感與承諾",
+        influence: "你在關係中首先追求可靠穩固的結構"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過分享歡樂來成長",
+        influence: "在關係中你用有趣的方式表達情感"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終展現深度理解的能力",
+        influence: "你的家庭天賦是在穩定基礎上發展歡樂的理解"
+      }
+    },
+    summary: "你從穩定出發，透過表達成長，最終成為深度思考者。",
+    advice: "在關係中，先建立穩固的安全感，再用創意表達情感，最後在這個結合中發展深刻的理解。"
+  },
+
+  // 第21組：178 - 開創→靜心→豐盛
+  "178": {
+    title: "開創思考的豐盛之家",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立空間",
+        energy: "情感始於需要自主性與個人空間",
+        influence: "你在關係中首先需要保有自我的獨立性"
+      },
+      process: {
+        number: 7,
+        name: "靜心思考",
+        energy: "透過深度理解來成長",
+        influence: "在關係中你追求對情感本質的洞察"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終展現滋養支持的能力",
+        influence: "你的家庭天賦是將深刻理解轉化為實際的滋養"
+      }
+    },
+    summary: "你從獨立出發，透過靜心思考，最終成為豐盛滋養者。",
+    advice: "在關係中，先確立自己的獨立空間，再發展深刻的理解，最後將這些洞察轉化為實際的滋養。"
+  },
+
+  // 第22組：718 - 靜心→開創→豐盛
+  "718": {
+    title: "思考開創的豐盛之家",
+    journey: {
+      start: {
+        number: 7,
+        name: "靜心思考",
+        energy: "情感始於想要理解關係的本質",
+        influence: "你在關係中首先追求深刻的洞察"
+      },
+      process: {
+        number: 1,
+        name: "獨立空間",
+        energy: "透過保持自我界線來成長",
+        influence: "在關係中你學習在理解中保有自我"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終展現滋養支持的能力",
+        influence: "你的家庭天賦是將深刻理解轉化為實際的滋養"
+      }
+    },
+    summary: "你從靜心出發，透過獨立成長，最終成為豐盛滋養者。",
+    advice: "在關係中，先發展深刻的理解，再確立自己的獨立性，最後將這些洞察轉化為實際的滋養。"
+  },
+
+  // 第23組：268 - 協調→完美關愛→豐盛
+  "268": {
+    title: "協調完美的豐盛之家",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "情感始於需要連結與和諧",
+        influence: "你在關係中首先追求情感上的親密感"
+      },
+      process: {
+        number: 6,
+        name: "完美關愛",
+        energy: "透過創造理想和諧來成長",
+        influence: "在關係中你追求完美的照顧與和諧"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終展現滋養支持的能力",
+        influence: "你的家庭天賦是將完美關愛轉化為實際的滋養"
+      }
+    },
+    summary: "你從協調出發，透過完美關愛，最終成為豐盛滋養者。",
+    advice: "在關係中，先建立情感的連結，再創造完美的關愛環境，最後將這份和諧轉化為實際的滋養。"
+  },
+
+  // 第24組：628 - 完美關愛→協調→豐盛
+  "628": {
+    title: "完美協調的豐盛之家",
+    journey: {
+      start: {
+        number: 6,
+        name: "完美關愛",
+        energy: "情感始於想要創造理想和諧",
+        influence: "你在關係中首先追求完美的照顧與和諧"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過情感交流來成長",
+        influence: "在關係中你學習在完美關愛中建立親密感"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終展現滋養支持的能力",
+        influence: "你的家庭天賦是將完美關愛轉化為實際的滋養"
+      }
+    },
+    summary: "你從完美關愛出發，透過協調成長，最終成為豐盛滋養者。",
+    advice: "在關係中，先創造完美的關愛環境，再建立情感的連結，最後將這份和諧轉化為實際的滋養。"
+  },
+
+  // 第25組：358 - 表達→自由→豐盛
+  "358": {
+    title: "表達自由的豐盛之家",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "情感始於想要分享歡樂與趣味",
+        influence: "你在關係中首先追求輕鬆愉快的互動"
+      },
+      process: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "透過靈活適應來成長",
+        influence: "在關係中你需要變化的空間，不喜歡被束縛"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終展現滋養支持的能力",
+        influence: "你的家庭天賦是將創意探索轉化為實際的滋養"
+      }
+    },
+    summary: "你從表達出發，透過自由探索，最終成為豐盛滋養者。",
+    advice: "在關係中，先分享歡樂與創意，再保持自由的彈性，最後將這些探索轉化為實際的滋養。"
+  },
+
+  // 第26組：538 - 自由→表達→豐盛
+  "538": {
+    title: "自由表達的豐盛之家",
+    journey: {
+      start: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "情感始於需要變化與冒險",
+        influence: "你在關係中首先追求新鮮感與自由"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過分享歡樂來成長",
+        influence: "在關係中用有趣的方式表達情感"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終展現滋養支持的能力",
+        influence: "你的家庭天賦是將自由探索轉化為有創意的滋養"
+      }
+    },
+    summary: "你從自由出發，透過表達成長，最終成為豐盛滋養者。",
+    advice: "在關係中，先保持自由的空間，再用創意表達情感，最後將這些探索轉化為實際的滋養。"
+  },
+
+  // 第27組：448 - 穩定→穩定→豐盛
+  "448": {
+    title: "雙重穩定的豐盛之家",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "情感始於需要安全感與承諾",
+        influence: "你在關係中首先追求可靠穩固的結構"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "持續透過建立安全感來深化",
+        influence: "在關係中你特別擅長創造穩固的承諾"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終展現滋養支持的能力",
+        influence: "你的家庭天賦是將穩固基礎轉化為實際的滋養"
+      }
+    },
+    summary: "你從穩定出發，持續穩定深化，最終成為豐盛滋養者。",
+    advice: "在關係中，你的強項是建立安全感與承諾，先用它創造穩固的基礎，再將其轉化為實際的滋養。"
+  },
+
+  // 第28組：189 - 開創→豐盛→圓滿
+  "189": {
+    title: "開創豐盛的圓滿之家",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立空間",
+        energy: "情感始於需要自主性與個人空間",
+        influence: "你在關係中首先需要保有自我的獨立性"
+      },
+      process: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "透過實際滋養來成長",
+        influence: "在關係中你追求提供實際的支持與資源"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終展現包容完成的能力",
+        influence: "你的家庭天賦是將獨立與滋養整合為完整的愛"
+      }
+    },
+    summary: "你從獨立出發，透過豐盛滋養，最終成為圓滿整合者。",
+    advice: "在關係中，先確立自己的獨立空間，再提供實際的滋養，最後將這兩者整合為完整的愛的循環。"
+  },
+
+  // 第29組：819 - 豐盛→開創→圓滿
+  "819": {
+    title: "豐盛開創的圓滿之家",
+    journey: {
+      start: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "情感始於想要提供實際的滋養",
+        influence: "你在關係中首先追求實質的支持與資源"
+      },
+      process: {
+        number: 1,
+        name: "獨立空間",
+        energy: "透過保持自我界線來成長",
+        influence: "在關係中你學習在滋養中保有自我"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終展現包容完成的能力",
+        influence: "你的家庭天賦是將滋養與獨立整合為完整的愛"
+      }
+    },
+    summary: "你從豐盛出發，透過獨立成長，最終成為圓滿整合者。",
+    advice: "在關係中，先提供實際的滋養，再確立自己的獨立性，最後將這兩者整合為完整的愛的循環。"
+  },
+
+  // 第30組：279 - 協調→靜心→圓滿
+  "279": {
+    title: "協調思考的圓滿之家",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "情感始於需要連結與和諧",
+        influence: "你在關係中首先追求情感上的親密感"
+      },
+      process: {
+        number: 7,
+        name: "靜心思考",
+        energy: "透過深度理解來成長",
+        influence: "在關係中你追求對情感本質的洞察"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終展現包容完成的能力",
+        influence: "你的家庭天賦是將親密與理解整合為完整的愛"
+      }
+    },
+    summary: "你從協調出發，透過靜心思考，最終成為圓滿整合者。",
+    advice: "在關係中，先建立情感的連結，再發展深刻的理解，最後將這兩者整合為完整的愛的智慧。"
+  },
+
+  // 第31組：729 - 靜心→協調→圓滿
+  "729": {
+    title: "思考協調的圓滿之家",
+    journey: {
+      start: {
+        number: 7,
+        name: "靜心思考",
+        energy: "情感始於想要理解關係的本質",
+        influence: "你在關係中首先追求深刻的洞察"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過情感交流來成長",
+        influence: "在關係中你學習在理解中建立親密感"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終展現包容完成的能力",
+        influence: "你的家庭天賦是將理解與親密整合為完整的愛"
+      }
+    },
+    summary: "你從靜心出發，透過協調成長，最終成為圓滿整合者。",
+    advice: "在關係中，先發展深刻的理解，再建立情感的連結，最後將這兩者整合為完整的愛的智慧。"
+  },
+
+  // 第32組：369 - 表達→完美關愛→圓滿
+  "369": {
+    title: "表達完美的圓滿之家",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "情感始於想要分享歡樂與趣味",
+        influence: "你在關係中首先追求輕鬆愉快的互動"
+      },
+      process: {
+        number: 6,
+        name: "完美關愛",
+        energy: "透過創造理想和諧來成長",
+        influence: "在關係中你追求完美的照顧與和諧"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終展現包容完成的能力",
+        influence: "你的家庭天賦是將歡樂與完美整合為完整的愛"
+      }
+    },
+    summary: "你從表達出發，透過完美關愛，最終成為圓滿整合者。",
+    advice: "在關係中，先分享歡樂與創意，再創造完美的關愛環境，最後將這兩者整合為完整的愛的體驗。"
+  },
+
+  // 第33組：639 - 完美關愛→表達→圓滿
+  "639": {
+    title: "完美表達的圓滿之家",
+    journey: {
+      start: {
+        number: 6,
+        name: "完美關愛",
+        energy: "情感始於想要創造理想和諧",
+        influence: "你在關係中首先追求完美的照顧與和諧"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過分享歡樂來成長",
+        influence: "在關係中用有趣的方式表達情感"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終展現包容完成的能力",
+        influence: "你的家庭天賦是將完美與歡樂整合為完整的愛"
+      }
+    },
+    summary: "你從完美關愛出發，透過表達成長，最終成為圓滿整合者。",
+    advice: "在關係中，先創造完美的關愛環境，再用創意表達情感，最後將這兩者整合為完整的愛的體驗。"
+  },
+
+  // 第34組：459 - 穩定→自由→圓滿
+  "459": {
+    title: "穩定自由的圓滿之家",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "情感始於需要安全感與承諾",
+        influence: "你在關係中首先追求可靠穩固的結構"
+      },
+      process: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "透過靈活適應來成長",
+        influence: "在關係中你需要變化的空間，不喜歡被束縛"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終展現包容完成的能力",
+        influence: "你的家庭天賦是將穩定與自由整合為完整的愛"
+      }
+    },
+    summary: "你從穩定出發，透過自由探索，最終成為圓滿整合者。",
+    advice: "在關係中，先建立穩固的安全感，再保持自由的彈性，最後將這兩者整合為完整的愛的平衡。"
+  },
+
+  // 第35組：549 - 自由→穩定→圓滿
+  "549": {
+    title: "自由穩定的圓滿之家",
+    journey: {
+      start: {
+        number: 5,
+        name: "自由呼吸",
+        energy: "情感始於需要變化與冒險",
+        influence: "你在關係中首先追求新鮮感與自由"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "透過建立安全感來成長",
+        influence: "在關係中你需要可靠的結構和承諾"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終展現包容完成的能力",
+        influence: "你的家庭天賦是將自由與穩定整合為完整的愛"
+      }
+    },
+    summary: "你從自由出發，透過穩定成長，最終成為圓滿整合者。",
+    advice: "在關係中，先保持自由的空間，再建立穩固的安全感，最後將這兩者整合為完整的愛的平衡。"
+  }
+};
+
+// ====== 完整的坐鎮碼旅程解析 ======
+window.throneJourneys = {
+  // 第1組：123 - 開創→協調→表達
+  "123": {
+    title: "開創協調的傳播者",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立開創",
+        energy: "靈魂始於獨特的自我表達",
+        influence: "你的生命課題始於勇敢做自己"
+      },
+      process: {
+        number: 2,
+        name: "合作協調", 
+        energy: "透過與世界連結來成長",
+        influence: "你學習在保持自我中與他人合作"
       },
       result: {
         number: 3,
         name: "創意表達",
-        energy: "最終透過創意表達來完成使命",
-        influence: "你的生命天賦是將洞見轉化為創意作品"
+        energy: "最終成為歡樂的傳播者",
+        influence: "你的生命使命是用創意連結人心"
       }
     },
-    summary: "你從深度思考開始，透過自由體驗，最終成為創意表達者。",
-    advice: "信任你的內在智慧，允許自己自由探索，最終會找到獨特的表達方式來分享你的洞見。"
-  }
+    summary: "你從獨立開創出發，透過合作協調，最終成為創意傳播者。",
+    advice: "勇敢展現你的獨特，在與世界的互動中找到平衡，最終用創意為人們帶來歡樂與連結。"
+  },
 
-  // 更多組合會逐步補充...
-};
-
-// ====== 通用數字旅程生成器 ======
-// 當沒有特定組合時，使用這個函式自動生成基本解讀
-window.generateJourney = function(codes, type) {
-  const [start, process, result] = codes;
-  const startInfo = window.numberMeanings[start];
-  const processInfo = window.numberMeanings[process];
-  const resultInfo = window.numberMeanings[result];
-
-  if (!startInfo || !processInfo || !resultInfo) {
-    console.warn('無法生成旅程：數字資料不完整');
-    return null;
-  }
-
-  // 根據類型調整描述
-  const typeDescriptions = {
-    career: {
-      startPrefix: "你的工作動機始於",
-      processPrefix: "在工作中你透過",
-      resultPrefix: "你的工作天賦在於"
-    },
-    family: {
-      startPrefix: "你在關係中始於",
-      processPrefix: "在關係中你透過",
-      resultPrefix: "你的情感天賦在於"
-    },
-    throne: {
-      startPrefix: "你的生命課題始於",
-      processPrefix: "在生命道路上你透過",
-      resultPrefix: "你的生命使命在於"
-    }
-  };
-
-  const desc = typeDescriptions[type] || typeDescriptions.career;
-
-  return {
-    title: `${startInfo.name} → ${processInfo.name} → ${resultInfo.name}`,
+  // 第2組：213 - 協調→開創→表達  
+  "213": {
+    title: "協調開創的橋樑者",
     journey: {
       start: {
-        number: start,
-        name: startInfo.name,
-        energy: `從${startInfo.essence.split('、')[0]}的能量出發`,
-        influence: `${desc.startPrefix}${startInfo.essence.split('、')[0]}`
+        number: 2,
+        name: "合作協調",
+        energy: "靈魂始於對連結的敏感",
+        influence: "你的生命課題始於理解和諧的藝術"
       },
       process: {
-        number: process,
-        name: processInfo.name,
-        energy: `透過${processInfo.essence.split('、')[0]}來推進`,
-        influence: `${desc.processPrefix}${processInfo.essence.split('、')[0]}的方式前進`
+        number: 1,
+        name: "獨立開創",
+        energy: "透過確立自我來成長", 
+        influence: "你學習在關係中找到自己的聲音"
       },
       result: {
-        number: result,
-        name: resultInfo.name,
-        energy: `最終展現${resultInfo.essence.split('、')[0]}的品質`,
-        influence: `${desc.resultPrefix}展現${resultInfo.essence.split('、')[0]}`
+        number: 3,
+        name: "創意表達",
+        energy: "最終成為快樂的橋樑者",
+        influence: "你的生命使命是連結不同的人事物"
       }
     },
-    summary: `你從${startInfo.name}開始，透過${processInfo.name}，最終成為${resultInfo.name}。`,
-    advice: `尊重你的起點能量（${startInfo.name}），信任轉化過程（${processInfo.name}），最終會展現獨特的天賦（${resultInfo.name}）。`
-  };
+    summary: "你從合作協調出發，透過獨立開創，最終成為創意橋樑者。",
+    advice: "先感受世界的和諧律動，再找到自己的獨特位置，最終成為連結不同能量的創意橋樑。"
+  },
+
+  // 第3組：134 - 開創→表達→穩定
+  "134": {
+    title: "開創表達的建造者",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立開創",
+        energy: "靈魂始於獨特的創意火花",
+        influence: "你的生命課題始於信任自己的靈感"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過分享歡樂來擴展",
+        influence: "你學習將內在火花轉化為外在表達"
+      },
+      result: {
+        number: 4,
+        name: "穩定基石",
+        energy: "最終成為可靠的建造者",
+        influence: "你的生命使命是為創意建立穩固的結構"
+      }
+    },
+    summary: "你從獨立開創出發，透過創意表達，最終成為穩定建造者。",
+    advice: "信任你獨特的創意靈感，勇敢表達出來，最終為這些創意建立能持久影響的結構。"
+  },
+
+  // 第4組：314 - 表達→開創→穩定
+  "314": {
+    title: "表達開創的實作者",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "靈魂始於對美的感知",
+        influence: "你的生命課題始於分享內在的歡樂"
+      },
+      process: {
+        number: 1,
+        name: "獨立開創",
+        energy: "透過勇敢行動來成長",
+        influence: "你學習將創意轉化為實際行動"
+      },
+      result: {
+        number: 4,
+        name: "穩定基石",
+        energy: "最終成為務實的實作者",
+        influence: "你的生命使命是將美好願景落實於現實"
+      }
+    },
+    summary: "你從創意表達出發，透過獨立開創，最終成為穩定實作者。",
+    advice: "先分享你感受到的美好，再勇敢採取行動，最終將這些願景建構成穩固的現實。"
+  },
+
+  // 第5組：224 - 協調→協調→穩定
+  "224": {
+    title: "雙重協調的和諧者",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "靈魂始於深刻的同理心",
+        influence: "你的生命課題始於理解關係的本質"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "持續透過連結來深化",
+        influence: "你特別擅長感知能量的流動與平衡"
+      },
+      result: {
+        number: 4,
+        name: "穩定基石",
+        energy: "最終成為和諧的穩定者",
+        influence: "你的生命使命是為世界帶來穩定的和諧"
+      }
+    },
+    summary: "你從合作協調出發，持續協調深化，最終成為和諧穩定者。",
+    advice: "運用你深刻的同理心，感知世界的能量流動，最終成為帶來穩定和諧的基石。"
+  },
+
+  // 第6組：145 - 開創→穩定→自由
+  "145": {
+    title: "開創穩定的探險家",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立開創",
+        energy: "靈魂始於自主的意志",
+        influence: "你的生命課題始於跟隨內在的衝動"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "透過建立結構來成長",
+        influence: "你學習為自己的衝動找到堅實的基礎"
+      },
+      result: {
+        number: 5,
+        name: "自由體驗",
+        energy: "最終成為自由的探險家",
+        influence: "你的生命使命是在穩定基礎上自由探索"
+      }
+    },
+    summary: "你從獨立開創出發，透過穩定基石，最終成為自由探險家。",
+    advice: "跟隨你內在的衝動，為它建立穩固的基礎，最終在這個結構中自由探索無限可能。"
+  },
+
+  // 第7組：415 - 穩定→開創→自由
+  "415": {
+    title: "穩定開創的改革者",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "靈魂始於對結構的直覺",
+        influence: "你的生命課題始於建立可靠的系統"
+      },
+      process: {
+        number: 1,
+        name: "獨立開創",
+        energy: "透過勇敢突破來成長",
+        influence: "你學習在穩定中開創新的可能性"
+      },
+      result: {
+        number: 5,
+        name: "自由體驗",
+        energy: "最終成為自由的改革者",
+        influence: "你的生命使命是在傳統中創造新的自由"
+      }
+    },
+    summary: "你從穩定基石出發，透過獨立開創，最終成為自由改革者。",
+    advice: "先建立穩固的基礎，再勇敢開創新路，最終在傳統與創新間找到自由的平衡。"
+  },
+
+  // 第8組：235 - 協調→表達→自由
+  "235": {
+    title: "協調表達的流動者",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "靈魂始於敏感的連結力",
+        influence: "你的生命課題始於感知無形的連結"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過藝術化表達來成長",
+        influence: "你學習將感知轉化為美麗的表達"
+      },
+      result: {
+        number: 5,
+        name: "自由體驗",
+        energy: "最終成為自由的流動者",
+        influence: "你的生命使命是讓能量自由流動與轉化"
+      }
+    },
+    summary: "你從合作協調出發，透過創意表達，最終成為自由流動者。",
+    advice: "感知世界的隱形連結，用創意將其表達出來，最終成為讓能量自由流動的管道。"
+  },
+
+  // 第9組：325 - 表達→協調→自由
+  "325": {
+    title: "表達協調的舞者",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "靈魂始於內在的歡樂泉源",
+        influence: "你的生命課題始於分享生命的喜悅"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過與人共鳴來成長",
+        influence: "你學習在表達中找到與世界的和諧"
+      },
+      result: {
+        number: 5,
+        name: "自由體驗",
+        energy: "最終成為自由的舞者",
+        influence: "你的生命使命是在和諧中自由創造"
+      }
+    },
+    summary: "你從創意表達出發，透過合作協調，最終成為自由舞者。",
+    advice: "分享你內在的歡樂，在與世界的互動中找到節奏，最終在和諧中自由舞動創造。"
+  },
+
+  // 第10組：156 - 開創→自由→完美關愛
+  "156": {
+    title: "開創自由的療癒者",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立開創",
+        energy: "靈魂始於獨特的生命力",
+        influence: "你的生命課題始於活出真實的自己"
+      },
+      process: {
+        number: 5,
+        name: "自由體驗",
+        energy: "透過多元探索來成長",
+        influence: "你學習在自由中擴展生命的維度"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終成為完美的療癒者",
+        influence: "你的生命使命是用自由的心創造完美的愛"
+      }
+    },
+    summary: "你從獨立開創出發，透過自由體驗，最終成為完美療癒者。",
+    advice: "活出真實的自己，自由探索生命，最終用這份自由創造完美的療癒與關愛。"
+  },
+
+  // 第11組：516 - 自由→開創→完美關愛
+  "516": {
+    title: "自由開創的美化者",
+    journey: {
+      start: {
+        number: 5,
+        name: "自由體驗",
+        energy: "靈魂始於對變化的渴望",
+        influence: "你的生命課題始於擁抱生命的多樣性"
+      },
+      process: {
+        number: 1,
+        name: "獨立開創",
+        energy: "透過聚焦行動來成長",
+        influence: "你學習在變化中找到自己的方向"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終成為完美的美化者",
+        influence: "你的生命使命是用自由精神創造完美的和諧"
+      }
+    },
+    summary: "你從自由體驗出發，透過獨立開創，最終成為完美美化者。",
+    advice: "擁抱生命的多元面貌，找到自己的獨特道路，最終用自由精神創造完美的和諧世界。"
+  },
+
+  // 第12組：246 - 協調→穩定→完美關愛
+  "246": {
+    title: "協調穩定的滋養者",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "靈魂始於深度的感受力",
+        influence: "你的生命課題始於理解情感的智慧"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "透過建立安全感來成長",
+        influence: "你學習為感受找到穩固的容器"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終成為完美的滋養者",
+        influence: "你的生命使命是為世界帶來穩定的滋養"
+      }
+    },
+    summary: "你從合作協調出發，透過穩定基石，最終成為完美滋養者。",
+    advice: "深入感受世界的脈動，為這些感受建立安全的空間，最終成為穩定滋養的源頭。"
+  },
+
+  // 第13組：426 - 穩定→協調→完美關愛
+  "426": {
+    title: "穩定協調的容器",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "靈魂始於結構的智慧",
+        influence: "你的生命課題始於建立有形的支持"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過情感連結來成長",
+        influence: "你學習在結構中注入溫暖的能量"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終成為完美的容器",
+        influence: "你的生命使命是成為愛與支持的完美容器"
+      }
+    },
+    summary: "你從穩定基石出發，透過合作協調，最終成為完美容器。",
+    advice: "建立穩固的支持系統，在其中注入情感的溫暖，最終成為承載完美關愛的容器。"
+  },
+
+  // 第14組：336 - 表達→表達→完美關愛
+  "336": {
+    title: "雙重表達的藝術家",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "靈魂始於歡樂的創造力",
+        influence: "你的生命課題始於展現內在的美"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "持續透過創造來深化",
+        influence: "你特別擅長將美轉化為各種形式"
+      },
+      result: {
+        number: 6,
+        name: "完美關愛",
+        energy: "最終成為完美的藝術家",
+        influence: "你的生命使命是用創作為世界帶來完美的愛"
+      }
+    },
+    summary: "你從創意表達出發，持續表達深化，最終成為完美藝術家。",
+    advice: "盡情展現你內在的美，不斷深化你的創造，最終用藝術為世界帶來完美的愛的體驗。"
+  },
+
+  // 第15組：167 - 開創→完美關愛→靜心
+  "167": {
+    title: "開創完美的智者",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立開創",
+        energy: "靈魂始於獨特的真理追尋",
+        influence: "你的生命課題始於走自己的道路"
+      },
+      process: {
+        number: 6,
+        name: "完美關愛",
+        energy: "透過創造和諧來成長",
+        influence: "你學習在道路上創造完美的愛"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終成為深度的智者",
+        influence: "你的生命使命是在完美愛中發現深度的智慧"
+      }
+    },
+    summary: "你從獨立開創出發，透過完美關愛，最終成為深度智者。",
+    advice: "勇敢走自己的路，在路上創造完美的和諧，最終在愛中發現生命的深度智慧。"
+  },
+
+  // 第16組：617 - 完美關愛→開創→靜心
+  "617": {
+    title: "完美開創的探索者",
+    journey: {
+      start: {
+        number: 6,
+        name: "完美關愛",
+        energy: "靈魂始於對完美的直覺",
+        influence: "你的生命課題始於創造理想的和諧"
+      },
+      process: {
+        number: 1,
+        name: "獨立開創",
+        energy: "透過勇敢行動來成長",
+        influence: "你學習將完美願景付諸實踐"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終成為深度的探索者",
+        influence: "你的生命使命是在實踐中探索真理的本質"
+      }
+    },
+    summary: "你從完美關愛出發，透過獨立開創，最終成為深度探索者。",
+    advice: "跟隨你對完美的直覺，勇敢將其實現，最終在實踐中深入探索生命的真理。"
+  },
+
+  // 第17組：257 - 協調→自由→靜心
+  "257": {
+    title: "協調自由的哲學家",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "靈魂始於關係的奧秘",
+        influence: "你的生命課題始於理解連結的藝術"
+      },
+      process: {
+        number: 5,
+        name: "自由體驗",
+        energy: "透過多元體驗來成長",
+        influence: "你學習在關係中保持自由的空間"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終成為深度的哲學家",
+        influence: "你的生命使命是在關係與自由間發現智慧"
+      }
+    },
+    summary: "你從合作協調出發，透過自由體驗，最終成為深度哲學家。",
+    advice: "深入理解關係的藝術，在其中保持自由的探索，最終發現連結與獨立間的深刻智慧。"
+  },
+
+  // 第18組：527 - 自由→協調→靜心
+  "527": {
+    title: "自由協調的觀察者",
+    journey: {
+      start: {
+        number: 5,
+        name: "自由體驗",
+        energy: "靈魂始於對變化的熱愛",
+        influence: "你的生命課題始於擁抱生命的流動"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過深度連結來成長",
+        influence: "你學習在自由中建立有意義的關係"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終成為深度的觀察者",
+        influence: "你的生命使命是在流動中觀察永恆的真理"
+      }
+    },
+    summary: "你從自由體驗出發，透過合作協調，最終成為深度觀察者。",
+    advice: "擁抱生命的流動變化，在其中建立深刻的連結，最終成為觀察生命真理的智者。"
+  },
+
+  // 第19組：347 - 表達→穩定→靜心
+  "347": {
+    title: "表達穩定的建築師",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "靈魂始於內在的靈感泉源",
+        influence: "你的生命課題始於信任創造的衝動"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "透過建立結構來成長",
+        influence: "你學習為靈感找到堅實的基礎"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終成為深度的建築師",
+        influence: "你的生命使命是為創意建造智慧的殿堂"
+      }
+    },
+    summary: "你從創意表達出發，透過穩定基石，最終成為深度建築師。",
+    advice: "信任你的創造靈感，為它建立穩固的基礎，最終建造承載智慧的美麗結構。"
+  },
+
+  // 第20組：437 - 穩定→表達→靜心
+  "437": {
+    title: "穩定表達的匠人",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "靈魂始於結構的直覺",
+        influence: "你的生命課題始於建立可靠的支持"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過藝術化表達來成長",
+        influence: "你學習在結構中注入美麗的能量"
+      },
+      result: {
+        number: 7,
+        name: "靜心思考",
+        energy: "最終成為深度的匠人",
+        influence: "你的生命使命是在穩定中創造智慧的藝術"
+      }
+    },
+    summary: "你從穩定基石出發，透過創意表達，最終成為深度匠人。",
+    advice: "建立穩固的基礎，在其中注入創意的表達，最終創造融合智慧與美的藝術作品。"
+  },
+
+  // 第21組：178 - 開創→靜心→豐盛
+  "178": {
+    title: "開創智慧的顯化者",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立開創",
+        energy: "靈魂始於獨特的生命意願",
+        influence: "你的生命課題始於實現內在的藍圖"
+      },
+      process: {
+        number: 7,
+        name: "靜心思考",
+        energy: "透過深度理解來成長",
+        influence: "你學習在行動中融入智慧"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終成為豐盛的顯化者",
+        influence: "你的生命使命是將智慧轉化為豐盛的成果"
+      }
+    },
+    summary: "你從獨立開創出發，透過靜心思考，最終成為豐盛顯化者。",
+    advice: "勇敢實現內在的藍圖，在行動中融入深刻的理解，最終將智慧顯化為豐盛的成果。"
+  },
+
+  // 第22組：718 - 靜心→開創→豐盛
+  "718": {
+    title: "智慧開創的實踐者",
+    journey: {
+      start: {
+        number: 7,
+        name: "靜心思考",
+        energy: "靈魂始於對真理的渴求",
+        influence: "你的生命課題始於理解生命的本質"
+      },
+      process: {
+        number: 1,
+        name: "獨立開創",
+        energy: "透過勇敢行動來成長",
+        influence: "你學習將理解轉化為實際創造"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終成為豐盛的實踐者",
+        influence: "你的生命使命是將智慧實踐為豐盛的現實"
+      }
+    },
+    summary: "你從靜心思考出發，透過獨立開創，最終成為豐盛實踐者。",
+    advice: "深入理解生命的本質，勇敢將其付諸實踐，最終將智慧轉化為豐盛的現實。"
+  },
+
+  // 第23組：268 - 協調→完美關愛→豐盛
+  "268": {
+    title: "協調完美的滋養源",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "靈魂始於關係的智慧",
+        influence: "你的生命課題始於理解和諧的創造"
+      },
+      process: {
+        number: 6,
+        name: "完美關愛",
+        energy: "透過創造完美來成長",
+        influence: "你學習在關係中創造理想的愛"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終成為豐盛的滋養源",
+        influence: "你的生命使命是將完美的愛轉化為豐盛的滋養"
+      }
+    },
+    summary: "你從合作協調出發，透過完美關愛，最終成為豐盛滋養源。",
+    advice: "理解關係的智慧，在其中創造完美的愛，最終將這份愛轉化為滋養世界的資源。"
+  },
+
+  // 第24組：628 - 完美關愛→協調→豐盛
+  "628": {
+    title: "完美協調的支持者",
+    journey: {
+      start: {
+        number: 6,
+        name: "完美關愛",
+        energy: "靈魂始於對完美的感知",
+        influence: "你的生命課題始於創造理想的和諧"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過深度連結來成長",
+        influence: "你學習在完美中建立有意義的關係"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終成為豐盛的支持者",
+        influence: "你的生命使命是將完美關係轉化為實際支持"
+      }
+    },
+    summary: "你從完美關愛出發，透過合作協調，最終成為豐盛支持者。",
+    advice: "創造理想的和諧，在其中建立深刻的關係，最終將這些連結轉化為實際的支持力量。"
+  },
+
+  // 第25組：358 - 表達→自由→豐盛
+  "358": {
+    title: "表達自由的創造者",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "靈魂始於歡樂的創造衝動",
+        influence: "你的生命課題始於分享內在的美"
+      },
+      process: {
+        number: 5,
+        name: "自由體驗",
+        energy: "透過多元探索來成長",
+        influence: "你學習在創造中保持自由的空間"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終成為豐盛的創造者",
+        influence: "你的生命使命是將自由創意轉化為豐盛的成果"
+      }
+    },
+    summary: "你從創意表達出發，透過自由體驗，最終成為豐盛創造者。",
+    advice: "分享你內在的美，在創造中保持自由的探索，最終將創意轉化為豐盛的成果。"
+  },
+
+  // 第26組：538 - 自由→表達→豐盛
+  "538": {
+    title: "自由表達的企業家",
+    journey: {
+      start: {
+        number: 5,
+        name: "自由體驗",
+        energy: "靈魂始於對變化的熱情",
+        influence: "你的生命課題始於擁抱生命的可能性"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過藝術化呈現來成長",
+        influence: "你學習將體驗轉化為美麗的表達"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終成為豐盛的企業家",
+        influence: "你的生命使命是將自由體驗轉化為有價值的創造"
+      }
+    },
+    summary: "你從自由體驗出發，透過創意表達，最終成為豐盛企業家。",
+    advice: "擁抱生命的無限可能，將體驗轉化為美麗的表達，最終創造有價值的豐盛事業。"
+  },
+
+  // 第27組：448 - 穩定→穩定→豐盛
+  "448": {
+    title: "雙重穩定的建造者",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "靈魂始於結構的天賦",
+        influence: "你的生命課題始於建立持久的基礎"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "持續透過建設來深化",
+        influence: "你特別擅長創造可靠的系統"
+      },
+      result: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "最終成為豐盛的建造者",
+        influence: "你的生命使命是將穩固結構轉化為豐盛的資源"
+      }
+    },
+    summary: "你從穩定基石出發，持續建設深化，最終成為豐盛建造者。",
+    advice: "運用你建立結構的天賦，創造可靠的系統，最終將這些基礎轉化為豐盛的資源。"
+  },
+
+  // 第28組：189 - 開創→豐盛→圓滿
+  "189": {
+    title: "開創豐盛的整合者",
+    journey: {
+      start: {
+        number: 1,
+        name: "獨立開創",
+        energy: "靈魂始於獨特的創造衝動",
+        influence: "你的生命課題始於實現個人的天賦"
+      },
+      process: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "透過創造價值來成長",
+        influence: "你學習將天賦轉化為實際的貢獻"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終成為圓滿的整合者",
+        influence: "你的生命使命是將個人成就整合為更大的善"
+      }
+    },
+    summary: "你從獨立開創出發，透過豐盛資源，最終成為圓滿整合者。",
+    advice: "實現你獨特的天賦，將其轉化為有價值的貢獻，最終將個人成就整合為對整體的服務。"
+  },
+
+  // 第29組：819 - 豐盛→開創→圓滿
+  "819": {
+    title: "豐盛開創的領導者",
+    journey: {
+      start: {
+        number: 8,
+        name: "豐盛資源",
+        energy: "靈魂始於資源的智慧",
+        influence: "你的生命課題始於善用已有的豐盛"
+      },
+      process: {
+        number: 1,
+        name: "獨立開創",
+        energy: "透過創新行動來成長",
+        influence: "你學習用資源開創新的可能性"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終成為圓滿的領導者",
+        influence: "你的生命使命是將資源與創新整合為領導的力量"
+      }
+    },
+    summary: "你從豐盛資源出發，透過獨立開創，最終成為圓滿領導者。",
+    advice: "善用你已有的資源，用它們開創新的道路，最終成為整合資源與創新的領導力量。"
+  },
+
+  // 第30組：279 - 協調→靜心→圓滿
+  "279": {
+    title: "協調智慧的導師",
+    journey: {
+      start: {
+        number: 2,
+        name: "合作協調",
+        energy: "靈魂始於關係的深度",
+        influence: "你的生命課題始於理解連結的奧秘"
+      },
+      process: {
+        number: 7,
+        name: "靜心思考",
+        energy: "透過深刻理解來成長",
+        influence: "你學習在關係中發展智慧"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終成為圓滿的導師",
+        influence: "你的生命使命是將關係智慧分享給世界"
+      }
+    },
+    summary: "你從合作協調出發，透過靜心思考，最終成為圓滿導師。",
+    advice: "深入理解關係的奧秘，在其中發展深刻的智慧，最終成為分享關係智慧的導師。"
+  },
+
+  // 第31組：729 - 靜心→協調→圓滿
+  "729": {
+    title: "智慧協調的療癒者",
+    journey: {
+      start: {
+        number: 7,
+        name: "靜心思考",
+        energy: "靈魂始於真理的追尋",
+        influence: "你的生命課題始於發現生命的本質"
+      },
+      process: {
+        number: 2,
+        name: "合作協調",
+        energy: "透過深度連結來成長",
+        influence: "你學習在智慧中建立有意義的關係"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終成為圓滿的療癒者",
+        influence: "你的生命使命是用智慧療癒關係的創傷"
+      }
+    },
+    summary: "你從靜心思考出發，透過合作協調，最終成為圓滿療癒者。",
+    advice: "追尋生命的真理，在其中建立深刻的連結，最終用智慧療癒關係中的傷痛。"
+  },
+
+  // 第32組：369 - 表達→完美關愛→圓滿
+  "369": {
+    title: "表達完美的藝術家",
+    journey: {
+      start: {
+        number: 3,
+        name: "創意表達",
+        energy: "靈魂始於美的感知",
+        influence: "你的生命課題始於展現內在的創造力"
+      },
+      process: {
+        number: 6,
+        name: "完美關愛",
+        energy: "透過創造理想來成長",
+        influence: "你學習在創造中追求完美的和諧"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終成為圓滿的藝術家",
+        influence: "你的生命使命是將美與愛整合為完整的藝術"
+      }
+    },
+    summary: "你從創意表達出發，透過完美關愛，最終成為圓滿藝術家。",
+    advice: "展現你內在的創造力，在其中追求完美的和諧，最終將美與愛整合為完整的藝術表達。"
+  },
+
+  // 第33組：639 - 完美關愛→表達→圓滿
+  "639": {
+    title: "完美表達的療癒師",
+    journey: {
+      start: {
+        number: 6,
+        name: "完美關愛",
+        energy: "靈魂始於和諧的直覺",
+        influence: "你的生命課題始於創造理想的環境"
+      },
+      process: {
+        number: 3,
+        name: "創意表達",
+        energy: "透過藝術化呈現來成長",
+        influence: "你學習將和諧轉化為美麗的表達"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終成為圓滿的療癒師",
+        influence: "你的生命使命是將完美關愛轉化為療癒的藝術"
+      }
+    },
+    summary: "你從完美關愛出發，透過創意表達，最終成為圓滿療癒師。",
+    advice: "創造理想的和諧環境，將其轉化為美麗的表達，最終成為用藝術療癒的完美療癒師。"
+  },
+
+  // 第34組：459 - 穩定→自由→圓滿
+  "459": {
+    title: "穩定自由的平衡者",
+    journey: {
+      start: {
+        number: 4,
+        name: "穩定基石",
+        energy: "靈魂始於結構的智慧",
+        influence: "你的生命課題始於建立可靠的基礎"
+      },
+      process: {
+        number: 5,
+        name: "自由體驗",
+        energy: "透過多元探索來成長",
+        influence: "你學習在穩定中保持自由的空間"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終成為圓滿的平衡者",
+        influence: "你的生命使命是將穩定與自由整合為完整的平衡"
+      }
+    },
+    summary: "你從穩定基石出發，透過自由體驗，最終成為圓滿平衡者。",
+    advice: "建立可靠的基礎，在其中保持自由的探索，最終成為平衡結構與流動的大師。"
+  },
+
+  // 第35組：549 - 自由→穩定→圓滿
+  "549": {
+    title: "自由穩定的整合者",
+    journey: {
+      start: {
+        number: 5,
+        name: "自由體驗",
+        energy: "靈魂始於變化的熱情",
+        influence: "你的生命課題始於擁抱生命的流動"
+      },
+      process: {
+        number: 4,
+        name: "穩定基石",
+        energy: "透過建立結構來成長",
+        influence: "你學習在自由中創造穩定的基礎"
+      },
+      result: {
+        number: 9,
+        name: "圓滿整合",
+        energy: "最終成為圓滿的整合者",
+        influence: "你的生命使命是將自由與穩定整合為完整的系統"
+      }
+    },
+    summary: "你從自由體驗出發，透過穩定基石，最終成為圓滿整合者。",
+    advice: "擁抱生命的流動變化，在其中創造穩固的基礎，最終成為整合自由與結構的大師。"
+  }
 };
 
-// ====== 獲取旅程解析（優先使用特定組合，沒有則用通用模板）======
+// ====== 最終版的獲取旅程解析函式 ======
 window.getJourneyInterpretation = function(codes, type) {
   const codeKey = codes.join('');
   let journeyData = null;
-
+  
   // 根據類型選擇對應的資料庫
   switch(type) {
     case 'career':
@@ -1091,12 +2862,24 @@ window.getJourneyInterpretation = function(codes, type) {
     case 'throne':
       journeyData = window.throneJourneys[codeKey];
       break;
+    default:
+      console.warn(`未知的旅程類型：${type}`);
   }
-
-  // 如果找不到特定組合，使用通用生成器
-  if (!journeyData && window.generateJourney) {
-    journeyData = window.generateJourney(codes, type);
+  
+  // 如果真的找不到（理論上不會發生）
+  if (!journeyData) {
+    console.warn(`未找到 ${type} 類型的 ${codeKey} 組合解析`);
+    return {
+      title: `${codes[0]} → ${codes[1]} → ${codes[2]}`,
+      journey: {
+        start: { number: codes[0], name: "探索中", energy: "能量正在流動", influence: "起點能量" },
+        process: { number: codes[1], name: "轉化中", energy: "過程正在發展", influence: "轉化過程" },
+        result: { number: codes[2], name: "展現中", energy: "結果正在形成", influence: "最終展現" }
+      },
+      summary: "這個獨特的數字組合正在等待更深的詮釋",
+      advice: "你的旅程是獨一無二的，繼續探索會發現更多驚喜"
+    };
   }
-
+  
   return journeyData;
 };

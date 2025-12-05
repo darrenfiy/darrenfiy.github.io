@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>深度天賦解析 · 生命靈數</title>
+  <style>
+    /* ====== 基礎樣式 ====== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(135deg, #fdf2ff 0%, #f0e8ff 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding-bottom: 40px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      color: #5b3fd1;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #777;
+      font-size: 0.95rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 8px 20px;
+      background: linear-gradient(135deg, #9f7aea, #6c5ce7);
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      transition: transform 0.2s;
+      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(108, 92, 231, 0.4);
+    }
+
+    /* ====== 天賦金字塔主視覺 ====== */
+    .pyramid-section {
+      margin: 30px 0;
+    }
+
+    .pyramid-title {
+      font-size: 1.2rem;
+      color: #5b3fd1;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .code-group {
+      width: 100%;
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(108, 92, 231, 0.1);
+    }
+
+    .group-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #f0e8ff;
+    }
+
+    .group-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #5b3fd1;
+    }
+
+    .group-type {
+      font-size: 0.8rem;
+      padding: 4px 12px;
+      background: #f3edff;
+      color: #5b3fd1;
+      border-radius: 999px;
+      font-weight: 500;
+    }
+
+    /* ====== 數字旅程時間軸 ====== */
+    .journey-timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .journey-timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #9f7aea, #6c5ce7);
+      border-radius: 3px;
+    }
+
+    .journey-step {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .journey-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .step-marker {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #9f7aea, #6c5ce7);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-right: 20px;
+      flex-shrink: 0;
+      z-index: 1;
+      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+    }
+
+    .step-content {
+      flex: 1;
+      background: #fbf9ff;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #e6dcff;
+    }
+
+    .step-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #8a6eff;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .step-name {
+      font-size: 1.1rem;
+      color: #5b3fd1;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .step-energy {
+      font-size: 0.95rem;
+      color: #666;
+      margin-bottom: 8px;
+      line-height: 1.5;
+    }
+
+    .step-influence {
+      font-size: 0.9rem;
+      color: #888;
+      font-style: italic;
+      line-height: 1.4;
+    }
+
+    /* ====== 旅程總結 ====== */
+    .journey-summary {
+      background: linear-gradient(135deg, #fff9f0, #fff5e6);
+      border: 1px solid #fed7aa;
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    .summary-title {
+      font-size: 1rem;
+      color: #d97706;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+
+    .summary-text {
+      font-size: 1rem;
+      color: #92400e;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .summary-advice {
+      font-size: 0.95rem;
+      color: #a16207;
+      line-height: 1.5;
+      padding-left: 16px;
+      border-left: 3px solid #fed7aa;
+    }
+
+    /* ====== 能量對比區 ====== */
+    .comparison-section {
+      margin: 40px 0;
+    }
+
+    .comparison-title {
+      font-size: 1.2rem;
+      color: #5b3fd1;
+      margin-bottom: 25px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .comparison-card {
+      background: white;
+      border-radius: 16px;
+      padding: 25px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+      border: 1px solid #eee;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .comparison-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+    }
+
+    .comparison-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    .comparison-numbers {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #5b3fd1;
+      background: #f3edff;
+      padding: 8px 16px;
+      border-radius: 10px;
+    }
+
+    .comparison-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333;
+      flex: 1;
+    }
+
+    .comparison-desc {
+      font-size: 0.95rem;
+      color: #666;
+      line-height: 1.5;
+    }
+
+    /* ====== 個人化建議 ====== */
+    .advice-section {
+      background: linear-gradient(135deg, #f0f9ff, #e6f4ff);
+      border: 1px solid #bae6fd;
+      border-radius: 16px;
+      padding: 30px;
+      margin-top: 40px;
+    }
+
+    .advice-title {
+      font-size: 1.2rem;
+      color: #0284c7;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .advice-list {
+      list-style: none;
+    }
+
+    .advice-item {
+      padding: 12px 0;
+      border-bottom: 1px dashed #bae6fd;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .advice-item:last-child {
+      border-bottom: none;
+    }
+
+    .advice-icon {
+      color: #0284c7;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .advice-text {
+      font-size: 1rem;
+      color: #0369a1;
+      line-height: 1.5;
+    }
+
+    /* ====== 響應式設計 ====== */
+    @media (max-width: 640px) {
+      .container {
+        padding: 15px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .journey-timeline::before {
+        left: 20px;
+      }
+
+      .step-marker {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+        margin-right: 15px;
+      }
+
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .group-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1>🔮 深度天賦解析</h1>
+      <p class="subtitle" id="header-subtitle">看見你的數字旅程：起因 → 過程 → 結果</p>
+      <a href="index.html" class="back-btn">← 回到首頁</a>
+    </header>
+
+    <!-- 事業天賦旅程 -->
+    <section class="pyramid-section">
+      <h2 class="pyramid-title">📊 事業天賦旅程</h2>
+      <div class="code-group">
+        <div class="group-header">
+          <div class="group-name">事業碼：<span id="career-code-display">—</span></div>
+          <span class="group-type">工作天賦</span>
+        </div>
+
+        <div class="journey-timeline" id="career-journey">
+          <div class="journey-step">
+            <div class="step-marker" id="career-start-num">?</div>
+            <div class="step-content">
+              <div class="step-label">起因 · Start</div>
+              <div class="step-name" id="career-start-name">—</div>
+              <div class="step-energy" id="career-start-energy">—</div>
+              <div class="step-influence" id="career-start-influence">—</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="step-marker" id="career-process-num">?</div>
+            <div class="step-content">
+              <div class="step-label">過程 · Process</div>
+              <div class="step-name" id="career-process-name">—</div>
+              <div class="step-energy" id="career-process-energy">—</div>
+              <div class="step-influence" id="career-process-influence">—</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="step-marker" id="career-result-num">?</div>
+            <div class="step-content">
+              <div class="step-label">結果 · Result</div>
+              <div class="step-name" id="career-result-name">—</div>
+              <div class="step-energy" id="career-result-energy">—</div>
+              <div class="step-influence" id="career-result-influence">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="journey-summary">
+          <div class="summary-title">🌟 旅程總結</div>
+          <div class="summary-text" id="career-summary">—</div>
+          <div class="summary-advice" id="career-advice">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 家庭天賦旅程 -->
+    <section class="pyramid-section">
+      <h2 class="pyramid-title">🏡 家庭天賦旅程</h2>
+      <div class="code-group">
+        <div class="group-header">
+          <div class="group-name">家庭碼：<span id="family-code-display">—</span></div>
+          <span class="group-type">情感模式</span>
+        </div>
+
+        <div class="journey-timeline" id="family-journey">
+          <div class="journey-step">
+            <div class="step-marker" id="family-start-num">?</div>
+            <div class="step-content">
+              <div class="step-label">起因 · Start</div>
+              <div class="step-name" id="family-start-name">—</div>
+              <div class="step-energy" id="family-start-energy">—</div>
+              <div class="step-influence" id="family-start-influence">—</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="step-marker" id="family-process-num">?</div>
+            <div class="step-content">
+              <div class="step-label">過程 · Process</div>
+              <div class="step-name" id="family-process-name">—</div>
+              <div class="step-energy" id="family-process-energy">—</div>
+              <div class="step-influence" id="family-process-influence">—</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="step-marker" id="family-result-num">?</div>
+            <div class="step-content">
+              <div class="step-label">結果 · Result</div>
+              <div class="step-name" id="family-result-name">—</div>
+              <div class="step-energy" id="family-result-energy">—</div>
+              <div class="step-influence" id="family-result-influence">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="journey-summary">
+          <div class="summary-title">🌟 旅程總結</div>
+          <div class="summary-text" id="family-summary">—</div>
+          <div class="summary-advice" id="family-advice">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 坐鎮碼旅程 -->
+    <section class="pyramid-section">
+      <h2 class="pyramid-title">👑 坐鎮碼旅程</h2>
+      <div class="code-group">
+        <div class="group-header">
+          <div class="group-name">坐鎮碼：<span id="throne-code-display">—</span></div>
+          <span class="group-type">生命道路</span>
+        </div>
+
+        <div class="journey-timeline" id="throne-journey">
+          <div class="journey-step">
+            <div class="step-marker" id="throne-start-num">?</div>
+            <div class="step-content">
+              <div class="step-label">起因 · Start</div>
+              <div class="step-name" id="throne-start-name">—</div>
+              <div class="step-energy" id="throne-start-energy">—</div>
+              <div class="step-influence" id="throne-start-influence">—</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="step-marker" id="throne-process-num">?</div>
+            <div class="step-content">
+              <div class="step-label">過程 · Process</div>
+              <div class="step-name" id="throne-process-name">—</div>
+              <div class="step-energy" id="throne-process-energy">—</div>
+              <div class="step-influence" id="throne-process-influence">—</div>
+            </div>
+          </div>
+
+          <div class="journey-step">
+            <div class="step-marker" id="throne-result-num">?</div>
+            <div class="step-content">
+              <div class="step-label">結果 · Result</div>
+              <div class="step-name" id="throne-result-name">—</div>
+              <div class="step-energy" id="throne-result-energy">—</div>
+              <div class="step-influence" id="throne-result-influence">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="journey-summary">
+          <div class="summary-title">🌟 旅程總結</div>
+          <div class="summary-text" id="throne-summary">—</div>
+          <div class="summary-advice" id="throne-advice">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 能量對比區 -->
+    <section class="comparison-section">
+      <h2 class="comparison-title">✨ 能量對比分析</h2>
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <div class="comparison-numbers" id="career-compare-nums">—</div>
+            <div class="comparison-name" id="career-compare-name">—</div>
+          </div>
+          <div class="comparison-desc" id="career-compare-desc">—</div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <div class="comparison-numbers" id="family-compare-nums">—</div>
+            <div class="comparison-name" id="family-compare-name">—</div>
+          </div>
+          <div class="comparison-desc" id="family-compare-desc">—</div>
+        </div>
+
+        <div class="comparison-card">
+          <div class="comparison-header">
+            <div class="comparison-numbers" id="throne-compare-nums">—</div>
+            <div class="comparison-name" id="throne-compare-name">—</div>
+          </div>
+          <div class="comparison-desc" id="throne-compare-desc">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 個人化建議 -->
+    <section class="advice-section">
+      <h2 class="advice-title">💫 你的成長建議</h2>
+      <ul class="advice-list" id="personal-advice">
+        <li class="advice-item">
+          <div class="advice-icon">→</div>
+          <div class="advice-text">請先返回首頁計算你的生命靈數...</div>
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <script src="numerology-pyramid.js"></script>
+  <script src="number-journeys.js"></script>
+  <script>
+    // ====== 頁面載入時解析參數 ======
+    window.addEventListener('DOMContentLoaded', () => {
+      // 從 URL 參數或 localStorage 獲取生日
+      const urlParams = new URLSearchParams(window.location.search);
+      const birthdate = urlParams.get('birthdate') || localStorage.getItem('lifepath_birthdate');
+
+      if (!birthdate) {
+        // 沒有生日資料，顯示提示
+        document.getElementById('personal-advice').innerHTML = `
+          <li class="advice-item">
+            <div class="advice-icon">💜</div>
+            <div class="advice-text">請先返回首頁計算你的生命靈數，才能看到完整的深度解析</div>
+          </li>
+        `;
+        return;
+      }
+
+      // 計算天賦密碼
+      const talentCodes = window.calculateTalentCodes(birthdate);
+      if (!talentCodes) {
+        console.error('無法計算天賦密碼');
+        return;
+      }
+
+      // 解析生日顯示
+      const [year, month, day] = birthdate.split('-');
+      document.getElementById('header-subtitle').innerHTML = `
+        生日 ${year} 年 ${month} 月 ${day} 日<br>
+        <small style="font-size: 0.85rem; color: #999;">數字旅程的深度解讀</small>
+      `;
+
+      // 更新顯示
+      updateAllJourneys(talentCodes);
+      updateComparison(talentCodes);
+      updatePersonalAdvice(talentCodes);
+    });
+
+    // ====== 更新所有旅程顯示 ======
+    function updateAllJourneys(talentCodes) {
+      // 事業碼旅程
+      updateJourneyDisplay(
+        'career',
+        talentCodes.careerCode,
+        'career'
+      );
+
+      // 家庭碼旅程
+      updateJourneyDisplay(
+        'family',
+        talentCodes.familyCode,
+        'family'
+      );
+
+      // 坐鎮碼旅程
+      updateJourneyDisplay(
+        'throne',
+        talentCodes.throneCode,
+        'throne'
+      );
+    }
+
+    // ====== 更新單一旅程顯示 ======
+    function updateJourneyDisplay(type, codes, journeyType) {
+      const codeStr = codes.join(' ');
+
+      // 顯示數字碼
+      document.getElementById(`${type}-code-display`).textContent = codeStr;
+
+      // 獲取旅程解析
+      const journeyData = window.getJourneyInterpretation(codes, journeyType);
+
+      if (!journeyData) {
+        console.warn(`沒有找到 ${type} 旅程的解析資料`);
+        return;
+      }
+
+      // 更新起因
+      document.getElementById(`${type}-start-num`).textContent = codes[0];
+      document.getElementById(`${type}-start-name`).textContent = journeyData.journey.start.name;
+      document.getElementById(`${type}-start-energy`).textContent = journeyData.journey.start.energy;
+      document.getElementById(`${type}-start-influence`).textContent = journeyData.journey.start.influence;
+
+      // 更新過程
+      document.getElementById(`${type}-process-num`).textContent = codes[1];
+      document.getElementById(`${type}-process-name`).textContent = journeyData.journey.process.name;
+      document.getElementById(`${type}-process-energy`).textContent = journeyData.journey.process.energy;
+      document.getElementById(`${type}-process-influence`).textContent = journeyData.journey.process.influence;
+
+      // 更新結果
+      document.getElementById(`${type}-result-num`).textContent = codes[2];
+      document.getElementById(`${type}-result-name`).textContent = journeyData.journey.result.name;
+      document.getElementById(`${type}-result-energy`).textContent = journeyData.journey.result.energy;
+      document.getElementById(`${type}-result-influence`).textContent = journeyData.journey.result.influence;
+
+      // 更新總結和建議
+      document.getElementById(`${type}-summary`).textContent = journeyData.summary;
+      document.getElementById(`${type}-advice`).textContent = journeyData.advice;
+    }
+
+    // ====== 更新能量對比 ======
+    function updateComparison(talentCodes) {
+      // 事業碼對比
+      const careerCodes = talentCodes.careerCode;
+      document.getElementById('career-compare-nums').textContent = careerCodes.join('');
+      document.getElementById('career-compare-name').textContent =
+        `${window.numberMeanings[careerCodes[0]].name} → ${window.numberMeanings[careerCodes[2]].name}`;
+      document.getElementById('career-compare-desc').textContent =
+        `從 ${window.numberMeanings[careerCodes[0]].name} 的能量，經過 ${window.numberMeanings[careerCodes[1]].name} 的轉化，最終展現 ${window.numberMeanings[careerCodes[2]].name} 的品質。`;
+
+      // 家庭碼對比
+      const familyCodes = talentCodes.familyCode;
+      document.getElementById('family-compare-nums').textContent = familyCodes.join('');
+      document.getElementById('family-compare-name').textContent =
+        `${window.numberMeanings[familyCodes[0]].name} → ${window.numberMeanings[familyCodes[2]].name}`;
+      document.getElementById('family-compare-desc').textContent =
+        `情感上從 ${window.numberMeanings[familyCodes[0]].name} 出發，透過 ${window.numberMeanings[familyCodes[1]].name} 連結，最終需要 ${window.numberMeanings[familyCodes[2]].name} 的空間。`;
+
+      // 坐鎮碼對比
+      const throneCodes = talentCodes.throneCode;
+      document.getElementById('throne-compare-nums').textContent = throneCodes.join('');
+      document.getElementById('throne-compare-name').textContent =
+        `${window.numberMeanings[throneCodes[0]].name} → ${window.numberMeanings[throneCodes[2]].name}`;
+      document.getElementById('throne-compare-desc').textContent =
+        `生命道路從 ${window.numberMeanings[throneCodes[0]].name} 開始，透過 ${window.numberMeanings[throneCodes[1]].name} 的歷程，完成 ${window.numberMeanings[throneCodes[2]].name} 的使命。`;
+    }
+
+    // ====== 更新個人化建議 ======
+    function updatePersonalAdvice(talentCodes) {
+      const adviceList = document.getElementById('personal-advice');
+
+      const careerNum = talentCodes.coreTalents.career;
+      const familyNum = talentCodes.coreTalents.family;
+      const throneNum = talentCodes.coreTalents.throne;
+
+      const advices = [
+        `✨ 事業上，善用你的 ${window.numberMeanings[careerNum].name} 天賦，在 ${window.numberMeanings[talentCodes.careerCode[0]].name} 的基礎上建立專業。`,
+        `💖 情感中，允許自己有 ${window.numberMeanings[familyNum].name} 的需求，這是你的情感充電方式。`,
+        `🌟 生命道路上，信任 ${window.numberMeanings[throneNum].name} 的內在指引，這是你最深的生命藍圖。`,
+        `🌱 當感到卡住時，回想你的起點能量：${window.numberMeanings[talentCodes.careerCode[0]].name}，那裡藏著最初的動力。`,
+        `🌀 你的轉化能量 ${window.numberMeanings[talentCodes.careerCode[1]].name} 是你的秘密武器，善用它來跨越障礙。`
+      ];
+
+      adviceList.innerHTML = advices.map(advice => `
+        <li class="advice-item">
+          <div class="advice-icon">→</div>
+          <div class="advice-text">${advice}</div>
+        </li>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

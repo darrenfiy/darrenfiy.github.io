@@ -245,6 +245,41 @@
       line-height: 1.4;
     }
 
+    /* ====== 花園入口連結 ====== */
+    .garden-link {
+      text-align: center;
+      margin: 16px 0 8px;
+      padding: 12px;
+      background: linear-gradient(135deg, #f0e8ff, #fdf2ff);
+      border-radius: 12px;
+      border: 1px dashed #d8b4ff;
+    }
+
+    .garden-link a {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(135deg, #d8b4ff, #9f7aea);
+      color: white;
+      text-decoration: none;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 12px rgba(159, 122, 234, 0.3);
+      transition: all 0.2s;
+    }
+
+    .garden-link a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(159, 122, 234, 0.4);
+    }
+
+    .garden-link p {
+      margin: 8px 0 0;
+      font-size: 0.8rem;
+      color: #9f7aea;
+      line-height: 1.4;
+    }
+
     /* ====== 歷史紀錄 ====== */
     .history-section {
       display: none;
@@ -321,6 +356,12 @@
       <p class="app-subtitle">
         用你先懂的數字，帶你回到你本來的樣子。
       </p>
+
+      <!-- 花園入口 -->
+      <div class="garden-link">
+        <a href="blu-guarden.html">🌸 進入 BLU 小花園</a>
+        <p>想要讓這些覺察被永遠記住？<br>進入花園，種下你的第一顆種子</p>
+      </div>
     </header>
 
     <!-- 輸入與計算區 -->

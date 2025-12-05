@@ -280,6 +280,57 @@
       line-height: 1.4;
     }
 
+    /* ====== 今日能量卡片 ====== */
+    .energy-card {
+      border-radius: 12px;
+      border: 1px solid #e6dcff;
+      padding: 12px;
+      background: linear-gradient(135deg, #f9f5ff, #f0e8ff);
+      margin-bottom: 12px;
+    }
+
+    .energy-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .energy-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-width: 60px;
+    }
+
+    .energy-label {
+      font-size: 0.7rem;
+      color: #8a6eff;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .energy-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #9f7aea, #6c5ce7);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.2);
+    }
+
+    .energy-desc {
+      font-size: 0.85rem;
+      color: #51416f;
+      line-height: 1.4;
+      flex: 1;
+    }
+
     /* ====== 歷史紀錄 ====== */
     .history-section {
       display: none;
@@ -390,6 +441,24 @@
 
       <p class="result-desc" id="life-desc"></p>
 
+      <!-- 今日能量 -->
+      <div class="energy-card">
+        <div class="energy-row">
+          <div class="energy-badge">
+            <div class="energy-label">今日能量</div>
+            <div class="energy-number" id="daily-energy-num">?</div>
+          </div>
+          <div class="energy-desc">
+            <div style="font-weight: 600; margin-bottom: 2px;">
+              <span id="daily-energy-name">—</span>
+            </div>
+            <div style="font-size: 0.8rem; color: #7a6ba8;">
+              今天的宇宙數字
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="tip-card">
         <div class="tip-label">今天的小小提醒</div>
         <div class="tip-text" id="life-tip">
@@ -422,6 +491,7 @@
     </section>
   </div>
 
+  <script src="combo-tips.js"></script>
   <script>
     // ====== LocalStorage 工具函式 ======
     const STORAGE_KEY = {
@@ -632,7 +702,44 @@
       return sum; // 目前先不處理 11/22 等大師數，保持 v1 簡單
     }
 
-    // ====== 工具函式：取得每日提示（根據日期輪換） ======
+    // ====== 工具函式：計算今日能量數字 ======
+    function calculateDailyEnergy() {
+      const date = new Date();
+      const year = date.getFullYear().toString();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const day = date.getDate().toString().padStart(2, "0");
+      const dateStr = year + month + day; // YYYYMMDD
+
+      let sum = 0;
+      for (let i = 0; i < dateStr.length; i++) {
+        sum += Number(dateStr[i]);
+      }
+
+      // 持續相加直到剩一位數
+      while (sum > 9) {
+        sum = sum
+          .toString()
+          .split("")
+          .reduce((acc, d) => acc + Number(d), 0);
+      }
+
+      return sum;
+    }
+
+    // ====== 工具函式：取得結合建議（生命靈數 × 今日能量） ======
+    function getCombinedDailyTip(lifeNumber) {
+      const dailyEnergy = calculateDailyEnergy();
+
+      // 檢查 comboTips 是否存在
+      if (!window.comboTips || !window.comboTips[lifeNumber.toString()]) {
+        return "今天也是很好的一天，記得對自己溫柔一點。";
+      }
+
+      const profile = window.comboTips[lifeNumber.toString()];
+      return profile[dailyEnergy.toString()] || "今天也是很好的一天，記得對自己溫柔一點。";
+    }
+
+    // ====== 工具函式：取得每日提示（根據日期輪換）[已棄用，改用 getCombinedDailyTip] ======
     function getDailyTip(lifeNumber) {
       const data = lifeData[lifeNumber];
       if (!data || !data.tips) return data.tip; // fallback
@@ -734,7 +841,18 @@
             lifeTaglineEl.textContent = data.tagline;
             lifeKeywordsEl.textContent = data.keywords;
             lifeDescEl.textContent = data.desc;
-            lifeTipEl.textContent = getDailyTip(num);
+
+            // 顯示今日能量
+            const dailyEnergy = calculateDailyEnergy();
+            const dailyEnergyNumEl = document.getElementById("daily-energy-num");
+            const dailyEnergyNameEl = document.getElementById("daily-energy-name");
+            dailyEnergyNumEl.textContent = dailyEnergy;
+            dailyEnergyNameEl.textContent = window.energyNames
+              ? window.energyNames[dailyEnergy.toString()]
+              : dailyEnergy;
+
+            // 使用結合建議
+            lifeTipEl.textContent = getCombinedDailyTip(num);
             resultCard.classList.add("show");
           }
         }
@@ -780,13 +898,24 @@
       saveBirthdate(dateStr);
       saveLifeNumber(num);
 
-      // 更新畫面
+      // 更新生命靈數顯示
       lifeNumberEl.textContent = num;
       lifeTitleEl.textContent = data.title;
       lifeTaglineEl.textContent = data.tagline;
       lifeKeywordsEl.textContent = data.keywords;
       lifeDescEl.textContent = data.desc;
-      lifeTipEl.textContent = getDailyTip(num);
+
+      // 顯示今日能量
+      const dailyEnergy = calculateDailyEnergy();
+      const dailyEnergyNumEl = document.getElementById("daily-energy-num");
+      const dailyEnergyNameEl = document.getElementById("daily-energy-name");
+      dailyEnergyNumEl.textContent = dailyEnergy;
+      dailyEnergyNameEl.textContent = window.energyNames
+        ? window.energyNames[dailyEnergy.toString()]
+        : dailyEnergy;
+
+      // 使用結合建議
+      lifeTipEl.textContent = getCombinedDailyTip(num);
 
       resultCard.classList.add("show");
 

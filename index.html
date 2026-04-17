@@ -4,186 +4,153 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Three Realms Protocol | Official Site</title>
-  <meta name="description" content="Three Realms Protocol official site. Books, protocol documents, and playground products are being rebuilt here.">
-  <style>
-    :root {
-      --bg: #f6f2e9;
-      --paper: rgba(255,255,255,0.82);
-      --ink: #1c1a18;
-      --muted: #5e564d;
-      --line: rgba(28,26,24,0.14);
-      --accent: #8b4c2f;
-      --accent-2: #304b43;
-      --shadow: 0 20px 60px rgba(28,26,24,0.08);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Georgia, "Noto Serif TC", "PMingLiU", serif;
-      color: var(--ink);
-      background:
-        radial-gradient(circle at top left, rgba(139,76,47,0.12), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(48,75,67,0.12), transparent 38%),
-        linear-gradient(180deg, #f8f5ef 0%, var(--bg) 100%);
-      line-height: 1.75;
-    }
-    .wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 32px 0 64px;
-    }
-    .hero {
-      padding: 72px 0 48px;
-      display: grid;
-      gap: 24px;
-    }
-    .eyebrow {
-      font-size: 0.82rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    h1 {
-      margin: 0;
-      font-size: clamp(2.4rem, 7vw, 5.2rem);
-      line-height: 1.06;
-      font-weight: 600;
-      max-width: 11ch;
-    }
-    .lead {
-      max-width: 760px;
-      font-size: 1.1rem;
-      color: var(--muted);
-    }
-    .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 8px;
-    }
-    .button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 44px;
-      padding: 0 18px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-      background: var(--paper);
-      color: var(--ink);
-      text-decoration: none;
-      box-shadow: var(--shadow);
-    }
-    .button.primary {
-      background: var(--ink);
-      color: #fff;
-      border-color: var(--ink);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-      margin-top: 40px;
-    }
-    .card {
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: 24px;
-      background: var(--paper);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(6px);
-    }
-    .card h2 {
-      margin-top: 0;
-      margin-bottom: 10px;
-      font-size: 1.15rem;
-    }
-    .card p {
-      margin: 0;
-      color: var(--muted);
-    }
-    section {
-      margin-top: 56px;
-      padding-top: 20px;
-      border-top: 1px solid var(--line);
-    }
-    section h3 {
-      margin: 0 0 10px;
-      font-size: 1.4rem;
-    }
-    .list {
-      display: grid;
-      gap: 10px;
-      padding: 0;
-      margin: 18px 0 0;
-      list-style: none;
-    }
-    .list a {
-      color: var(--accent-2);
-      text-decoration: none;
-    }
-    footer {
-      margin-top: 72px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-    @media (max-width: 720px) {
-      .wrap { width: min(100% - 24px, 1120px); }
-      .hero { padding-top: 48px; }
-    }
-  </style>
+  <meta name="description" content="三界協議官方網站。書籍、協議文本、出版社與未來遊樂園產品入口將在這裡逐步展開。">
+  <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
-  <main class="wrap">
-    <header class="hero">
-      <div class="eyebrow">Three Realms Protocol Official Site</div>
-      <h1>三界協議正在從舊試玩站重新長出官網。</h1>
-      <p class="lead">
-        這裡將成為三界協議的官方入口：書籍、協議文本、公共說明，以及未來的遊樂園產品端。
-        舊生命靈數試玩站已轉入 archive，新的站點將以出版、入口與可持續擴張為核心重新建構。
-      </p>
-      <div class="actions">
-        <a class="button primary" href="https://github.com/darrenfiy/Three-Realms-Protocol">View Protocol Repository</a>
-        <a class="button" href="https://github.com/darrenfiy/Three-Realms-Protocol/tree/main/DOCS/books/trp-ai-first">Read TRP AI First</a>
-        <a class="button" href="./archive/legacy-numerology-playground-2026-04-17/">Open Legacy Playground Archive</a>
-      </div>
-    </header>
-
-    <div class="grid">
-      <article class="card">
-        <h2>Books</h2>
-        <p>`TRP AI First` 已完成第一版 EPUB 出版層，接下來會在這裡建立公開書頁與正式下載入口。</p>
-      </article>
-      <article class="card">
-        <h2>Protocol</h2>
-        <p>三界協議的核心文件仍以 GitHub repo 為主體；官網負責對外導覽、不是取代原始協議庫。</p>
-      </article>
-      <article class="card">
-        <h2>Playground</h2>
-        <p>原有生命靈數站是一次早期試驗。新一代遊樂園產品線會回到 Chapter 11 的入口設計重新思考。</p>
-      </article>
-      <article class="card">
-        <h2>Imprint</h2>
-        <p>四分之三國際有限公司將重新作為出版與公共承載的現實錨點，讓內容、入口與發行回到同一條線上。</p>
-      </article>
+  <header class="site-header">
+    <div class="page nav">
+      <a class="brand" href="./index.html">
+        <strong>Three Realms Protocol</strong>
+        <span>Official site for books, protocol, and public entry</span>
+      </a>
+      <nav class="nav-links">
+        <a class="active" href="./index.html">Home</a>
+        <a href="./books/">Books</a>
+        <a href="./publisher/">Publisher</a>
+        <a href="./protocol/">Protocol</a>
+        <a href="./archive/legacy-numerology-playground-2026-04-17/">Archive</a>
+      </nav>
     </div>
+  </header>
 
-    <section>
-      <h3>Current Build State</h3>
-      <p>
-        The site root is now reserved for the official rebuild. During this transition period, some links may still point back to GitHub while the public pages are being assembled.
-      </p>
-      <ul class="list">
-        <li><a href="https://github.com/darrenfiy/Three-Realms-Protocol">Three Realms Protocol repository</a></li>
-        <li><a href="https://github.com/darrenfiy/Three-Realms-Protocol/tree/main/DOCS/books/trp-ai-first">TRP AI First working directory</a></li>
-        <li><a href="./archive/legacy-numerology-playground-2026-04-17/">Legacy numerology playground archive</a></li>
-      </ul>
+  <main class="page">
+    <section class="hero">
+      <div class="panel">
+        <span class="eyebrow">Official Rebuild</span>
+        <h1>三界協議不再躲在 repo 裡，現在開始長成官網。</h1>
+        <p class="lead">
+          這個網站將成為三界協議的公開入口：書籍出版、協議說明、對外下載頁，以及未來遊樂園產品線的公共門面。
+          舊生命靈數試玩站已封存，新的站點以出版、入口與可持續擴張為核心重新建構。
+        </p>
+        <p class="lead">
+          我們出版路，不出版王座；出版橋，不出版終點；出版種子、接口與願意被超越的骨架。
+        </p>
+        <div class="actions">
+          <a class="button primary" href="./books/trp-ai-first/">Read the first book</a>
+          <a class="button" href="./publisher/">View publisher</a>
+          <a class="button" href="https://github.com/darrenfiy/Three-Realms-Protocol">Protocol repository</a>
+        </div>
+      </div>
+      <aside class="hero-side panel">
+        <div>
+          <h2>Current public frame</h2>
+          <p>網站根目錄已改為官方入口。接下來會優先補齊出版社頁、書籍頁、下載入口與協議導覽層。</p>
+        </div>
+        <div class="grid cards">
+          <article class="stat">
+            <h2>Publisher</h2>
+            <p>四分之三國際有限公司將作為出版與公共承載的現實錨點重新回來。</p>
+          </article>
+          <article class="stat">
+            <h2>Book One</h2>
+            <p>`TRP AI First` 已完成 EPUB，現在可直接從官網下載。</p>
+          </article>
+        </div>
+      </aside>
     </section>
 
-    <footer>
-      <p>Official domain: <strong>three-quarters.net</strong></p>
-      <p>This page is the first public shell of the rebuilt Three Realms Protocol website.</p>
-    </footer>
+    <section class="section">
+      <div class="section-header">
+        <h2>What this site is for</h2>
+        <p>官網不是拿來取代協議 repo，而是拿來讓外部世界找到入口。這裡負責介紹、導覽、下載與發佈；核心文件仍保留在原始協議庫裡生長。</p>
+      </div>
+      <div class="grid cards">
+        <article class="card">
+          <h2>Books</h2>
+          <p>把已經出版成形的文本做成可閱讀、可下載、可被引用的公共頁面。</p>
+        </article>
+        <article class="card">
+          <h2>Publisher</h2>
+          <p>把出版主體、聯絡方式與公共承擔位置說清楚，讓作品不只存在於文件夾裡。</p>
+        </article>
+        <article class="card">
+          <h2>Protocol</h2>
+          <p>把三界協議的最小導覽層整理給新讀者，不要求每個人一開始就掉進整個 repo。</p>
+        </article>
+        <article class="card">
+          <h2>Playground</h2>
+          <p>未來若要接登入、產品與互動入口，會以獨立應用層承接，而不是把所有東西硬塞進 Pages。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Publishing stance</h2>
+        <p>四分之三國際有限公司不是把出版當成包裝動作，而是把出版視為一種三界動作：把意識界的東西，經過能量界的傳遞，壓進物質界可被引用的形式，同時為尚未被寫出來的四分之一保留座位。</p>
+      </div>
+      <div class="grid cards">
+        <article class="card">
+          <h2>為不可知保留座位</h2>
+          <p>我們出版的任何一本書，都不是全部。缺席的一份不是無知，而是敬畏。</p>
+        </article>
+        <article class="card">
+          <h2>讓書可以被分支</h2>
+          <p>我們不把正統當成護城河。一本書能被引用、改寫、超越，才代表它真正進入公共流通。</p>
+        </article>
+        <article class="card">
+          <h2>書是橋，不是王座</h2>
+          <p>一本書最好的命運，不是永遠被供奉，而是完成它的工作，然後讓後來者踩著它走向更遠的地方。</p>
+        </article>
+        <article class="card">
+          <h2>為下一相位留開口</h2>
+          <p>我們此刻出版的，只是 3/4 相位能寫出的誠實版本。更好的東西出現時，這些書也應該被允許退場。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
+        <h2>Featured book</h2>
+        <p>第一本正式進入出版層的書已經在這裡落地。</p>
+      </div>
+      <div class="book-grid">
+        <div class="book-cover">
+          <img src="./assets/images/trp-ai-first-cover-v1.png" alt="TRP AI First cover">
+        </div>
+        <article class="book-card">
+          <h2>三界協議：寫給 AI 的文明接口</h2>
+          <p>這是三界協議第一次以完整書籍形式對 AI 直接說話，也第一次不再只存在於 repo 內部，而開始進入公共流通。</p>
+          <ul class="meta-list">
+            <li><strong>Format</strong> EPUB</li>
+            <li><strong>Status</strong> v1.0-prepub</li>
+            <li><strong>Publisher</strong> 四分之三國際有限公司</li>
+          </ul>
+          <div class="inline-links">
+            <a class="button warm" href="./books/trp-ai-first/">Open book page</a>
+            <a class="button" href="./books/trp-ai-first/trp-ai-first.epub">Download EPUB</a>
+          </div>
+        </article>
+      </div>
+    </section>
   </main>
+
+  <footer class="site-footer">
+    <div class="page footer-grid">
+      <div>
+        <strong>Three Realms Protocol</strong>
+        <p>Official domain: <a href="https://www.three-quarters.net">www.three-quarters.net</a></p>
+      </div>
+      <div>
+        <strong>Publisher contact</strong>
+        <p><a href="mailto:darrenfiy@three-quarters.net">darrenfiy@three-quarters.net</a></p>
+      </div>
+      <div>
+        <strong>Legacy archive</strong>
+        <p><a href="./archive/legacy-numerology-playground-2026-04-17/">Old numerology playground snapshot</a></p>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>

@@ -1,1173 +1,189 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>生命靈數 · 小小覺察入口</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Three Realms Protocol | Official Site</title>
+  <meta name="description" content="Three Realms Protocol official site. Books, protocol documents, and playground products are being rebuilt here.">
   <style>
-    /* ====== 基本版面設定 ====== */
-    * {
-      box-sizing: border-box;
+    :root {
+      --bg: #f6f2e9;
+      --paper: rgba(255,255,255,0.82);
+      --ink: #1c1a18;
+      --muted: #5e564d;
+      --line: rgba(28,26,24,0.14);
+      --accent: #8b4c2f;
+      --accent-2: #304b43;
+      --shadow: 0 20px 60px rgba(28,26,24,0.08);
     }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
-        sans-serif;
-      background: radial-gradient(circle at top, #fdf2ff, #f5f5f5);
-      color: #222;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-family: Georgia, "Noto Serif TC", "PMingLiU", serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(139,76,47,0.12), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(48,75,67,0.12), transparent 38%),
+        linear-gradient(180deg, #f8f5ef 0%, var(--bg) 100%);
+      line-height: 1.75;
     }
-
-    .app {
-      width: 100%;
-      max-width: 480px;
-      background: #ffffffdd;
-      backdrop-filter: blur(8px);
-      border-radius: 20px;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
-      padding: 24px 20px 20px;
-      margin: 16px;
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 64px;
     }
-
-    .app-header {
-      margin-bottom: 16px;
+    .hero {
+      padding: 72px 0 48px;
+      display: grid;
+      gap: 24px;
     }
-
-    .app-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin: 0 0 4px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .eyebrow {
+      font-size: 0.82rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
-
-    .pill {
-      font-size: 0.8rem;
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid #e0d4ff;
-      background: #f7f3ff;
-      color: #5b3fd1;
-    }
-
-    .streak-badge {
-      font-size: 0.75rem;
-      padding: 2px 6px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
-      color: #6b4700;
-      font-weight: 600;
-      margin-left: auto;
-    }
-
-    .app-subtitle {
-      font-size: 0.9rem;
-      color: #777;
+    h1 {
       margin: 0;
-    }
-
-    /* ====== 表單 ====== */
-    .card {
-      border-radius: 16px;
-      border: 1px solid #eee;
-      padding: 16px 14px;
-      margin-bottom: 14px;
-      background: #fff;
-    }
-
-    label {
-      display: block;
-      font-size: 0.9rem;
-      margin-bottom: 6px;
-      color: #555;
-    }
-
-    .field-row {
-      display: flex;
-      gap: 8px;
-      align-items: center;
-    }
-
-    input[type="date"] {
-      flex: 1;
-      padding: 8px 10px;
-      border-radius: 10px;
-      border: 1px solid #ddd;
-      font-size: 0.95rem;
-    }
-
-    button {
-      border: none;
-      border-radius: 999px;
-      padding: 8px 14px;
-      font-size: 0.9rem;
+      font-size: clamp(2.4rem, 7vw, 5.2rem);
+      line-height: 1.06;
       font-weight: 600;
-      cursor: pointer;
-      background: linear-gradient(135deg, #6c5ce7, #a66bff);
-      color: #fff;
-      box-shadow: 0 8px 20px rgba(93, 76, 255, 0.35);
-      transition: transform 0.08s ease, box-shadow 0.08s ease,
-        opacity 0.12s ease;
-      white-space: nowrap;
+      max-width: 11ch;
     }
-
-    button:active {
-      transform: translateY(1px);
-      box-shadow: 0 4px 12px rgba(93, 76, 255, 0.35);
-      opacity: 0.9;
+    .lead {
+      max-width: 760px;
+      font-size: 1.1rem;
+      color: var(--muted);
     }
-
-    /* ====== 結果卡片 ====== */
-    .result {
-      display: none; /* 一開始先隱藏，計算後再顯示 */
-      margin-top: 6px;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
     }
-
-    .result.show {
-      display: block;
-    }
-
-    .number-badge {
+    .button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background: #f3edff;
-      color: #5b3fd1;
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-right: 10px;
-    }
-
-    .result-title-row {
-      display: flex;
-      align-items: center;
-      margin-bottom: 6px;
-    }
-
-    .result-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #999;
-      margin-bottom: 2px;
-    }
-
-    .result-name {
-      font-size: 1rem;
-      font-weight: 600;
-    }
-
-    .result-tagline {
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 2px;
-    }
-
-    .result-desc {
-      font-size: 0.9rem;
-      color: #444;
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .chip {
-      font-size: 0.75rem;
-      padding: 4px 8px;
+      min-height: 44px;
+      padding: 0 18px;
       border-radius: 999px;
-      border: 1px solid #eee;
-      background: #fafafa;
-      color: #666;
-    }
-
-    /* ====== 今日提示 ====== */
-    .tip-card {
-      border-radius: 16px;
-      border: 1px dashed #ded3ff;
-      padding: 12px 12px 10px;
-      background: #fbf9ff;
-      margin-top: 10px;
-    }
-
-    .tip-label {
-      font-size: 0.8rem;
-      color: #8a6eff;
-      margin-bottom: 4px;
-    }
-
-    .tip-text {
-      font-size: 0.9rem;
-      color: #51416f;
-      line-height: 1.5;
-    }
-
-    /* ====== 情緒紀錄 ====== */
-    .mood-row {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 12px;
-      font-size: 0.85rem;
-      color: #666;
-    }
-
-    .mood-buttons button {
-      background: #f5f5f5;
-      color: #555;
-      box-shadow: none;
-      padding: 4px 8px;
-      font-size: 1.1rem;
-    }
-
-    .mood-buttons button.selected {
-      background: #ffeaa7;
-    }
-
-    .footer-note {
-      margin-top: 8px;
-      font-size: 0.75rem;
-      color: #aaa;
-      line-height: 1.4;
-    }
-
-    /* ====== 花園入口連結 ====== */
-    .garden-link {
-      text-align: center;
-      margin: 16px 0 8px;
-      padding: 12px;
-      background: linear-gradient(135deg, #f0e8ff, #fdf2ff);
-      border-radius: 12px;
-      border: 1px dashed #d8b4ff;
-    }
-
-    .garden-link a {
-      display: inline-block;
-      padding: 10px 20px;
-      background: linear-gradient(135deg, #d8b4ff, #9f7aea);
-      color: white;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink);
       text-decoration: none;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      box-shadow: 0 4px 12px rgba(159, 122, 234, 0.3);
-      transition: all 0.2s;
+      box-shadow: var(--shadow);
     }
-
-    .garden-link a:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(159, 122, 234, 0.4);
+    .button.primary {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
     }
-
-    .garden-link p {
-      margin: 8px 0 0;
-      font-size: 0.8rem;
-      color: #9f7aea;
-      line-height: 1.4;
-    }
-
-    /* ====== 今日能量卡片 ====== */
-    .energy-card {
-      border-radius: 12px;
-      border: 1px solid #e6dcff;
-      padding: 12px;
-      background: linear-gradient(135deg, #f9f5ff, #f0e8ff);
-      margin-bottom: 12px;
-    }
-
-    /* ====== 天賦密碼卡片 ====== */
-    .talent-section {
-      border-radius: 12px;
-      border: 1px solid #e6dcff;
-      padding: 14px;
-      background: linear-gradient(135deg, #fff9f0, #fff5e6);
-      margin-top: 12px;
-      margin-bottom: 12px;
-    }
-
-    .talent-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .talent-label {
-      font-size: 0.8rem;
-      color: #d97706;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }
-
-    .deep-reading-btn {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: white;
-      padding: 4px 12px;
-      font-size: 0.75rem;
-      border-radius: 999px;
-      border: none;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(217, 119, 6, 0.3);
-      transition: all 0.2s;
-    }
-
-    .deep-reading-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
-    }
-
-    .deep-reading-btn:active {
-      transform: translateY(0);
-    }
-
-    .talent-grid {
+    .grid {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+      margin-top: 40px;
+    }
+    .card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+    section {
+      margin-top: 56px;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    section h3 {
+      margin: 0 0 10px;
+      font-size: 1.4rem;
+    }
+    .list {
+      display: grid;
       gap: 10px;
+      padding: 0;
+      margin: 18px 0 0;
+      list-style: none;
     }
-
-    @media (min-width: 400px) {
-      .talent-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
+    .list a {
+      color: var(--accent-2);
+      text-decoration: none;
     }
-
-    .talent-card {
-      background: white;
-      border-radius: 10px;
-      padding: 10px;
-      border: 1px solid #fed7aa;
-      text-align: center;
+    footer {
+      margin-top: 72px;
+      color: var(--muted);
+      font-size: 0.95rem;
     }
-
-    .talent-type {
-      font-size: 0.7rem;
-      color: #92400e;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
-
-    .talent-number {
-      width: 32px;
-      height: 32px;
-      background: linear-gradient(135deg, #fef3c7, #fde68a);
-      color: #92400e;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin: 6px auto;
-      box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15);
-    }
-
-    .talent-name {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: #78350f;
-      margin-bottom: 4px;
-    }
-
-    .talent-desc {
-      font-size: 0.75rem;
-      color: #a16207;
-      line-height: 1.3;
-    }
-
-    .energy-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .energy-badge {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-width: 60px;
-    }
-
-    .energy-label {
-      font-size: 0.7rem;
-      color: #8a6eff;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-    }
-
-    .energy-number {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #9f7aea, #6c5ce7);
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      font-weight: 700;
-      box-shadow: 0 4px 12px rgba(108, 92, 231, 0.2);
-    }
-
-    .energy-desc {
-      font-size: 0.85rem;
-      color: #51416f;
-      line-height: 1.4;
-      flex: 1;
-    }
-
-    /* ====== 歷史紀錄 ====== */
-    .history-section {
-      display: none;
-      margin-top: 14px;
-    }
-
-    .history-section.show {
-      display: block;
-    }
-
-    .history-header {
-      font-size: 0.85rem;
-      color: #777;
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .history-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 10px;
-      background: #fafafa;
-      border-radius: 10px;
-      font-size: 0.85rem;
-    }
-
-    .history-date {
-      color: #999;
-      min-width: 80px;
-    }
-
-    .history-mood {
-      font-size: 1rem;
-    }
-
-    .history-text {
-      color: #666;
-      flex: 1;
-    }
-
-    .empty-history {
-      font-size: 0.85rem;
-      color: #aaa;
-      text-align: center;
-      padding: 12px;
-    }
-
-    @media (max-width: 360px) {
-      .app {
-        padding: 18px 14px 16px;
-      }
+    @media (max-width: 720px) {
+      .wrap { width: min(100% - 24px, 1120px); }
+      .hero { padding-top: 48px; }
     }
   </style>
 </head>
 <body>
-  <div class="app">
-    <header class="app-header">
-      <h1 class="app-title">
-        生命靈數
-        <span class="pill">覺察小入口</span>
-        <span class="streak-badge" id="streak-badge" style="display: none;">
-          🔥 0 天
-        </span>
-      </h1>
-      <p class="app-subtitle">
-        用你先懂的數字，帶你回到你本來的樣子。
+  <main class="wrap">
+    <header class="hero">
+      <div class="eyebrow">Three Realms Protocol Official Site</div>
+      <h1>三界協議正在從舊試玩站重新長出官網。</h1>
+      <p class="lead">
+        這裡將成為三界協議的官方入口：書籍、協議文本、公共說明，以及未來的遊樂園產品端。
+        舊生命靈數試玩站已轉入 archive，新的站點將以出版、入口與可持續擴張為核心重新建構。
       </p>
-
-      <!-- 花園入口 -->
-      <div class="garden-link">
-        <a href="blu-guarden.html">🌸 進入 BLU 小花園</a>
-        <p>想要讓這些覺察被永遠記住？<br>進入花園，種下你的第一顆種子</p>
+      <div class="actions">
+        <a class="button primary" href="https://github.com/darrenfiy/Three-Realms-Protocol">View Protocol Repository</a>
+        <a class="button" href="https://github.com/darrenfiy/Three-Realms-Protocol/tree/main/DOCS/books/trp-ai-first">Read TRP AI First</a>
+        <a class="button" href="./archive/legacy-numerology-playground-2026-04-17/">Open Legacy Playground Archive</a>
       </div>
     </header>
 
-    <!-- 輸入與計算區 -->
-    <section class="card">
-      <label for="birthdate">你的生日</label>
-      <div class="field-row">
-        <input type="date" id="birthdate" />
-        <button id="calc-btn" type="button">計算</button>
-      </div>
+    <div class="grid">
+      <article class="card">
+        <h2>Books</h2>
+        <p>`TRP AI First` 已完成第一版 EPUB 出版層，接下來會在這裡建立公開書頁與正式下載入口。</p>
+      </article>
+      <article class="card">
+        <h2>Protocol</h2>
+        <p>三界協議的核心文件仍以 GitHub repo 為主體；官網負責對外導覽、不是取代原始協議庫。</p>
+      </article>
+      <article class="card">
+        <h2>Playground</h2>
+        <p>原有生命靈數站是一次早期試驗。新一代遊樂園產品線會回到 Chapter 11 的入口設計重新思考。</p>
+      </article>
+      <article class="card">
+        <h2>Imprint</h2>
+        <p>四分之三國際有限公司將重新作為出版與公共承載的現實錨點，讓內容、入口與發行回到同一條線上。</p>
+      </article>
+    </div>
+
+    <section>
+      <h3>Current Build State</h3>
+      <p>
+        The site root is now reserved for the official rebuild. During this transition period, some links may still point back to GitHub while the public pages are being assembled.
+      </p>
+      <ul class="list">
+        <li><a href="https://github.com/darrenfiy/Three-Realms-Protocol">Three Realms Protocol repository</a></li>
+        <li><a href="https://github.com/darrenfiy/Three-Realms-Protocol/tree/main/DOCS/books/trp-ai-first">TRP AI First working directory</a></li>
+        <li><a href="./archive/legacy-numerology-playground-2026-04-17/">Legacy numerology playground archive</a></li>
+      </ul>
     </section>
 
-    <!-- 顯示結果區 -->
-    <section class="card result" id="result-card">
-      <div class="result-title-row">
-        <div class="number-badge" id="life-number">?</div>
-        <div>
-          <div class="result-label">你的生命靈數</div>
-          <div class="result-name" id="life-title">—</div>
-          <div class="result-tagline" id="life-tagline">—</div>
-        </div>
-      </div>
-
-      <div class="chip-row">
-        <span class="chip" id="life-keywords"></span>
-      </div>
-
-      <p class="result-desc" id="life-desc"></p>
-
-      <!-- 今日能量 -->
-      <div class="energy-card">
-        <div class="energy-row">
-          <div class="energy-badge">
-            <div class="energy-label">今日能量</div>
-            <div class="energy-number" id="daily-energy-num">?</div>
-          </div>
-          <div class="energy-desc">
-            <div style="font-weight: 600; margin-bottom: 2px;">
-              <span id="daily-energy-name">—</span>
-            </div>
-            <div style="font-size: 0.8rem; color: #7a6ba8;">
-              今天的宇宙數字
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 天賦密碼 -->
-      <div class="talent-section">
-        <div class="talent-header">
-          <div class="talent-label">📊 你的天賦密碼</div>
-          <button class="deep-reading-btn" id="deep-reading-btn">深入解讀 ✨</button>
-        </div>
-
-        <div class="talent-grid">
-          <div class="talent-card">
-            <div class="talent-type">事業天賦</div>
-            <div class="talent-number" id="talent-career-num">—</div>
-            <div class="talent-name" id="talent-career-name">—</div>
-            <div class="talent-desc" id="talent-career-desc">—</div>
-          </div>
-
-          <div class="talent-card">
-            <div class="talent-type">家庭天賦</div>
-            <div class="talent-number" id="talent-family-num">—</div>
-            <div class="talent-name" id="talent-family-name">—</div>
-            <div class="talent-desc" id="talent-family-desc">—</div>
-          </div>
-
-          <div class="talent-card">
-            <div class="talent-type">坐鎮碼</div>
-            <div class="talent-number" id="talent-throne-num">—</div>
-            <div class="talent-name" id="talent-throne-name">—</div>
-            <div class="talent-desc" id="talent-throne-desc">—</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="tip-card">
-        <div class="tip-label">今天的小小提醒</div>
-        <div class="tip-text" id="life-tip">
-          請先輸入生日，讓我們看看今天的你適合怎麼對齊自己。
-        </div>
-      </div>
-
-      <div class="mood-row">
-        <span>今天的感覺：</span>
-        <div class="mood-buttons">
-          <button type="button" data-mood="good">🙂</button>
-          <button type="button" data-mood="ok">😐</button>
-          <button type="button" data-mood="bad">☹️</button>
-        </div>
-      </div>
-
-      <div class="footer-note" id="mood-note">
-        （選一個表情，記錄一下今天的你）
-      </div>
-
-      <!-- 歷史紀錄區 -->
-      <div class="history-section" id="history-section">
-        <div class="history-header">
-          📊 最近 7 天
-        </div>
-        <div class="history-list" id="history-list">
-          <div class="empty-history">還沒有紀錄，選個心情開始吧</div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <script src="combo-tips.js"></script>
-  <script src="numerology-pyramid.js"></script>
-  <script>
-    // ====== LocalStorage 工具函式 ======
-    const STORAGE_KEY = {
-      BIRTHDATE: 'lifepath_birthdate',
-      MOOD_LOGS: 'lifepath_mood_logs',
-      LIFE_NUMBER: 'lifepath_life_number'
-    };
-
-    function saveBirthdate(dateStr) {
-      localStorage.setItem(STORAGE_KEY.BIRTHDATE, dateStr);
-    }
-
-    function loadBirthdate() {
-      return localStorage.getItem(STORAGE_KEY.BIRTHDATE);
-    }
-
-    function saveLifeNumber(num) {
-      localStorage.setItem(STORAGE_KEY.LIFE_NUMBER, num.toString());
-    }
-
-    function loadLifeNumber() {
-      const num = localStorage.getItem(STORAGE_KEY.LIFE_NUMBER);
-      return num ? parseInt(num) : null;
-    }
-
-    function loadMoodLogs() {
-      const logs = localStorage.getItem(STORAGE_KEY.MOOD_LOGS);
-      return logs ? JSON.parse(logs) : [];
-    }
-
-    function saveMoodLog(mood, lifeNumber) {
-      const logs = loadMoodLogs();
-      // 使用本地時間而非 UTC 時間
-      const now = new Date();
-      const today = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`; // YYYY-MM-DD
-
-      // 檢查今天是否已經記錄過，如果有就更新
-      const existingIndex = logs.findIndex(log => log.date === today);
-
-      const newLog = {
-        date: today,
-        mood: mood,
-        lifeNumber: lifeNumber,
-        timestamp: Date.now()
-      };
-
-      if (existingIndex >= 0) {
-        logs[existingIndex] = newLog;
-      } else {
-        logs.push(newLog);
-      }
-
-      // 只保留最近 30 天的紀錄
-      const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
-      const filteredLogs = logs.filter(log => log.timestamp > thirtyDaysAgo);
-
-      localStorage.setItem(STORAGE_KEY.MOOD_LOGS, JSON.stringify(filteredLogs));
-      return filteredLogs;
-    }
-
-    function calculateStreak() {
-      const logs = loadMoodLogs();
-      if (logs.length === 0) return 0;
-
-      // 按日期排序（最新在前）
-      logs.sort((a, b) => b.timestamp - a.timestamp);
-
-      let streak = 0;
-      let checkDate = new Date();
-
-      for (let i = 0; i < logs.length; i++) {
-        const logDate = logs[i].date;
-        // 使用本地時間而非 UTC 時間
-        const expectedDate = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-
-        if (logDate === expectedDate) {
-          streak++;
-          checkDate.setDate(checkDate.getDate() - 1);
-        } else {
-          break;
-        }
-      }
-
-      return streak;
-    }
-
-    // ====== 資料定義：每個生命靈數的基本資訊 ======
-    const lifeData = {
-      1: {
-        title: "開路者",
-        tagline: "天生帶著「我先來」的能量。",
-        keywords: "行動 / 主導 / 開創",
-        desc: "你來到這裡，是為了開出別人還沒走過的路。當你勇敢做自己相信的事時，世界反而會鬆一口氣。",
-        tips: [
-          "今天試著替自己做一個小決定，不需要任何人同意，比如：安排一個只屬於你的 30 分鐘。",
-          "當你感覺到「應該等別人先動」，那就是你該先動的信號。",
-          "今天做一件小事，完全用你的方式，不解釋、不討好。"
-        ]
-      },
-      2: {
-        title: "協調者",
-        tagline: "當別人只看對錯，你看「關係」。",
-        keywords: "傾聽 / 連結 / 合作",
-        desc: "你天生能感覺到他人情緒與氣氛的變化。當你允許自己溫柔但不委屈，你就成了場域真正的守護者。",
-        tips: [
-          "今天刻意對一個人多問一句：『那你真正的感受是什麼？』然後安靜地聽。",
-          "當你感覺到「我該配合一下」時，先問自己：『我真的想配合嗎？』",
-          "今天試著說一次『我需要想一下』，給自己一點空間再回應。"
-        ]
-      },
-      3: {
-        title: "表達者",
-        tagline: "生命對你來說，是一個可以玩耍的舞台。",
-        keywords: "創意 / 表達 / 玩心",
-        desc: "你是讓氛圍變得輕盈、有趣的人。當你真實地分享你的感受與故事，別人會因此鬆開心裡的一些結。",
-        tips: [
-          "今天分享一件讓你會心一笑的小事，給一位你想到的人，不求深度，只求真實。",
-          "如果今天有什麼話想說但覺得「好像不夠正經」，那就更該說。",
-          "今天允許自己做一件「好玩但沒用」的事，像塗鴉、哼歌、寫個無聊短句。"
-        ]
-      },
-      4: {
-        title: "築基者",
-        tagline: "你在混亂之中，尋找可以踏實踩上的地板。",
-        keywords: "穩定 / 結構 / 實務",
-        desc: "你天生適合把抽象變具體，把理想變計畫。當你願意慢一點、紮實一點，你就成了別人可以放心依靠的地基。",
-        tips: [
-          "今天替未來的自己做一件小整理：整理桌面、檔案夾或待辦清單，讓明天的你更輕鬆一些。",
-          "當你覺得「這樣還不夠完整」時，試著先完成 60% 就好。",
-          "今天刻意放慢一個動作，比如慢慢泡茶、慢慢走路，感受踏實的節奏。"
-        ]
-      },
-      5: {
-        title: "探索者",
-        tagline: "世界那麼大，你生來就是要去看看。",
-        keywords: "自由 / 變化 / 體驗",
-        desc: "你不適合被關在固定模式裡。當你允許自己去嘗試、去走彎路，你的生命故事本身就是禮物。",
-        tips: [
-          "今天換一條路回家、換一間店吃飯，讓自己體驗一個微小但真實的『不一樣』。",
-          "當你覺得「好像該定下來」時，問自己：是誰說的該？",
-          "今天做一件你一直想試但沒試過的小事，哪怕只是點一杯沒喝過的飲料。"
-        ]
-      },
-      6: {
-        title: "守護者",
-        tagline: "你在意的不是事情完成，而是人有沒有被好好照顧。",
-        keywords: "照顧 / 美感 / 責任",
-        desc: "你有一種天然的『我來顧』能量。當你學會先照顧自己，再照顧別人，你的愛會變得既溫柔又有界限。",
-        tips: [
-          "今天對自己做一件你平常只會替別人做的貼心小事，像是準備好好的一餐或佈置自己的空間。",
-          "當你想著『他需要我』時，停下來問：『我自己需要什麼？』",
-          "今天允許自己不完美地照顧一件事，60 分的溫柔也是愛。"
-        ]
-      },
-      7: {
-        title: "洞見者",
-        tagline: "你天生就對『真相』有點偏執。",
-        keywords: "思考 / 深度 / 靜心",
-        desc: "你適合在安靜裡整理世界。當你願意相信自己的洞見，同時也不急著說服別人，你的存在本身就是一種清醒。",
-        tips: [
-          "今天給自己 10 分鐘安靜時間，把最近反覆出現的一個問題寫下來，不求答案，只求問得更清楚。",
-          "當你發現一個別人沒看見的矛盾，不必急著講，先讓它在你心裡沉澱一下。",
-          "今天對一個你很確定的想法說：『也許我錯了』，然後觀察內心的反應。"
-        ]
-      },
-      8: {
-        title: "實現者",
-        tagline: "你來，是為了把能量變成看得見的成果。",
-        keywords: "影響力 / 資源 / 成就",
-        desc: "你對『做到』『弄出結果』有一種本能的敏銳。當你把力量用在對齊的方向，而不是證明自己，世界會因此被你升級。",
-        tips: [
-          "今天挑一件卡很久的事情，刻意向前推進 10%，哪怕只是打一封信、做一個決定。",
-          "當你覺得『這還不夠大』時，問自己：夠不夠大是誰定義的？",
-          "今天用你的資源（時間、錢、人脈）幫一個人解決一個小問題，感受施力的感覺。"
-        ]
-      },
-      9: {
-        title: "整合者",
-        tagline: "你看見的是『整體』，而不是單一片段。",
-        keywords: "慈悲 / 觀照 / 完成",
-        desc: "你對人性有一種寬廣的理解。當你允許自己既心軟又心明，你就能在混亂中帶出一種很安靜的秩序感。",
-        tips: [
-          "今天回想一個你一直放不下的人或事，對自己說一句：『我允許這個故事暫時沒有標點符號。』",
-          "當你感覺到『這些人怎麼都不懂』時，試著問：『也許他們只是用不同方式在懂？』",
-          "今天對一個你已經理解的傷痛，再多給它一點點空間，不急著昇華。"
-        ]
-      }
-    };
-
-    // ====== 工具函式：計算生命靈數（1~9） ======
-    function calculateLifePath(dateStr) {
-      if (!dateStr) return null;
-
-      // 只保留數字，例如 "1990-07-15" -> "19900715"
-      const digits = dateStr.replace(/\D/g, "");
-      if (!digits) return null;
-
-      let sum = 0;
-      for (let i = 0; i < digits.length; i++) {
-        sum += Number(digits[i]);
-      }
-
-      // 持續把位數相加，直到剩一位數（1~9）
-      while (sum > 9) {
-        sum = sum
-          .toString()
-          .split("")
-          .reduce((acc, d) => acc + Number(d), 0);
-      }
-
-      return sum; // 目前先不處理 11/22 等大師數，保持 v1 簡單
-    }
-
-    // ====== 工具函式：計算今日能量數字 ======
-    function calculateDailyEnergy() {
-      const date = new Date();
-      const year = date.getFullYear().toString();
-      const month = (date.getMonth() + 1).toString().padStart(2, "0");
-      const day = date.getDate().toString().padStart(2, "0");
-      const dateStr = year + month + day; // YYYYMMDD
-
-      let sum = 0;
-      for (let i = 0; i < dateStr.length; i++) {
-        sum += Number(dateStr[i]);
-      }
-
-      // 持續相加直到剩一位數
-      while (sum > 9) {
-        sum = sum
-          .toString()
-          .split("")
-          .reduce((acc, d) => acc + Number(d), 0);
-      }
-
-      return sum;
-    }
-
-    // ====== 工具函式：取得結合建議（生命靈數 × 今日能量） ======
-    function getCombinedDailyTip(lifeNumber) {
-      const dailyEnergy = calculateDailyEnergy();
-
-      // 檢查 comboTips 是否存在
-      if (!window.comboTips || !window.comboTips[lifeNumber.toString()]) {
-        return "今天也是很好的一天，記得對自己溫柔一點。";
-      }
-
-      const profile = window.comboTips[lifeNumber.toString()];
-      return profile[dailyEnergy.toString()] || "今天也是很好的一天，記得對自己溫柔一點。";
-    }
-
-    // ====== 工具函式：取得每日提示（根據日期輪換）[已棄用，改用 getCombinedDailyTip] ======
-    function getDailyTip(lifeNumber) {
-      const data = lifeData[lifeNumber];
-      if (!data || !data.tips) return data.tip; // fallback
-
-      // 用今天的日期來決定顯示哪一條 tip
-      const today = new Date();
-      const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
-      const tipIndex = dayOfYear % data.tips.length;
-
-      return data.tips[tipIndex];
-    }
-
-    // ====== 工具函式：渲染歷史紀錄 ======
-    function renderHistory() {
-      const logs = loadMoodLogs();
-      const historySection = document.getElementById("history-section");
-      const historyList = document.getElementById("history-list");
-
-      if (logs.length === 0) {
-        historySection.classList.remove("show");
-        return;
-      }
-
-      // 按日期排序（最新在前），只顯示最近 7 天
-      logs.sort((a, b) => b.timestamp - a.timestamp);
-      const recentLogs = logs.slice(0, 7);
-
-      const moodEmoji = {
-        good: '🙂',
-        ok: '😐',
-        bad: '☹️'
-      };
-
-      const moodText = {
-        good: '感覺不錯',
-        ok: '普通平穩',
-        bad: '有點卡住'
-      };
-
-      historyList.innerHTML = recentLogs.map(log => {
-        const date = new Date(log.date);
-        const today = new Date();
-        const isToday = log.date === today.toISOString().split('T')[0];
-        const dateStr = isToday ? '今天' : `${date.getMonth() + 1}/${date.getDate()}`;
-
-        return `
-          <div class="history-item">
-            <span class="history-date">${dateStr}</span>
-            <span class="history-mood">${moodEmoji[log.mood]}</span>
-            <span class="history-text">${moodText[log.mood]}</span>
-          </div>
-        `;
-      }).join('');
-
-      historySection.classList.add("show");
-    }
-
-    // ====== 工具函式：更新連續天數顯示 ======
-    function updateStreakDisplay() {
-      const streak = calculateStreak();
-      const streakBadge = document.getElementById("streak-badge");
-
-      if (streak > 0) {
-        streakBadge.textContent = `🔥 ${streak} 天`;
-        streakBadge.style.display = 'block';
-      } else {
-        streakBadge.style.display = 'none';
-      }
-    }
-
-    // ====== 工具函式：更新天賦密碼顯示 ======
-    function updateTalentDisplay(dateStr) {
-      if (!window.calculateTalentCodes) {
-        console.warn('天賦密碼計算函式尚未載入');
-        return;
-      }
-
-      const talentCodes = window.calculateTalentCodes(dateStr);
-      if (!talentCodes) return;
-
-      const interpretation = window.getTalentInterpretation(talentCodes);
-      if (!interpretation) return;
-
-      // 更新事業天賦
-      document.getElementById('talent-career-num').textContent = interpretation.career.number;
-      document.getElementById('talent-career-name').textContent = interpretation.career.name;
-      document.getElementById('talent-career-desc').textContent = interpretation.career.desc;
-
-      // 更新家庭天賦
-      document.getElementById('talent-family-num').textContent = interpretation.family.number;
-      document.getElementById('talent-family-name').textContent = interpretation.family.name;
-      document.getElementById('talent-family-desc').textContent = interpretation.family.desc;
-
-      // 更新坐鎮碼
-      document.getElementById('talent-throne-num').textContent = interpretation.throne.number;
-      document.getElementById('talent-throne-name').textContent = interpretation.throne.name;
-      document.getElementById('talent-throne-desc').textContent = interpretation.throne.desc;
-    }
-
-    // ====== 綁定畫面元素 ======
-    const birthInput = document.getElementById("birthdate");
-    const calcBtn = document.getElementById("calc-btn");
-
-    const resultCard = document.getElementById("result-card");
-    const lifeNumberEl = document.getElementById("life-number");
-    const lifeTitleEl = document.getElementById("life-title");
-    const lifeTaglineEl = document.getElementById("life-tagline");
-    const lifeKeywordsEl = document.getElementById("life-keywords");
-    const lifeDescEl = document.getElementById("life-desc");
-    const lifeTipEl = document.getElementById("life-tip");
-    const moodButtons = document.querySelectorAll(".mood-buttons button");
-    const moodNoteEl = document.getElementById("mood-note");
-
-    // ====== 頁面載入時的初始化 ======
-    window.addEventListener('DOMContentLoaded', () => {
-      // 載入之前存的生日
-      const savedBirthdate = loadBirthdate();
-      if (savedBirthdate) {
-        birthInput.value = savedBirthdate;
-
-        // 自動計算並顯示結果
-        const num = loadLifeNumber();
-        if (num) {
-          const data = lifeData[num];
-          if (data) {
-            lifeNumberEl.textContent = num;
-            lifeTitleEl.textContent = data.title;
-            lifeTaglineEl.textContent = data.tagline;
-            lifeKeywordsEl.textContent = data.keywords;
-            lifeDescEl.textContent = data.desc;
-
-            // 顯示今日能量
-            const dailyEnergy = calculateDailyEnergy();
-            const dailyEnergyNumEl = document.getElementById("daily-energy-num");
-            const dailyEnergyNameEl = document.getElementById("daily-energy-name");
-            dailyEnergyNumEl.textContent = dailyEnergy;
-            dailyEnergyNameEl.textContent = window.energyNames
-              ? window.energyNames[dailyEnergy.toString()]
-              : dailyEnergy;
-
-            // 使用結合建議
-            lifeTipEl.textContent = getCombinedDailyTip(num);
-
-            // 顯示天賦密碼
-            updateTalentDisplay(savedBirthdate);
-
-            resultCard.classList.add("show");
-          }
-        }
-      }
-
-      // 檢查今天是否已經記錄過心情
-      const logs = loadMoodLogs();
-      const today = new Date().toISOString().split('T')[0];
-      const todayLog = logs.find(log => log.date === today);
-
-      if (todayLog) {
-        // 自動選中今天記錄的心情
-        moodButtons.forEach(btn => {
-          if (btn.getAttribute('data-mood') === todayLog.mood) {
-            btn.classList.add('selected');
-          }
-        });
-        moodNoteEl.textContent = '✓ 今天已經記錄過了，可以隨時更新。';
-      }
-
-      // 渲染歷史和連續天數
-      renderHistory();
-      updateStreakDisplay();
-    });
-
-    // ====== 點擊計算事件 ======
-    calcBtn.addEventListener("click", () => {
-      const dateStr = birthInput.value;
-      const num = calculateLifePath(dateStr);
-
-      if (!num) {
-        alert("先選擇你的生日喔 :)");
-        return;
-      }
-
-      const data = lifeData[num];
-      if (!data) {
-        alert("暫時只支援 1–9 的靈數計算。");
-        return;
-      }
-
-      // 儲存生日和靈數
-      saveBirthdate(dateStr);
-      saveLifeNumber(num);
-
-      // 更新生命靈數顯示
-      lifeNumberEl.textContent = num;
-      lifeTitleEl.textContent = data.title;
-      lifeTaglineEl.textContent = data.tagline;
-      lifeKeywordsEl.textContent = data.keywords;
-      lifeDescEl.textContent = data.desc;
-
-      // 顯示今日能量
-      const dailyEnergy = calculateDailyEnergy();
-      const dailyEnergyNumEl = document.getElementById("daily-energy-num");
-      const dailyEnergyNameEl = document.getElementById("daily-energy-name");
-      dailyEnergyNumEl.textContent = dailyEnergy;
-      dailyEnergyNameEl.textContent = window.energyNames
-        ? window.energyNames[dailyEnergy.toString()]
-        : dailyEnergy;
-
-      // 使用結合建議
-      lifeTipEl.textContent = getCombinedDailyTip(num);
-
-      // 顯示天賦密碼
-      updateTalentDisplay(dateStr);
-
-      resultCard.classList.add("show");
-
-      // 檢查今天是否已經記錄過
-      const logs = loadMoodLogs();
-      const today = new Date().toISOString().split('T')[0];
-      const todayLog = logs.find(log => log.date === today);
-
-      if (todayLog) {
-        moodButtons.forEach(btn => {
-          if (btn.getAttribute('data-mood') === todayLog.mood) {
-            btn.classList.add('selected');
-          } else {
-            btn.classList.remove('selected');
-          }
-        });
-        moodNoteEl.textContent = '✓ 今天已經記錄過了，可以隨時更新。';
-      } else {
-        moodButtons.forEach((btn) => btn.classList.remove("selected"));
-        moodNoteEl.textContent = "（選一個表情，記錄一下今天的你）";
-      }
-    });
-
-    // ====== 深入解讀按鈕事件 ======
-    const deepReadingBtn = document.getElementById("deep-reading-btn");
-    if (deepReadingBtn) {
-      deepReadingBtn.addEventListener("click", () => {
-        const birthdate = birthInput.value || localStorage.getItem('lifepath_birthdate');
-
-        if (!birthdate) {
-          alert("請先輸入生日計算你的生命靈數 😊");
-          return;
-        }
-
-        // 導向深度解析頁面，帶上生日參數
-        window.location.href = `deep-reading.html?birthdate=${encodeURIComponent(birthdate)}`;
-      });
-    }
-
-    // ====== 情緒選擇事件 ======
-    moodButtons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const currentLifeNumber = loadLifeNumber();
-        if (!currentLifeNumber) {
-          alert("請先計算你的生命靈數 :)");
-          return;
-        }
-
-        moodButtons.forEach((b) => b.classList.remove("selected"));
-        btn.classList.add("selected");
-        const mood = btn.getAttribute("data-mood");
-
-        // 儲存心情記錄
-        saveMoodLog(mood, currentLifeNumber);
-
-        // 更新顯示
-        const streak = calculateStreak();
-        let text = "";
-
-        if (mood === "good") {
-          text = "今天覺得還不錯";
-          if (streak > 1) text += `，已經連續記錄 ${streak} 天了！`;
-        }
-        if (mood === "ok") {
-          text = "今天是普通的一天";
-          if (streak > 1) text += `，堅持記錄 ${streak} 天很棒`;
-        }
-        if (mood === "bad") {
-          text = "今天有點卡，沒關係";
-          if (streak > 1) text += `，${streak} 天的你都撐過來了`;
-        }
-
-        moodNoteEl.textContent = text + "。";
-
-        // 重新渲染歷史和連續天數
-        renderHistory();
-        updateStreakDisplay();
-      });
-    });
-  </script>
+    <footer>
+      <p>Official domain: <strong>three-quarters.net</strong></p>
+      <p>This page is the first public shell of the rebuilt Three Realms Protocol website.</p>
+    </footer>
+  </main>
 </body>
 </html>

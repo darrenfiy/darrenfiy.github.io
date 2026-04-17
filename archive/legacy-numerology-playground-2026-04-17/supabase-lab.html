@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>BLU 小實驗室 v5.0 - 自動覺醒版</title>
+    <style>
+      body { font-family: system-ui, -apple-system, sans-serif; max-width: 800px; margin: 20px auto; padding: 0 20px; }
+      .mood-buttons { display: flex; gap: 10px; margin: 10px 0; }
+      .mood-btn { font-size: 2rem; padding: 10px 20px; border: 2px solid #ddd; border-radius: 8px; cursor: pointer; background: white; }
+      .mood-btn:hover { background: #f0f0f0; }
+      .mood-btn.selected { background: #e3f2fd; border-color: #2196f3; }
+      .mood-history { margin-top: 15px; padding: 10px; background: #f9f9f9; border-radius: 8px; }
+      .mood-item { padding: 5px 0; border-bottom: 1px solid #eee; }
+      .streak { display: inline-block; padding: 4px 12px; background: linear-gradient(135deg, #ffeaa7, #fdcb6e); border-radius: 12px; font-weight: 600; color: #6b4700; }
+    </style>
+  </head>
+  <body>
+    <h1>BLU 小實驗室 v5.0 - 自動覺醒版</h1>
+
+    <h2>1. 登入 / 註冊</h2>
+    <p>
+      <input id="email" type="email" placeholder="Email" />
+      <input id="password" type="password" placeholder="Password" />
+    </p>
+    <p>
+      <button id="signupBtn">註冊（第一次用）</button>
+      <button id="loginBtn">登入</button>
+    </p>
+    <p id="authStatus"></p>
+
+    <hr />
+
+    <div id="appArea" style="display: none">
+      <h2>2. 靈魂狀態與 BLU 累積</h2>
+      <p>目前登入使用者 id：<span id="userId"></span></p>
+
+      <p>總累積 BLU 厚度：<span id="totalBlu">載入中...</span></p>
+      <p>生命靈數：<span id="lifeNumber">載入中...</span></p>
+      <p>靈魂入口標籤：<span id="entryLabel">載入中...</span></p>
+
+      <hr />
+
+      <h2>3. 建立 / 初始化 Profile（靈魂誕生）</h2>
+      <p>
+        <label for="birthDate">你的生日：</label>
+        <input id="birthDate" type="date" />
+      </p>
+      <p>
+        <button id="initProfileBtn">初始化靈魂檔案（計算生命靈數並生成標籤）</button>
+      </p>
+      <p id="profileStatus">（需輸入生日並初始化才能生成靈魂標籤）</p>
+
+      <hr />
+
+      <h2>4. 測試 BLU 寫入</h2>
+      <button id="addBluBtn">+0.5 BLU （一次親愛的）</button>
+      <p id="bluStatus"></p>
+
+      <hr />
+
+      <h2>5. 每日心情記錄 <span id="streakBadge"></span></h2>
+      <p>今天的心情：</p>
+      <div class="mood-buttons">
+        <button class="mood-btn" data-mood="good">🙂</button>
+        <button class="mood-btn" data-mood="neutral">😐</button>
+        <button class="mood-btn" data-mood="bad">☹️</button>
+      </div>
+      <p id="moodStatus"></p>
+
+      <div class="mood-history" id="moodHistory" style="display: none;">
+        <h3>最近 7 天</h3>
+        <div id="moodHistoryList"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+      // **請確認這兩行是妳的 Supabase 專案密鑰**
+      const SUPABASE_URL = "https://amqgpwrhxzrhvaknsasl.supabase.co";
+      const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFtcWdwd3JoeHpyaHZha25zYXNsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3NzExMDYsImV4cCI6MjA4MDM0NzEwNn0.cOVpCvBS42_GIBR2zA4J0TqatYMZgeQ-mwLwYjmPTKU";
+
+      const { createClient } = supabase;
+      const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+      // DOM 元素定義
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+      const authStatus = document.getElementById("authStatus");
+      const appArea = document.getElementById("appArea");
+      const userIdSpan = document.getElementById("userId");
+      const bluStatus = document.getElementById("bluStatus");
+      const totalBluSpan = document.getElementById("totalBlu");
+      const lifeNumberSpan = document.getElementById("lifeNumber");
+      const entryLabelSpan = document.getElementById("entryLabel");
+      const birthDateInput = document.getElementById("birthDate");
+      const initProfileBtn = document.getElementById("initProfileBtn");
+      const profileStatus = document.getElementById("profileStatus");
+
+      // 心情記錄相關
+      const moodButtons = document.querySelectorAll(".mood-btn");
+      const moodStatus = document.getElementById("moodStatus");
+      const streakBadge = document.getElementById("streakBadge");
+      const moodHistory = document.getElementById("moodHistory");
+      const moodHistoryList = document.getElementById("moodHistoryList");
+
+      // ====== 工具函式：計算生命靈數（1~9） ======
+      function calculateLifePath(dateStr) {
+        if (!dateStr) return null;
+
+        // 只保留數字，例如 "1990-07-15" -> "19900715"
+        const digits = dateStr.replace(/\D/g, "");
+        if (!digits) return null;
+
+        let sum = 0;
+        for (let i = 0; i < digits.length; i++) {
+          sum += Number(digits[i]);
+        }
+
+        // 持續把位數相加，直到剩一位數（1~9）
+        while (sum > 9) {
+          sum = sum
+            .toString()
+            .split("")
+            .reduce((acc, d) => acc + Number(d), 0);
+        }
+
+        return sum; // 目前先不處理 11/22 等大師數，保持簡單
+      }
+
+      // ====== 工具函式：生成入口標籤 ======
+      function generateEntryLabel(lifeNumber, bluTotal) {
+        if (!lifeNumber) return "未知・探索者｜BLU 0.0";
+        return `${lifeNumber}號人｜BLU ${bluTotal.toFixed(1)}`;
+      }
+
+      // ====== 工具函式：計算連續記錄天數 ======
+      function calculateStreak(moodLogs) {
+        if (!moodLogs || moodLogs.length === 0) return 0;
+
+        // 按日期排序（最新在前）
+        const sorted = [...moodLogs].sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        let streak = 0;
+        let checkDate = new Date();
+        checkDate.setHours(0, 0, 0, 0);
+
+        for (const log of sorted) {
+          const logDate = new Date(log.date);
+          logDate.setHours(0, 0, 0, 0);
+
+          const expectedDate = new Date(checkDate);
+          expectedDate.setDate(expectedDate.getDate() - streak);
+
+          if (logDate.getTime() === expectedDate.getTime()) {
+            streak++;
+          } else {
+            break;
+          }
+        }
+
+        return streak;
+      }
+
+      // ====== 自動確保 Profile 存在（核心功能）======
+      async function ensureProfile(user) {
+        if (!user) return;
+
+        // 1. 檢查 profile 是否存在
+        const { data: existingProfile, error: fetchError } = await client
+          .from("profiles")
+          .select("id, birth_date, life_number")
+          .eq("id", user.id)
+          .single();
+
+        // 2. 如果 profile 不存在，自動建立
+        if (fetchError && fetchError.code === 'PGRST116') {
+          console.log("Profile 不存在，自動建立中...");
+
+          const { error: createError } = await client.from("profiles").insert({
+            id: user.id,
+            entry_label: "新生靈魂｜BLU 0.0"
+          });
+
+          if (createError) {
+            console.error("自動建立 Profile 失敗：", createError);
+          } else {
+            console.log("✅ Profile 自動建立成功！");
+          }
+          return;
+        }
+
+        // 3. 如果有 birth_date 但沒有 life_number，自動計算
+        if (existingProfile && existingProfile.birth_date && !existingProfile.life_number) {
+          console.log("發現生日資料但未計算生命靈數，自動計算中...");
+
+          const lifeNumber = calculateLifePath(existingProfile.birth_date);
+
+          if (lifeNumber) {
+            // 讀取 BLU 總量
+            const { data: bluData } = await client
+              .from("blu_logs")
+              .select("blu_value")
+              .eq("user_id", user.id);
+
+            const totalBlu = bluData
+              ? bluData.reduce((sum, log) => sum + (parseFloat(log.blu_value) || 0), 0)
+              : 0;
+
+            // 生成入口標籤
+            const entryLabel = generateEntryLabel(lifeNumber, totalBlu);
+
+            // 更新 profile
+            await client.from("profiles").update({
+              life_number: lifeNumber,
+              entry_label: entryLabel
+            }).eq("id", user.id);
+
+            console.log("✅ 生命靈數自動計算完成：", lifeNumber);
+          }
+        }
+      }
+
+      // 讀取 BLU 總量和 Profile
+      async function fetchTotalBluAndProfile(userId) {
+        // 1. 讀取 BLU Logs
+        const { data: bluData, error: bluError } = await client
+          .from("blu_logs")
+          .select("blu_value")
+          .eq("user_id", userId);
+
+        let totalBlu = 0;
+        if (bluError) {
+          totalBluSpan.textContent = "載入 BLU 錯誤！";
+          console.error("BLU Fetch Error:", bluError);
+        } else {
+          totalBlu = bluData.reduce((sum, log) => sum + (parseFloat(log.blu_value) || 0), 0);
+          totalBluSpan.textContent = totalBlu.toFixed(1);
+        }
+
+        // 2. 讀取 Profile（包含 entry_label, life_number, birth_date）
+        const { data: profileData, error: profileError } = await client
+          .from("profiles")
+          .select("entry_label, life_number, birth_date")
+          .eq("id", userId)
+          .single();
+
+        if (profileError && profileError.code !== 'PGRST116') { // PGRST116 找不到資料
+            entryLabelSpan.textContent = "載入標籤錯誤！";
+            lifeNumberSpan.textContent = "載入錯誤";
+            console.error("Profile Fetch Error:", profileError);
+            profileStatus.textContent = "❌ 錯誤：Profile 讀取失敗。";
+        } else if (profileData) {
+          // 顯示 entry_label
+          entryLabelSpan.textContent = profileData.entry_label || "未設定";
+
+          // 顯示 life_number
+          if (profileData.life_number) {
+            lifeNumberSpan.textContent = profileData.life_number + " 號";
+          } else {
+            lifeNumberSpan.textContent = "尚未計算（請輸入生日並初始化）";
+          }
+
+          // 如果有 birth_date，自動填入日期欄位
+          if (profileData.birth_date) {
+            birthDateInput.value = profileData.birth_date;
+          }
+
+          // 檢查是否需要更新 life_number
+          if (!profileData.life_number && profileData.birth_date) {
+            profileStatus.textContent = "⚠ 已有生日資料，但尚未計算生命靈數，請點擊初始化按鈕更新。";
+          } else if (!profileData.life_number) {
+            profileStatus.textContent = "⚠ 尚未設定生日，請輸入生日後點擊初始化按鈕。";
+          } else {
+            profileStatus.textContent = "✅ 靈魂檔案完整（生命靈數：" + profileData.life_number + "號）";
+          }
+        } else {
+            entryLabelSpan.textContent = "未找到標籤，請先初始化";
+            lifeNumberSpan.textContent = "尚未初始化";
+            profileStatus.textContent = "⚠ Profile 不存在，請輸入生日並點擊初始化按鈕。";
+        }
+      }
+
+
+      // 渲染心情歷史記錄
+      async function renderMoodHistory(userId) {
+        const { data: moodLogs, error } = await client
+          .from("mood_logs")
+          .select("date, mood, created_at")
+          .eq("user_id", userId)
+          .order("date", { ascending: false })
+          .limit(7);
+
+        if (error) {
+          console.error("讀取心情記錄失敗：", error);
+          return;
+        }
+
+        if (!moodLogs || moodLogs.length === 0) {
+          moodHistory.style.display = "none";
+          return;
+        }
+
+        // 計算連續天數
+        const streak = calculateStreak(moodLogs);
+        if (streak > 0) {
+          streakBadge.innerHTML = `<span class="streak">🔥 ${streak} 天</span>`;
+        } else {
+          streakBadge.innerHTML = "";
+        }
+
+        // 顯示歷史記錄
+        const moodEmoji = { good: "🙂", neutral: "😐", bad: "☹️" };
+        const moodText = { good: "感覺不錯", neutral: "平靜穩定", bad: "有點卡住" };
+
+        moodHistoryList.innerHTML = moodLogs.map(log => {
+          const date = new Date(log.date);
+          const today = new Date();
+          const isToday = log.date === today.toISOString().split('T')[0];
+          const dateStr = isToday ? "今天" : `${date.getMonth() + 1}/${date.getDate()}`;
+
+          return `
+            <div class="mood-item">
+              ${dateStr} ${moodEmoji[log.mood]} ${moodText[log.mood]}
+            </div>
+          `;
+        }).join("");
+
+        moodHistory.style.display = "block";
+
+        // 檢查今天是否已記錄，如果有就標記選中
+        const today = new Date().toISOString().split('T')[0];
+        const todayLog = moodLogs.find(log => log.date === today);
+
+        moodButtons.forEach(btn => {
+          if (todayLog && btn.dataset.mood === todayLog.mood) {
+            btn.classList.add("selected");
+          } else {
+            btn.classList.remove("selected");
+          }
+        });
+      }
+
+      // 更新使用者狀態（加入自動初始化）
+      async function refreshUser() {
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (user) {
+          // 🌟 自動確保 Profile 存在（核心改進）
+          await ensureProfile(user);
+
+          appArea.style.display = "block";
+          userIdSpan.textContent = user.id;
+          authStatus.textContent = "已登入";
+          await fetchTotalBluAndProfile(user.id);
+          await renderMoodHistory(user.id);
+        } else {
+          appArea.style.display = "none";
+          authStatus.textContent = "尚未登入";
+          totalBluSpan.textContent = '0';
+          entryLabelSpan.textContent = '載入中...';
+          profileStatus.textContent = '請先登入';
+          streakBadge.innerHTML = "";
+        }
+      }
+
+      // **[核心功能升級]** 建立 / 更新 Profile（含生命靈數計算與標籤生成）
+      initProfileBtn.onclick = async () => {
+        profileStatus.textContent = "🌟 靈魂檔案處理中...";
+
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (!user) {
+          profileStatus.textContent = "❌ 尚未登入。";
+          return;
+        }
+
+        // 讀取生日
+        const birthDate = birthDateInput.value;
+        if (!birthDate) {
+          profileStatus.textContent = "⚠ 請先輸入你的生日。";
+          return;
+        }
+
+        // 計算生命靈數
+        const lifeNumber = calculateLifePath(birthDate);
+        if (!lifeNumber) {
+          profileStatus.textContent = "❌ 生日格式錯誤，無法計算生命靈數。";
+          return;
+        }
+
+        // 讀取 BLU 總量
+        const { data: bluData } = await client
+          .from("blu_logs")
+          .select("blu_value")
+          .eq("user_id", user.id);
+
+        const totalBlu = bluData
+          ? bluData.reduce((sum, log) => sum + (parseFloat(log.blu_value) || 0), 0)
+          : 0;
+
+        // 生成入口標籤
+        const entryLabel = generateEntryLabel(lifeNumber, totalBlu);
+
+        // 使用 upsert：如果沒有 profile 就新增，有的話就更新
+        const { error } = await client.from("profiles").upsert({
+          id: user.id,
+          birth_date: birthDate,
+          life_number: lifeNumber,
+          entry_label: entryLabel
+        });
+
+        if (error) {
+          profileStatus.textContent = "❌ 初始化失敗：" + error.message;
+          console.error("Profile Init Error:", error);
+        } else {
+          profileStatus.textContent = `✅ 靈魂覺醒完成！你是 ${lifeNumber} 號人，標籤：${entryLabel}`;
+          // 重新讀取 profile 狀態
+          await fetchTotalBluAndProfile(user.id);
+        }
+      };
+
+
+      // 註冊功能 (不變)
+      document.getElementById("signupBtn").onclick = async () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        authStatus.textContent = "註冊中...";
+        const { data, error } = await client.auth.signUp({
+          email,
+          password,
+        });
+
+        if (error) {
+          authStatus.textContent = "註冊失敗：" + error.message;
+        } else {
+          authStatus.textContent = "註冊成功，請再按一次『登入』";
+        }
+      };
+
+      // 登入功能
+      document.getElementById("loginBtn").onclick = async () => {
+        const email = emailInput.value;
+        const password = passwordInput.value;
+
+        authStatus.textContent = "登入中...";
+        const { data, error } = await client.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          authStatus.textContent = "登入失敗：" + error.message;
+        } else {
+          authStatus.textContent = "登入成功！";
+          await refreshUser();
+        }
+      };
+
+      // 寫入 BLU 功能（並自動更新 entry_label）
+      document.getElementById("addBluBtn").onclick = async () => {
+        bluStatus.textContent = "寫入中...";
+
+        const {
+          data: { user },
+        } = await client.auth.getUser();
+
+        if (!user) {
+          bluStatus.textContent = "尚未登入，請先登入。";
+          return;
+        }
+
+        const { error } = await client.from("blu_logs").insert({
+          user_id: user.id,
+          blu_value: 0.5,
+          description: "手動測試 +0.5 BLU",
+        });
+
+        if (error) {
+          bluStatus.textContent = "寫入失敗：" + error.message;
+        } else {
+          bluStatus.textContent = "✅ 成功寫入一筆 +0.5 BLU！";
+
+          // 成功後重新讀取並更新 entry_label
+          const { data: profileData } = await client
+            .from("profiles")
+            .select("life_number")
+            .eq("id", user.id)
+            .single();
+
+          if (profileData && profileData.life_number) {
+            // 重新計算 BLU 總量
+            const { data: bluData } = await client
+              .from("blu_logs")
+              .select("blu_value")
+              .eq("user_id", user.id);
+
+            const totalBlu = bluData
+              ? bluData.reduce((sum, log) => sum + (parseFloat(log.blu_value) || 0), 0)
+              : 0;
+
+            // 重新生成 entry_label
+            const newEntryLabel = generateEntryLabel(profileData.life_number, totalBlu);
+
+            // 更新 entry_label
+            await client.from("profiles").update({
+              entry_label: newEntryLabel
+            }).eq("id", user.id);
+
+            bluStatus.textContent = `✅ 成功寫入 +0.5 BLU！標籤已更新為：${newEntryLabel}`;
+          }
+
+          await fetchTotalBluAndProfile(user.id); // 重新整理畫面
+        }
+      };
+
+      // ====== 心情記錄按鈕事件 ======
+      moodButtons.forEach(btn => {
+        btn.addEventListener("click", async () => {
+          const {
+            data: { user },
+          } = await client.auth.getUser();
+
+          if (!user) {
+            moodStatus.textContent = "請先登入才能記錄心情。";
+            return;
+          }
+
+          const mood = btn.dataset.mood;
+          const today = new Date().toISOString().split('T')[0];
+
+          moodStatus.textContent = "記錄中...";
+
+          // 使用 upsert：如果今天已經記錄過就更新，沒有就新增
+          const { error } = await client.from("mood_logs").upsert({
+            user_id: user.id,
+            date: today,
+            mood: mood
+          }, {
+            onConflict: "user_id,date"
+          });
+
+          if (error) {
+            moodStatus.textContent = "❌ 記錄失敗：" + error.message;
+            console.error("Mood Log Error:", error);
+          } else {
+            // 更新按鈕狀態
+            moodButtons.forEach(b => b.classList.remove("selected"));
+            btn.classList.add("selected");
+
+            const moodText = { good: "感覺不錯", neutral: "平靜穩定", bad: "有點卡住" };
+            moodStatus.textContent = `✅ 記錄成功！今天${moodText[mood]}`;
+
+            // 重新渲染歷史記錄（包含連續天數）
+            await renderMoodHistory(user.id);
+          }
+        });
+      });
+
+      // 一進來先檢查是否已登入
+      refreshUser();
+    </script>
+  </body>
+</html>

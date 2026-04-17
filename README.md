@@ -14,7 +14,9 @@ This repository now serves as the public-entry site for the Three Realms Protoco
 
 - `/` - official homepage
 - `/books/` - public books index
-- `/books/trp-ai-first/` - first book page and EPUB download
+- `/books/trp-ai-first/` - protocol / nonfiction book page and EPUB download
+- `/books/breathing/` - early fiction book page and EPUB download
+- `/books/protocol-body-autobiography/` - autobiographical novel page and EPUB download
 - `/publisher/` - publisher and imprint page
 - `/protocol/` - public protocol orientation
 - `/archive/legacy-numerology-playground-2026-04-17/` - archived numerology playground snapshot

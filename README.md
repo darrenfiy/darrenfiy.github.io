@@ -1,27 +1,32 @@
-﻿# darrenfiy.github.io
+# darrenfiy.github.io
 
-This repository now serves as the public-entry site for the Three Realms Protocol official website.
+This repository serves as the official website for Three-Quarters International Ltd. (`three-quarters.net`).
 
-## Current role
+Its current public role is no longer just a protocol landing page. It is now the outward-facing home for the publisher, the mission and vision layer, the book pages, and the public orientation entry into the Three Realms Protocol field.
 
-- Official landing page for `three-quarters.net`
-- Public orientation layer for the protocol
+## Core positioning
+
+- Official website for `three-quarters.net`
+- Public-facing home for Three-Quarters International Ltd.
 - Publisher and imprint page
-- Book landing pages and direct download links
-- Future product and playground entry links
+- Book landing pages and direct EPUB downloads
+- Protocol orientation layer for new readers
 
 ## Site structure
 
 - `/` - official homepage
 - `/books/` - public books index
 - `/books/trp-ai-first/` - protocol / nonfiction book page and EPUB download
-- `/books/breathing/` - early fiction book page and EPUB download
+- `/books/breathing/` - fiction book page and EPUB download
 - `/books/protocol-body-autobiography/` - autobiographical novel page and EPUB download
-- `/publisher/` - publisher and imprint page
+- `/publisher/` - publisher, mission, and vision page
 - `/protocol/` - public protocol orientation
-- `/archive/legacy-numerology-playground-2026-04-17/` - archived numerology playground snapshot
 
-## Archive policy
+## Editorial stance
 
-The previous numerology playground experiment has been preserved under the dated archive path above.
-The repository root is now reserved for the rebuilt official site.
+The current website direction centers on a simple mission and vision:
+
+- Mission: let love flow
+- Vision: a civilization in which love can flow
+
+This site exists to give that stance a public form through books, protocol framing, and a stable publisher-facing surface.

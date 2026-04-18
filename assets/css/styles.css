@@ -1,13 +1,15 @@
-﻿:root {
+:root {
   --bg: #f6f1e8;
   --bg-deep: #ece4d6;
   --paper: rgba(255, 252, 247, 0.88);
+  --paper-strong: rgba(255, 250, 243, 0.94);
   --ink: #1f1b18;
   --muted: #655c54;
   --line: rgba(31, 27, 24, 0.12);
   --accent: #8d4c31;
   --accent-strong: #6f341d;
   --forest: #31483f;
+  --gold: #b48a4a;
   --shadow: 0 22px 64px rgba(31, 27, 24, 0.08);
   --radius-xl: 32px;
   --radius-lg: 24px;
@@ -20,8 +22,9 @@ body {
   margin: 0;
   color: var(--ink);
   background:
-    radial-gradient(circle at 0% 0%, rgba(141, 76, 49, 0.14), transparent 30%),
-    radial-gradient(circle at 100% 20%, rgba(49, 72, 63, 0.12), transparent 28%),
+    radial-gradient(circle at 0% 0%, rgba(141, 76, 49, 0.18), transparent 30%),
+    radial-gradient(circle at 100% 20%, rgba(49, 72, 63, 0.16), transparent 28%),
+    radial-gradient(circle at 50% 12%, rgba(180, 138, 74, 0.12), transparent 22%),
     linear-gradient(180deg, #faf7f1 0%, var(--bg) 55%, var(--bg-deep) 100%);
   font-family: Georgia, "Noto Serif TC", "PMingLiU", serif;
   line-height: 1.75;
@@ -84,6 +87,9 @@ img { display: block; max-width: 100%; height: auto; }
   gap: 28px;
   align-items: stretch;
 }
+.hero-home {
+  align-items: start;
+}
 .eyebrow {
   display: inline-block;
   margin-bottom: 14px;
@@ -105,6 +111,9 @@ img { display: block; max-width: 100%; height: auto; }
   color: var(--muted);
   font-size: 1.1rem;
 }
+.lead-strong {
+  color: var(--ink);
+}
 .panel,
 .card,
 .stat,
@@ -118,6 +127,23 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .panel {
   padding: 28px;
+}
+.panel-hero {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255,255,255,0.68), rgba(255,249,241,0.9)),
+    var(--paper-strong);
+}
+.panel-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto -80px -120px auto;
+  width: 260px;
+  height: 260px;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(180, 138, 74, 0.18), transparent 68%);
+  pointer-events: none;
 }
 .actions {
   display: flex;
@@ -152,6 +178,11 @@ img { display: block; max-width: 100%; height: auto; }
   gap: 16px;
   align-content: space-between;
 }
+.aurora-panel {
+  background:
+    linear-gradient(180deg, rgba(255,252,247,0.84), rgba(244, 235, 221, 0.94)),
+    var(--paper);
+}
 .hero-side h2,
 .section h2,
 .book-card h2,
@@ -178,6 +209,9 @@ img { display: block; max-width: 100%; height: auto; }
 .grid.cards {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
+.compact-grid {
+  grid-template-columns: 1fr;
+}
 .card,
 .feature,
 .stat,
@@ -189,6 +223,28 @@ img { display: block; max-width: 100%; height: auto; }
   margin-top: 56px;
   padding-top: 20px;
   border-top: 1px solid var(--line);
+}
+.ribbon-section {
+  margin-top: 10px;
+  padding-top: 0;
+  border-top: 0;
+}
+.ribbon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ribbon span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 38px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 52, 29, 0.12);
+  background: rgba(255,255,255,0.56);
+  color: var(--accent-strong);
+  font-size: 0.94rem;
+  box-shadow: 0 10px 26px rgba(31, 27, 24, 0.04);
 }
 .section-header {
   display: grid;
@@ -208,6 +264,32 @@ img { display: block; max-width: 100%; height: auto; }
   grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
   gap: 22px;
   align-items: stretch;
+}
+.manifesto-grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.manifesto-card {
+  background:
+    linear-gradient(160deg, rgba(255,255,255,0.74), rgba(245, 235, 220, 0.94)),
+    var(--paper);
+}
+.quote-block {
+  display: grid;
+  gap: 4px;
+  padding-bottom: 4px;
+}
+.quote-mark {
+  margin: 0;
+  font-size: 3rem;
+  line-height: 1;
+  color: var(--gold);
+}
+.quote-text {
+  margin: 0;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  line-height: 1.2;
 }
 .book-cover {
   overflow: hidden;
@@ -238,6 +320,9 @@ img { display: block; max-width: 100%; height: auto; }
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 18px;
+}
+.top-gap {
+  margin-top: 22px;
 }
 .page-hero {
   padding: 56px 0 26px;
@@ -281,7 +366,8 @@ img { display: block; max-width: 100%; height: auto; }
 }
 @media (max-width: 900px) {
   .hero,
-  .book-grid {
+  .book-grid,
+  .manifesto-grid {
     grid-template-columns: 1fr;
   }
 }

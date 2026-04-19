@@ -16,9 +16,9 @@ Its current public role is no longer just a protocol landing page. It is now the
 
 - `/` - official homepage
 - `/books/` - public books index
-- `/books/trp-ai-first/` - protocol / nonfiction book page and EPUB download
+- `/books/trp-ai-first/` - nonfiction book page and EPUB download
 - `/books/breathing/` - fiction book page and EPUB download
-- `/books/protocol-body-autobiography/` - autobiographical novel page and EPUB download
+- `/books/protocol-body-autobiography/` - fiction book page and EPUB download
 - `/publisher/` - publisher, mission, and vision page
 - `/protocol/` - public protocol orientation
 

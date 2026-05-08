@@ -429,7 +429,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 .product-title-long {
   max-width: 980px;
-  font-size: clamp(2.45rem, 8vw, 6.2rem);
+  font-size: clamp(1.25rem, 4vw, 3.1rem);
 }
 .dialogue-trainer-wordmark {
   width: min(210px, 70vw);
@@ -596,7 +596,7 @@ img { display: block; max-width: 100%; height: auto; }
     font-size: clamp(3rem, 18vw, 5.2rem);
   }
   .product-title-long {
-    font-size: clamp(2.35rem, 12vw, 4.2rem);
+    font-size: clamp(1.45rem, 7vw, 2.45rem);
   }
   .training-board {
     margin-top: 12px;

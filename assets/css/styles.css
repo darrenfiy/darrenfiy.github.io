@@ -412,7 +412,7 @@ img { display: block; max-width: 100%; height: auto; }
   margin: 0;
 }
 .product-hero {
-  min-height: calc(100vh - 72px);
+  min-height: calc(100vh - 150px);
   padding: 42px 0 34px;
   display: grid;
   align-content: center;

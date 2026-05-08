@@ -11,6 +11,7 @@ Its current public role is no longer just a protocol landing page. It is now the
 - Publisher and imprint page
 - Book landing pages and direct EPUB downloads
 - Protocol orientation layer for new readers
+- Product layer for public app / tool entrances
 
 ## Site structure
 
@@ -19,6 +20,8 @@ Its current public role is no longer just a protocol landing page. It is now the
 - `/books/trp-ai-first/` - nonfiction book page and EPUB download
 - `/books/breathing/` - fiction book page and EPUB download
 - `/books/protocol-body-autobiography/` - fiction book page and EPUB download
+- `/products/` - product and app index
+- `/products/yantu/` - 言途 Dialogue Trainer product landing page
 - `/publisher/` - publisher, mission, and vision page
 - `/protocol/` - public protocol orientation
 

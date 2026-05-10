@@ -22,6 +22,7 @@ Its current public role is no longer just a protocol landing page. It is now the
 - `/books/protocol-body-autobiography/` - fiction book page and EPUB download
 - `/products/` - product and app index
 - `/products/dialogue-trainer/` - 言途 Dialogue Trainer product landing page
+- `/support/` - support doorway for users, collaborators, and personal support
 - `/privacy/` - public privacy policy
 - `/terms/` - public terms of service
 - `/publisher/` - publisher, mission, and vision page

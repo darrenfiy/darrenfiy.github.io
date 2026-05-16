@@ -16,6 +16,7 @@ Its current public role is no longer just a protocol landing page. It is now the
 ## Site structure
 
 - `/` - official homepage
+- `/en/` - English homepage
 - `/books/` - public books index
 - `/books/trp-ai-first/` - nonfiction book page and EPUB download
 - `/books/breathing/` - fiction book page and EPUB download

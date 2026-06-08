@@ -606,3 +606,162 @@ img { display: block; max-width: 100%; height: auto; }
     grid-template-columns: 1fr;
   }
 }
+
+.research-hero,
+.fathom-hero {
+  position: relative;
+}
+.publication-card {
+  display: grid;
+  grid-template-columns: minmax(210px, 0.32fr) minmax(0, 1fr);
+  gap: 24px;
+  align-items: stretch;
+  padding: 28px;
+  border: 1px solid rgba(14, 116, 144, 0.2);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.76), rgba(231, 244, 247, 0.82)),
+    var(--paper);
+  box-shadow: var(--shadow);
+}
+.publication-code {
+  display: grid;
+  gap: 10px;
+  align-content: center;
+  min-height: 220px;
+  padding: 22px;
+  border-radius: 24px;
+  color: #f8fafc;
+  background: linear-gradient(155deg, var(--teal-deep), #17334f 58%, #3d2f65);
+}
+.publication-code span {
+  color: rgba(248, 250, 252, 0.72);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.publication-code strong {
+  font-size: clamp(2.2rem, 7vw, 4.4rem);
+  line-height: 0.9;
+}
+.publication-code a {
+  overflow-wrap: anywhere;
+  color: #f8fafc;
+}
+.publication-card h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.7rem, 4vw, 2.8rem);
+  line-height: 1.12;
+}
+.research-accent-card,
+.fathom-card-accent {
+  position: relative;
+  overflow: hidden;
+}
+.research-accent-card::before,
+.fathom-card-accent::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--teal);
+}
+.cyan-accent::before { background: var(--cyan); }
+.rose-accent::before { background: var(--rose); }
+.amber-accent::before { background: var(--amber); }
+.fathom-hero {
+  min-height: calc(100vh - 130px);
+}
+.fathom-hero-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(280px, 74vw);
+  min-height: 210px;
+  margin-bottom: 8px;
+}
+.fathom-icon {
+  width: min(150px, 42vw);
+  border-radius: 30px;
+  box-shadow: 0 22px 56px rgba(49, 72, 63, 0.2);
+}
+.fathom-glyph {
+  position: absolute;
+  width: 74px;
+  padding: 10px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(49, 72, 63, 0.12);
+  box-shadow: 0 14px 36px rgba(31, 27, 24, 0.08);
+}
+.fathom-glyph.glyph-left {
+  left: 4px;
+  bottom: 18px;
+}
+.fathom-glyph.glyph-right {
+  right: 4px;
+  top: 18px;
+}
+.fathom-spotlight {
+  border-color: rgba(49, 72, 63, 0.2);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.72), rgba(239, 236, 247, 0.84)),
+    var(--paper);
+}
+.fathom-product-mark {
+  background:
+    linear-gradient(135deg, rgba(49, 72, 63, 0.12), rgba(14, 116, 144, 0.11), rgba(190, 18, 60, 0.08)),
+    rgba(255,255,255,0.58);
+}
+.fathom-product-mark img {
+  width: min(150px, 70%);
+  border-radius: 28px;
+  box-shadow: 0 18px 42px rgba(49, 72, 63, 0.18);
+}
+.fathom-oracle-strip {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.36fr);
+  gap: 24px;
+  align-items: center;
+  padding: 28px;
+  border: 1px solid rgba(49, 72, 63, 0.18);
+  border-radius: var(--radius-xl);
+  background:
+    linear-gradient(145deg, rgba(255,255,255,0.72), rgba(235, 244, 241, 0.86)),
+    var(--paper);
+  box-shadow: var(--shadow);
+}
+.fathom-oracle-strip h2 {
+  margin: 0 0 12px;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+}
+.fathom-oracle-strip p {
+  margin: 0;
+  color: var(--muted);
+}
+.fathom-symbols {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+.fathom-symbols img {
+  width: 74px;
+  min-width: 0;
+  padding: 10px;
+  border-radius: 22px;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid var(--line);
+}
+.beta-list {
+  max-width: 860px;
+}
+@media (max-width: 900px) {
+  .publication-card,
+  .fathom-oracle-strip {
+    grid-template-columns: 1fr;
+  }
+  .publication-code {
+    min-height: auto;
+  }
+}

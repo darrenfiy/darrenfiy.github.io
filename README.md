@@ -11,6 +11,7 @@ Its current public role is no longer just a protocol landing page. It is now the
 - Publisher and imprint page
 - Book landing pages and direct EPUB downloads
 - Protocol orientation layer for new readers
+- Research publication index for externally citable artifacts
 - Product layer for public app / tool entrances
 
 ## Site structure
@@ -21,8 +22,10 @@ Its current public role is no longer just a protocol landing page. It is now the
 - `/books/trp-ai-first/` - nonfiction book page and EPUB download
 - `/books/breathing/` - fiction book page and EPUB download
 - `/books/protocol-body-autobiography/` - fiction book page and EPUB download
+- `/research/` - research publication index and DOI entry
 - `/products/` - product and app index
 - `/products/dialogue-trainer/` - 言途 Dialogue Trainer product landing page
+- `/products/fathom/` - Fathom closed beta product landing page
 - `/support/` - support doorway for users, collaborators, and personal support
 - `/privacy/` - public privacy policy
 - `/terms/` - public terms of service

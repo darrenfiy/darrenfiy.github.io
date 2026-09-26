@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://graph.facebook.com; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  <title>FoZone Manager | Facebook Page Connection</title>
+  <meta name="description" content="Restricted, read-only Facebook Page connection for FoZone Manager administrators and Meta App Review.">
+  <link rel="canonical" href="https://three-quarters.net/fozone-manager/">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="page nav">
+      <a class="brand" href="../">
+        <strong>Three-Quarters International</strong>
+        <span>FoZone Manager · Restricted administration</span>
+      </a>
+      <nav class="nav-links" aria-label="Support links">
+        <a href="../en/privacy/">Privacy</a>
+        <a href="mailto:info@three-quarters.net">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page oauth-page">
+    <section class="oauth-hero">
+      <div>
+        <span class="eyebrow">Authorized administrators only</span>
+        <h1>Connect a Facebook Page.</h1>
+        <p class="lead">
+          This read-only connection lets FoZone Manager verify Page access and show how public comments
+          return the commenter fields <code>from.name</code> and <code>from.id</code>.
+        </p>
+      </div>
+      <aside class="panel security-panel">
+        <span class="status-dot" aria-hidden="true"></span>
+        <div>
+          <strong>Nothing is published or changed.</strong>
+          <p>The access token stays in this browser tab and is never stored by this website.</p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="panel connection-panel" aria-labelledby="connection-title">
+      <div class="section-copy">
+        <span class="step-label">Step 1 · OAuth authorization</span>
+        <h2 id="connection-title">Authorize Page access</h2>
+        <p>
+          Sign in with an account that is authorized to manage the Page. Meta will ask for read access to
+          the Page list, Page engagement, and public user content.
+        </p>
+      </div>
+      <div class="connection-actions">
+        <button class="button primary app-button" id="connect-button" type="button">Connect with Facebook</button>
+        <button class="button app-button" id="clear-button" type="button" hidden>Clear this session</button>
+      </div>
+      <div class="app-status neutral" id="app-status" role="status" aria-live="polite">
+        Not connected. No Facebook data has been requested.
+      </div>
+      <div class="app-error" id="app-error" role="alert" hidden></div>
+    </section>
+
+    <section class="panel review-note" aria-labelledby="usage-title">
+      <span class="step-label">Why this access is needed</span>
+      <h2 id="usage-title">Business Asset User Profile Access</h2>
+      <p>
+        FoZone Manager uses a public commenter’s ID and name to distinguish participants, associate a reply
+        with the correct person, and maintain conversation continuity on company-owned or explicitly entrusted
+        Pages. It does not use these fields for advertising, targeting, sale, or cross-account profiling.
+      </p>
+      <ul class="scope-list" aria-label="Requested permissions">
+        <li><code>pages_show_list</code></li>
+        <li><code>pages_read_engagement</code></li>
+        <li><code>pages_read_user_content</code></li>
+      </ul>
+    </section>
+
+    <section class="review-workspace" id="review-workspace" hidden aria-labelledby="workspace-title">
+      <div class="workspace-heading">
+        <div>
+          <span class="step-label">Step 2 · Read-only demonstration</span>
+          <h2 id="workspace-title">Inspect public Page comments</h2>
+        </div>
+        <p id="viewer-summary"></p>
+      </div>
+
+      <div class="selector-grid">
+        <label class="field-card" for="page-select">
+          <span>Facebook Page</span>
+          <select id="page-select">
+            <option value="">Select a Page</option>
+          </select>
+          <small>The Page access token is kept in memory and is never displayed.</small>
+        </label>
+
+        <label class="field-card" for="post-select">
+          <span>Recent Page post</span>
+          <select id="post-select" disabled>
+            <option value="">Select a post</option>
+          </select>
+          <small>Only posts from the selected Page are listed.</small>
+        </label>
+      </div>
+
+      <div class="results-heading">
+        <div>
+          <span class="step-label">Step 3 · Requested fields in use</span>
+          <h2>Public comments</h2>
+        </div>
+        <span class="result-count" id="result-count">0 comments</span>
+      </div>
+
+      <div class="empty-state" id="empty-state">
+        Select a Page and a recent post to request its public comments.
+      </div>
+      <div class="comment-list" id="comment-list" aria-live="polite"></div>
+    </section>
+
+    <section class="data-boundary" aria-labelledby="boundary-title">
+      <h2 id="boundary-title">Data boundary</h2>
+      <div class="boundary-grid">
+        <article>
+          <strong>Read</strong>
+          <p>Administrator name, Page name and ID, recent post metadata, and public comment fields.</p>
+        </article>
+        <article>
+          <strong>Not stored</strong>
+          <p>OAuth access tokens and API responses are not sent to or retained by this website.</p>
+        </article>
+        <article>
+          <strong>Not performed</strong>
+          <p>No publishing, replying, editing, deleting, moderation, advertising, or audience profiling.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page footer-grid">
+      <div><strong>Operator</strong><p>Three-Quarters International Ltd.</p></div>
+      <div><strong>Privacy</strong><p><a href="../en/privacy/">Privacy Policy</a></p></div>
+      <div><strong>Contact</strong><p><a href="mailto:info@three-quarters.net">info@three-quarters.net</a></p></div>
+    </div>
+  </footer>
+</body>
+</html>

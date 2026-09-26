@@ -31,6 +31,7 @@ Its current public role is no longer just a protocol landing page. It is now the
 - `/terms/` - public terms of service
 - `/publisher/` - publisher, mission, and vision page
 - `/protocol/` - public protocol orientation
+- `/fozone-manager/` - restricted, read-only Facebook OAuth connection for authorized administrators and Meta App Review
 
 ## Editorial stance
 

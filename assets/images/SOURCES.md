@@ -21,8 +21,9 @@ Published desk images. Source set: FoZone media library index `ASSETS.json`
 
 Legacy lineage images. Source set `fozone-visual-lineage-legacy-2026-09-17`
 (manifest: Three-Quarters-International `PUBLISHING/SOCIAL_MEDIA/ASSET_PROFILES/fozone/VISUAL/SOURCE-MANIFEST.json`).
-Per-file generator is unknown; the set came from Grok, Gemini and GPT-era tools. Publishing them here needs
-Darren's channel approval (manifest `rightsStatus`).
+Per-file generator is unknown; the set came from Grok, Gemini and GPT-era tools. The manifest `rightsStatus`
+requires normal channel approval; Darren approved publishing all three images on the public company website on
+2026-09-29.
 
 | File | Original | Original SHA-256 |
 |---|---|---|

@@ -4,9 +4,17 @@ This repository serves as the official website for Three-Quarters International 
 
 Its current public role is no longer just a protocol landing page. It is now the outward-facing home for the publisher, the mission and vision layer, the book pages, and the public orientation entry into the Three Realms Protocol field.
 
+Since the 2026-09 redesign (Control-Room `CR-PROP-2026-019`), the Chinese homepage speaks to clients first: the brand
+"四分之三" takes service work (one-page service sites, AI content operations, small local systems), and the publisher,
+books, protocol, research and products follow as the roots of that work. The company registration is suspended
+(歇業); services are taken and invoiced personally by the founder, Darren, with no uniform invoice (統一發票) for now.
+The site states this on the homepage and the services page. `/services/` is the single public place for service
+scope and reference prices.
+
 ## Core positioning
 
 - Official website for `three-quarters.net`
+- Client-facing entrance for 四分之三's services
 - Public-facing home for Three-Quarters International Ltd.
 - Publisher and imprint page
 - Book landing pages and direct EPUB downloads
@@ -16,8 +24,9 @@ Its current public role is no longer just a protocol landing page. It is now the
 
 ## Site structure
 
-- `/` - official homepage
-- `/en/` - English homepage
+- `/` - official homepage (client-first, Chinese)
+- `/services/` - services, reference prices and who takes the work; the only public copy of service prices
+- `/en/` - English homepage (still the publisher-first version)
 - `/books/` - public books index
 - `/books/trp-ai-first/` - nonfiction book page and EPUB download
 - `/books/breathing/` - fiction book page and EPUB download
@@ -32,6 +41,13 @@ Its current public role is no longer just a protocol landing page. It is now the
 - `/publisher/` - publisher, mission, and vision page
 - `/protocol/` - public protocol orientation
 - `/fozone-manager/` - restricted, read-only Facebook OAuth connection for authorized administrators and Meta App Review
+
+Images added for the homepage and services page are web derivatives; their originals and hashes are listed in
+[`assets/images/SOURCES.md`](./assets/images/SOURCES.md).
+
+`sitemap.xml` lists every public page except `/fozone-manager/` (it carries `noindex`) and `/archive/`; `robots.txt`
+points search engines to it. When a page is added or its content changes, add or update its `<url>` entry;
+`lastmod` follows real content changes, not header or navigation edits.
 
 ## Editorial stance
 

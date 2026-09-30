@@ -37,6 +37,15 @@ Screenshots of the live public page `https://hopebox.com.tw/candles`, taken 2026
 (desktop 1440×900; mobile 390×844 at 2×). The page belongs to the Hope Light brand; showing it as a case
 follows the "published pages only" rule on the services page, and the brand owner should know before launch.
 
+## `line/line-495farza-qr.svg`
+
+Added 2026-09-30. Not a derivative: a QR code generated locally with `segno` 1.6.6 (error level Q, 2-module border,
+dark `#1f1b18`) for the Three-Quarters LINE Official Account add-friend URL `https://line.me/R/ti/p/@495farza`
+(basic ID from Three-Quarters-International `PUBLISHING/SOCIAL_MEDIA/ASSET_PROFILES/fozone/channels/line-threequarters.json`).
+SHA-256 of this file: `5beb464e2f2764ea5c8d4fe4c31e63a741d8ea0d9f6687953e9cf1779211fae2`. Verified by decoding a
+headless-Chrome screenshot of the rendered homepage with `zxing-cpp`, which returned exactly that URL. If the
+account ever gets a Premium ID, regenerate this file and change the links in `index.html` and `services/index.html`.
+
 ## `og/og-home.jpg`
 
 Share card composed 2026-09-29 from `lineage-flame` and the homepage headline (Noto Serif TC / Noto Sans TC).

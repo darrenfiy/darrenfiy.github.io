@@ -37,6 +37,23 @@ Screenshots of the live public page `https://hopebox.com.tw/candles`, taken 2026
 (desktop 1440×900; mobile 390×844 at 2×). The page belongs to the Hope Light brand; showing it as a case
 follows the "published pages only" rule on the services page, and the brand owner should know before launch.
 
+Added 2026-09-30:
+
+| File | Original | Original SHA-256 |
+|---|---|---|
+| `records-home-desktop.webp` | mamasan-lab `6-collaborations/teachers/tiffany-hope-light/2026-09-customer-record-search/screenshots/v0.8-desktop-home.png` (commit `43cc666`), top 1280×800 | `535d2737eb9640932b49c7be25447c58ed86be839ae48221c391d5b5df37ca0b` |
+| `records-case-desktop.webp` | same folder, `v0.8-desktop-case.png`, top 1280×800 | `2854ec0b789ee4be66549946ef68a92fd8bc9d7e02e5981b197acdf602fb3410` |
+| `records-case-mobile.webp` | same folder, `v0.8-phone-case.png`, top 780×1690 | `6e1d24187f34d354cb691828d741db65e2b2e521c6e845629dc33780cca4c6bd` |
+| `mamasan-desktop.webp` | headless Chrome capture of the live `https://mamasan.three-quarters.net/` (1440×900; the live HTML matched mamasan.three-quarters.net `1715368` byte for byte) | `d01b92149469763c38670ddc7fe99937db73000eb244011cdad5ae68bb948c82` |
+| `mamasan-mobile.webp` | same page, 390×844 at 2×, top 780×1688 | `55c361aac161fcb141f785f0bdeeffe8c48b20b6671aca68b5bf35e912713a37` |
+
+The `records-*` screenshots are the Hope Light case-record **demo v0.8**, not the delivered system. Every name, phone
+number, LINE ID and note in them is fictional demo data (the demo says so on screen). The pages label them
+"示範稿・虛構資料" and "正式版製作中"; per the mamasan-lab project README the demo must not be presented as the
+teacher's final or accepted version. Darren decided on 2026-09-30 to show them. The screenshots are not a public page,
+so the services page's own rule ("其他內容先問過你") applies: the client side should know before launch.
+The mamasan screenshots show the owner's portrait as published on her own site.
+
 ## `line/line-495farza-qr.svg`
 
 Added 2026-09-30. Not a derivative: a QR code generated locally with `segno` 1.6.6 (error level Q, 2-module border,

@@ -3,14 +3,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Protocol | Three-Quarters International</title>
-  <meta name="description" content="Public orientation page for the Three Realms Protocol repository. Start here before entering the full document forest.">
+  <title>Three Realms Protocol | Three-Quarters International</title>
+  <meta name="description" content="The Three Realms Protocol is where Three-Quarters' way of working comes from: an open protocol Darren writes with AI. One text for three readers: the protocol site for people, GitHub as the source, MCP for AI.">
+  <link rel="canonical" href="https://www.three-quarters.net/en/protocol/">
   <link rel="alternate" hreflang="zh-Hant" href="https://www.three-quarters.net/protocol/">
   <link rel="alternate" hreflang="en" href="https://www.three-quarters.net/en/protocol/">
   <link rel="alternate" hreflang="x-default" href="https://www.three-quarters.net/protocol/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&display=swap">
   <link rel="stylesheet" href="../../assets/css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="../../assets/js/site.js" defer></script>
 </head>
-<body>
+<body class="home">
   <header class="site-header">
     <div class="page nav">
       <a class="brand" href="../">
@@ -22,61 +28,80 @@
         <a href="../books/">Books</a>
         <a href="../products/">Products</a>
         <a class="active" href="./">Protocol</a>
-        <a href="https://wiki.three-quarters.net">Wiki</a>
         <a href="../../protocol/" lang="zh-Hant" aria-label="切換到繁體中文">中文</a>
       </nav>
     </div>
   </header>
 
   <main class="page">
-    <section class="page-hero">
+    <section class="svc-hero protocol-hero">
       <div class="breadcrumbs"><a href="../">Home</a><span>/</span><span>Protocol</span></div>
-      <h1 class="page-title">Protocol Orientation</h1>
-      <p>The full Three Realms Protocol documents are still growing inside the GitHub repository. This page provides only the minimum orientation layer so new readers know where to enter without getting lost in the document forest.</p>
-      <p>If you prefer a more browsable way to look up concepts, entries, and their connections, you can start from the public wiki and return to the repository for the full source body.</p>
-    </section>
-
-    <section class="section">
-      <div class="grid cards">
-        <article class="card">
-          <h2>Repository</h2>
-          <p><a href="https://github.com/darrenfiy/Three-Realms-Protocol">Open the protocol repository on GitHub</a></p>
-        </article>
-        <article class="card">
-          <h2>Book entry</h2>
-          <p><a href="../books/">Read the first public book edition</a></p>
-        </article>
-        <article class="card">
-          <h2>Wiki</h2>
-          <p><a href="https://wiki.three-quarters.net">Browse the public wiki for concept pages, linked entries, and quick orientation</a></p>
-        </article>
-        <article class="card">
-          <h2>Archive</h2>
-          <p><a href="../../archive/legacy-numerology-playground-2026-04-17/">See the archived numerology playground experiment</a></p>
-        </article>
+      <div class="eyebrow-verse" aria-label="The five zones of the protocol">
+        <span>SPEC Fire</span><span>MB Water</span><span>DOCS Earth</span><span>LEX Wood</span><span>EPOCH Metal</span>
+      </div>
+      <h1>Three Realms Protocol</h1>
+      <p>
+        Where Three-Quarters' way of working comes from: an open protocol that Darren writes with AI, still growing, with AI as its first reader.
+        People read it on the protocol site, starting from the overview and walking into five zones. The text stays in its original language, mostly Chinese; the index and titles come in seven languages.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://wiki.three-quarters.net/en/home">Open the protocol site</a>
+        <a class="btn btn-ghost" href="../books/">Read the first book</a>
       </div>
     </section>
 
-    <section class="section">
-      <div class="section-header">
-        <h2>Suggested first path</h2>
-        <p>If this is your first time here, the least confusing order is: read the book first, then use the wiki to build a sense of direction, and finally return to the repository to see how the protocol grows in both document and publication layers.</p>
+    <section class="block">
+      <div class="block-head reveal">
+        <span class="kicker">Three windows</span>
+        <h2>One text, three readers</h2>
+        <p>All three show the same protocol, not three versions. The site and MCP both take their text from the source on GitHub.</p>
       </div>
-      <ul class="list">
-        <li>Read <em>TRP AI First</em> as the first public entry.</li>
-        <li>Open the public wiki to browse terms, topic pages, and cross-links without starting from raw repository structure.</li>
-        <li>Open the GitHub repository to see the protocol body, specs, and history.</li>
-        <li>Return later for product and playground layers as they are rebuilt.</li>
-      </ul>
+      <div class="roots">
+        <a class="root-tile reveal" href="https://wiki.three-quarters.net/en/home">
+          <small>For people</small>
+          <h3>Protocol site</h3>
+          <p>Generated automatically from a pinned version of the source; every page says which version it was built from.</p>
+        </a>
+        <a class="root-tile reveal" href="https://github.com/darrenfiy/Three-Realms-Protocol">
+          <small>Source</small>
+          <h3>GitHub</h3>
+          <p>Where the protocol is written. Every change is kept; the history shows how it grew.</p>
+        </a>
+        <div class="root-tile reveal">
+          <small>For AI</small>
+          <h3>MCP</h3>
+          <p>For AI assistants: add <code>hub.three-quarters.net/mcp</code> in any tool that supports MCP. Anonymous and read-only.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <div class="block-head reveal">
+        <span class="kicker">First visit</span>
+        <h2>Where to start</h2>
+      </div>
+      <div class="steps steps-three">
+        <article class="step reveal">
+          <h3>Start from the overview</h3>
+          <p>The protocol site opens on the overview. Pick a zone and walk in.</p>
+        </article>
+        <article class="step reveal">
+          <h3>Read one whole book</h3>
+          <p><em>Three Realms Protocol: A Civilizational Interface for AI</em>, free as an EPUB under CC BY 4.0.</p>
+        </article>
+        <article class="step reveal">
+          <h3>Let your AI read along</h3>
+          <p>Connect the MCP endpoint and ask your assistant about any document by its ID or path.</p>
+        </article>
+      </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="page footer-grid">
-      <div><strong>Primary entry</strong><p><a href="../books/">TRP AI First</a></p></div>
+      <div><strong>Primary entry</strong><p><a href="../books/">Three Realms Protocol: the book</a></p></div>
       <div><strong>Publisher</strong><p><a href="../publisher/">Three-Quarters International Ltd.</a></p></div>
-      <div><strong>GitHub</strong><p><a href="https://github.com/darrenfiy/Three-Realms-Protocol">Protocol repository</a></p></div>
-      <div><strong>Wiki</strong><p><a href="https://wiki.three-quarters.net">Public beta wiki</a></p></div>
+      <div><strong>Contact</strong><p><a href="mailto:info@three-quarters.net">info@three-quarters.net</a></p></div>
       <div><strong>Support</strong><p><a href="../support/">Walk with us</a></p></div>
     </div>
   </footer>

@@ -43,7 +43,9 @@ scope and reference prices.
 - `/privacy/` - public privacy policy
 - `/terms/` - public terms of service
 - `/publisher/` - publisher, mission, and vision page
-- `/protocol/` - public protocol orientation
+- `/protocol/` - the door to the Three Realms Protocol: one text for three readers (the protocol site at
+  `wiki.three-quarters.net` for people, GitHub as the source, MCP for AI). Since the 2026-10-01 decision the wiki *is*
+  the protocol, so the site no longer lists a separate "knowledge base" / "Wiki" in navigation or footers
 - `/fozone-manager/` - restricted, read-only Facebook OAuth connection for authorized administrators and Meta App Review
 
 Images added for the homepage and services page are web derivatives; their originals and hashes are listed in

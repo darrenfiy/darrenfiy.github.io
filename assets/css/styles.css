@@ -1566,6 +1566,10 @@ img { display: block; max-width: 100%; height: auto; }
 .terms-card p { position: relative; margin: 0; padding-left: 18px; color: var(--muted); }
 .terms-card p::before { content: ""; position: absolute; left: 0; top: 0.8em; width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
 
+/* protocol door（/protocol/ 與 /en/protocol/）：同一份協議，三種讀者 */
+.steps.steps-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.root-tile code { font-size: 0.82rem; overflow-wrap: anywhere; }
+
 /* FAQ page（同時是 LINE 佛佐讀的第二資料池 faq-v1；答案區 .faq-answer 只放 p／ul） */
 .faq-group {
   display: grid;
@@ -1689,6 +1693,7 @@ img { display: block; max-width: 100%; height: auto; }
   .verse-band { margin-top: 72px; padding: 64px 0; }
   .verse { padding: 24px; }
   .cta-band { margin-top: 72px; }
+  .steps.steps-three { grid-template-columns: 1fr; }
   .faq-group { padding-top: 44px; }
   .faq-item { padding: 22px 20px 18px; border-radius: 22px; }
 }

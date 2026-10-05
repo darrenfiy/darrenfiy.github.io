@@ -1597,6 +1597,7 @@ img { display: block; max-width: 100%; height: auto; }
 }
 #hub .faq-seal { background: linear-gradient(145deg, #5f7a6c, var(--forest)); box-shadow: 0 12px 26px rgba(49, 72, 63, 0.25); }
 #protocol .faq-seal { background: linear-gradient(145deg, #d2ab6c, #8f6a33); box-shadow: 0 12px 26px rgba(143, 106, 51, 0.25); }
+#research .faq-seal { background: linear-gradient(145deg, #3f8f99, var(--teal-deep)); box-shadow: 0 12px 26px rgba(19, 78, 74, 0.25); }
 #events .faq-seal { background: linear-gradient(145deg, #c27447, #3a2a20); box-shadow: 0 12px 26px rgba(58, 42, 32, 0.28); }
 .faq-list { display: grid; gap: 18px; }
 .faq-item {

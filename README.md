@@ -26,7 +26,7 @@ scope and reference prices.
 
 - `/` - official homepage (client-first, Chinese)
 - `/services/` - services, reference prices and who takes the work; the only public copy of service prices
-- `/faq/` - "what is it, where is it" for the books, the Hub and its works, the protocol and open events; each answer
+- `/faq/` - "what is it, where is it" for the books, the Hub and its works, the protocol, research and open events; each answer
   points to that thing's own page instead of restating it. It is also the second source LINE FoZone reads
   (`data-fozone-corpus="faq-v1"`); the markup contract is Control-Room
   `PM/PROPOSALS/26021-fozone-line-knowledge-layer/D7-FAQ-CONSUMER-CONTRACT-2026-10-05.md`

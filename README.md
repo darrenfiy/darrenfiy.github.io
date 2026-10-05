@@ -30,7 +30,10 @@ scope and reference prices.
   points to that thing's own page instead of restating it. It is also the second source LINE FoZone reads
   (`data-fozone-corpus="faq-v1"`); the markup contract is Control-Room
   `PM/PROPOSALS/26021-fozone-line-knowledge-layer/D7-FAQ-CONSUMER-CONTRACT-2026-10-05.md`
-- `/en/` - English homepage (still the publisher-first version)
+- `/en/` - English homepage, translated from the current client-first Chinese homepage
+- `/en/services/` - English services and reference-pricing page
+- `/en/faq/` - English FAQ and public orientation page
+- `/en/books/*/` - English book pages with links to the shared EPUB editions
 - `/books/` - public books index
 - `/books/trp-ai-first/` - nonfiction book page and EPUB download
 - `/books/breathing/` - fiction book page and EPUB download

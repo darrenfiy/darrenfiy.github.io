@@ -1,0 +1,2 @@
+# vCards must keep CRLF line endings (RFC 2426); do not let autocrlf rewrite them.
+*.vcf -text

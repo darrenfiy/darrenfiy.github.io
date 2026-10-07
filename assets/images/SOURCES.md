@@ -69,3 +69,21 @@ account ever gets a Premium ID, regenerate this file and change the links in `in
 ## `og/og-home.jpg`
 
 Share card composed 2026-09-29 from `lineage-flame` and the homepage headline (Noto Serif TC / Noto Sans TC).
+
+## `card/` — e-card portraits, QR codes and share images
+
+Added 2026-10-07 for the three e-cards under `/card/`. Portraits are square crops resized to 400×400 WebP; the
+same crops at 240×240 JPEG are embedded in each card's `.vcf`.
+
+| File | Original | Original SHA-256 |
+|---|---|---|
+| `alisha.webp` | mamasan site `assets/img/portrait-white-smile.jpg` (her own studio portrait, already public there; crop 230,90–650,510) | `d8d6116f493854261256fd9dd16c5e54e362b836abe7c0745256d70321836997` |
+| `darren.webp` | Darren's AI-generated avatar, his Google Drive `個資/Camera_XHS_1729087820348af1cd9591515490880217c33f0c1fdac.jpg` (1080×1080, 193,169 bytes; crop 280,100–1000,820 leaves out the app's「AI生成」badge). Darren offered it for his card on 2026-10-07 | `05074b40a1984a3b97cb8cac995027dbed7e4fa87ac3497d019f0c1e00db1ac0` |
+| `fozone.webp` | `fozone/lineage-flame.webp` in this folder (crop 130,40–630,540) | `1d26b642bbb9d8235c40cfd97c0b8e0a1f5f5656d6e008dd7918a7cfed33d83b` (of that web file) |
+
+`qr-alisha.svg`, `qr-darren.svg`, `qr-fozone.svg` are generated with `segno` 1.6.6 (error level Q, 2-module border,
+dark `#1f1b18`) for `https://www.three-quarters.net/card/<name>/`. Each decoded back to exactly that URL with
+`zxing-cpp` from a headless-Chrome screenshot of its page (2026-10-07, local files).
+
+`og-alisha.jpg`, `og-darren.jpg`, `og-fozone.jpg` (1200×630) are screenshots of the card's own front and back faces,
+rendered from the page markup with `card.css` in headless Chrome. Regenerate them whenever a card's text changes.

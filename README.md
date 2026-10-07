@@ -50,11 +50,17 @@ scope and reference prices.
   `wiki.three-quarters.net` for people, GitHub as the source, MCP for AI). Since the 2026-10-01 decision the wiki *is*
   the protocol, so the site no longer lists a separate "knowledge base" / "Wiki" in navigation or footers
 - `/fozone-manager/` - restricted, read-only Facebook OAuth connection for authorized administrators and Meta App Review
+- `/card/alisha/`, `/card/darren/`, `/card/fozone/` - e-cards (added 2026-10-07): one phone page per person with a
+  flippable card, a "save to contacts" `.vcf`, a QR code and a share button. They carry `noindex` and are not in
+  the sitemap or navigation; they are handed out person to person. Shared styles and script are
+  `assets/css/card.css` and `assets/js/card.js`; images and their sources are under `assets/images/card/`. The card
+  says "四分之三 Three-Quarters" (the brand), not the registered company name, for the same reason as the homepage:
+  the company is suspended. When a card's text changes, change its `.vcf` and regenerate its `og-*.jpg` too
 
 Images added for the homepage and services page are web derivatives; their originals and hashes are listed in
 [`assets/images/SOURCES.md`](./assets/images/SOURCES.md).
 
-`sitemap.xml` lists every public page except `/fozone-manager/` (it carries `noindex`) and `/archive/`; `robots.txt`
+`sitemap.xml` lists every public page except `/fozone-manager/` and `/card/` (both carry `noindex`) and `/archive/`; `robots.txt`
 points search engines to it. When a page is added or its content changes, add or update its `<url>` entry;
 `lastmod` follows real content changes, not header or navigation edits.
 

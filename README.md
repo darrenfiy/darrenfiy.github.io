@@ -25,7 +25,10 @@ scope and reference prices.
 ## Site structure
 
 - `/` - official homepage (client-first, Chinese)
-- `/services/` - services, reference prices and who takes the work; the only public copy of service prices
+- `/services/` - services, reference prices and who takes the work; the only public copy of service prices.
+  Prices were reset on 2026-11-03 against real delivered work (Control-Room `PM/DECISIONS/2026-11-03-ai-era-pricing-reset.md`).
+  The one-page section also names the Co Me Time × Three-Quarters joint package; that package's price is owned by
+  mamasan's `/cometime/onepage/`, so change both pages (zh and en) together
 - `/faq/` - "what is it, where is it" for the books, the Hub and its works, the protocol, research and open events; each answer
   points to that thing's own page instead of restating it. It is also the second source LINE FoZone reads
   (`data-fozone-corpus="faq-v1"`); the markup contract is Control-Room

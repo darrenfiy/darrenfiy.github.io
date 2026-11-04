@@ -118,3 +118,29 @@ his card image here).
 The three robots on the page are not images: `services/cometime/cometime.js` draws them as SVG, redrawn as ink
 silhouettes from the recurring cast of the FoZone page posts (round white robot, square teal robot, tall grey robot;
 for example `2026-10-09-desk-2000.jpg`). No post image is copied.
+
+## `realms/` — Three Realms Online scenes and portraits (AI-generated game assets)
+
+Added 2026-11-04 for `/products/three-realms-online/`, `/about/`, the homepage and the products index. These are the
+game's own bound visual assets (Three-Realms-Online `docs/content/ASSETS.md`, bound in `docs/content/p2a.json`);
+the original PNG bytes live only in the game's local asset store (`Three-Realms-Online/.runtime/p2a/assets/`, excluded
+from Git) next to a JSON receipt whose `sha256` matches the hash below. Scenes were generated with
+`gemini-3-pro-image` in the FoZone council room for 26025; the two portraits are background-removed derivatives of
+council-drawn originals (no model call). All receipts carry `rating: general`. Darren decided on 2026-11-04 to show
+Three Realms Online publicly. Web files are WebP re-encodes (scenes 1376 or 1100 px wide, portraits 560 px with alpha).
+
+| File | Original asset | Original SHA-256 |
+|---|---|---|
+| `shrine-twilight.webp` | `asset-1b6b6ae50719ebf6f7b37fa8495d2c6a` (`room-shrine-twilight-v1`) | `3d665f1b6c920ce1d7d47577491312a7b3a9fccfe16ab1f73ca43ded0afe0c5d` |
+| `shrine-day.webp` | `asset-114fd40326ab6ecb029d8700ce0d1e92` (`room-shrine-day-v2`) | `7d96f8c1232555bf492965964a9492835d3b728e4d51c230d365f0ea9321f492` |
+| `lodge-twilight.webp` | `asset-dd37188079a43ff36d424c8f17e7d9a5` (`room-lodge-twilight-v1`) | `ed6d8bc7f0c4385119aae52a205e5e2d5bc5d1a42373a7a91d2535881fc38d32` |
+| `slope-day.webp` | `asset-40314dc559365289e82067d20fb320f2` (`room-slope-day-v1`) | `8043a8cd08dce0f8e7dec878bdd04ad9cbcd1e767019793bcbfb26fb5416fff8` |
+| `washing-day.webp` | `asset-4d1f4aab0fb2901acdba3e41213913bd` (`room-lodge-washing-day-v1`) | `5a9b3700aca7fde69e50247de797eade3f1e8b06e52e403196e9e70bb7250233` |
+| `house-day.webp` | `asset-593bbcff93ae4bc8f145ee9b7e24405b` (`room-lodge-house-day-v2`) | `ced79231f2e3cf06e940de9e90e28b4b6dcbcdec60a022abbd0f7cc16db6f155` |
+| `dasheng.webp` | `asset-de6a01775e7faeabb9533db2f878f007` (Great Sage base portrait, transparent) | `d50671088ed23e32d52547b920e57aa805353f7cb293a4ef418c6d0de432d209` |
+| `xiuniang.webp` | `asset-1440b39385bb1aed8b851235df20071b` (Xiuniang base portrait, transparent) | `3a77ca8012b6db4fb19a28dc2b3682a86789359e6d2a13f84e3845413f28d40e` |
+
+`og/og-three-realms.jpg` is a 1200×630 center crop of `asset-1b6b6ae50719ebf6f7b37fa8495d2c6a`.
+
+The `/about/` page reuses the three card portraits in `card/` (Darren's AI-drawn avatar, Alisha's card photo, FoZone's
+card image) as the cards do; Darren asked on 2026-11-04 that the about page carry all three, like the cards.

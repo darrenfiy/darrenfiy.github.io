@@ -24,7 +24,12 @@ scope and reference prices.
 
 ## Site structure
 
-- `/` - official homepage (client-first, Chinese)
+- `/` - official homepage (client-first, Chinese). Since 2026-11-04 it also shows "我們自己每天在蓋的" (Three Realms
+  Online and FoZone) and a band linking the Co Me Time joint package
+- `/about/` - who we are (added 2026-11-04): one person and a team of AIs building things that run; the one rule ("AI 說的不算，
+  做出來、留下紀錄的才算"); the three of us (Darren as founder/engineer/author, Alisha, FoZone), each linking to their
+  `/card/`; what we build; company / association / personal work. The definitions and why they read this way are in
+  Control-Room `PM/DECISIONS/2026-11-04-who-we-are-site-refresh.md`. Every page's main nav carries 關於／About
 - `/services/` - services, reference prices and who takes the work; the only public copy of service prices.
   Prices were reset on 2026-11-03 against real delivered work (Control-Room `PM/DECISIONS/2026-11-03-ai-era-pricing-reset.md`).
   The one-page section also names the Co Me Time × Three-Quarters joint package, which has its own page:
@@ -42,6 +47,7 @@ scope and reference prices.
   `PM/PROPOSALS/26021-fozone-line-knowledge-layer/D7-FAQ-CONSUMER-CONTRACT-2026-10-05.md`
 - `/en/` - English homepage, translated from the current client-first Chinese homepage
 - `/en/services/` - English services and reference-pricing page
+- `/en/about/`, `/en/products/three-realms-online/`, `/en/products/fozone/` - English versions of the pages above
 - `/en/faq/` - English FAQ and public orientation page
 - `/en/books/*/` - English book pages with links to the shared EPUB editions
 - `/books/` - public books index
@@ -50,6 +56,11 @@ scope and reference prices.
 - `/books/protocol-body-autobiography/` - fiction book page and EPUB download
 - `/research/` - research publication index and DOI entry
 - `/products/` - product and app index
+- `/products/three-realms-online/` - Three Realms Online (三界 Online), the text MUD at `https://three-realms.com/`
+  (open beta; Darren decided on 2026-11-04 to show it publicly with its entrance). Scene and portrait images are the
+  game's own bound assets (`assets/images/realms/`, see `SOURCES.md`). Its data handling is in `/privacy/#three-realms`
+- `/products/fozone/` - FoZone (佛佐之間): FoZone's home and the council room / reply desk; described publicly, no
+  sign-in entrance (only Darren uses it)
 - `/products/dialogue-trainer/` - 言途 Dialogue Trainer product landing page
 - `/products/fathom/` - Fathom closed beta product landing page
 - `/support/` - support doorway for users, collaborators, and personal support

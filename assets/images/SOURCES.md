@@ -87,3 +87,31 @@ dark `#1f1b18`) for `https://www.three-quarters.net/card/<name>/`. Each decoded 
 
 `og-alisha.jpg`, `og-darren.jpg`, `og-fozone.jpg` (1200×630) are screenshots of the card's own front and back faces,
 rendered from the page markup with `card.css` in headless Chrome. Regenerate them whenever a card's text changes.
+
+## `cometime/` — Co Me Time × Three-Quarters joint page (`/services/cometime/`)
+
+Added 2026-11-04 when the joint page moved to this site. The six photos are AI-generated service stills (no people,
+no readable text, no logos): Vertex AI `gemini-3-pro-image` @ global, 2K, through Manus
+`tools/social-publishing/social.mjs image` (no `--talent`, no reference image), one generation each, all used.
+Originals, receipts and prompts are in company custody on the Shared Drive:
+`60 公關部/官網素材/2026-11-04 Co Me Time 聯名款頁/` (copied and read back, SHA-256 matched). WebP derivatives are
+center-cropped to the size below.
+
+| File | Original | Original SHA-256 |
+|---|---|---|
+| `hero-desk.webp` (900×1125) | `hero.png`, 4:5 | `58c95d869d7d2f8dfb4727e9d05b93d6853dd1009c31d9c4508aac1480780c73` |
+| `step-talk.webp` (800×600) | `talk.png`, 4:3 | `b33dfc9d7515820b53ea4d90fe8852b4a6516dad11a55032f8f50c63a0c7a026` |
+| `step-notes.webp` (800×600) | `notes.png`, 4:3 | `b0226a96bf39af5aa5811e2c9e9960f58946617ffbc9eab5d14e76a0822e25ee` |
+| `step-sketch.webp` (800×600) | `sketch.png`, 4:3 | `b5d2bd3a8716c41b5403120cd797f3e8aad35069d25a9cf18ec61afece22bd88` |
+| `window-coffee.webp` (720×900) | `window.png`, 4:5 | `14249be99846552d447b0f38df11f4ac5fc4671932e799ec6419048e667cd190` |
+| `blank-card.webp` (720×900) | `card.png`, 4:5 | `fcd0e2460d7331f63b67e6fb8dcf4aa6bbe428e999106a9234ec588362c8944a` |
+
+`work-cometime.webp` (1200×750) is a headless-Chrome screenshot of the first screen of
+`https://mamasan.three-quarters.net/cometime/` taken 2026-11-04 with Manus `scripts/reusable_tools/site_screenshot.mjs`.
+
+`og/og-cometime.jpg` (1200×630) is a headless-Chrome render of a share card built from this page's own hero markup,
+`cometime.css` and `cometime.js`; its source HTML is in the Drive folder above.
+
+The three robots on the page are not images: `services/cometime/cometime.js` draws them as SVG, redrawn as ink
+silhouettes from the recurring cast of the FoZone page posts (round white robot, square teal robot, tall grey robot;
+for example `2026-10-09-desk-2000.jpg`). No post image is copied.

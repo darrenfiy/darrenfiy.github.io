@@ -27,8 +27,15 @@ scope and reference prices.
 - `/` - official homepage (client-first, Chinese)
 - `/services/` - services, reference prices and who takes the work; the only public copy of service prices.
   Prices were reset on 2026-11-03 against real delivered work (Control-Room `PM/DECISIONS/2026-11-03-ai-era-pricing-reset.md`).
-  The one-page section also names the Co Me Time × Three-Quarters joint package; that package's price is owned by
-  mamasan's `/cometime/onepage/`, so change both pages (zh and en) together
+  The one-page section also names the Co Me Time × Three-Quarters joint package, which has its own page:
+- `/services/cometime/` - Co Me Time × Three-Quarters joint package (brand positioning session with Alisha + a one-page
+  site), moved here from `mamasan.three-quarters.net/cometime/onepage/` on 2026-11-04 so the joint service sits on the
+  company site in its style (that old URL is now a redirect). Its own `cometime.css` layers misotone-style sections on
+  `styles.css`; `cometime.js` draws the three little robots from the FoZone page posts (eyes follow the pointer, tap to
+  talk) and turns the hero's three-quarter arcs toward the pointer. Photos are AI-generated service stills
+  (`assets/images/SOURCES.md`). When a joint or one-page price changes, change this page, both `/services/` pages and
+  `mamasan.three-quarters.net/cometime/` together; the list lives in darrenfiy-studio
+  `OFFERINGS/mamasan-partner-menu/cometime-joint-packages.md`
 - `/faq/` - "what is it, where is it" for the books, the Hub and its works, the protocol, research and open events; each answer
   points to that thing's own page instead of restating it. It is also the second source LINE FoZone reads
   (`data-fozone-corpus="faq-v1"`); the markup contract is Control-Room

@@ -253,7 +253,6 @@
 .cm-person h3 small { margin-left: 10px; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.12em; color: var(--copper); }
 .cm-person p { margin: 0; color: var(--muted); font-size: 0.95rem; }
 .cm-avatar { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 4px #fffaf3, 0 0 0 5px rgba(180, 138, 74, 0.5); }
-.cm-avatar-mark { display: grid; place-items: center; background: var(--cm-deep); color: var(--cm-on-dark); font-family: var(--serif); font-size: 2.6rem; line-height: 1; }
 .cm-bot-row { display: flex; align-items: flex-end; gap: 10px; height: 92px; }
 .cm-bot-row .cm-bot[data-bot="round"] { --bot-w: 56px; }
 .cm-bot-row .cm-bot[data-bot="square"] { --bot-w: 58px; }
@@ -347,6 +346,9 @@
   transition: opacity 0.2s, transform 0.2s;
 }
 .cm-bot:hover::after, .cm-bot.is-saying::after { opacity: 1; transform: translate(-50%, 0); }
+/* 首屏那隻貼著卡片頂端，往上冒的對話框會被卡片切掉，改從左邊冒出來 */
+.cm-bot.cm-bot-hero::after { bottom: auto; left: auto; top: 28%; right: calc(100% + 8px); transform: translate(6px, 0); }
+.cm-bot.cm-bot-hero:hover::after, .cm-bot.cm-bot-hero.is-saying::after { transform: none; }
 
 .cm-bot .ink { fill: var(--cm-bot-ink); }
 .cm-bot .line { fill: none; stroke: var(--cm-bot-ink); stroke-width: 5; stroke-linecap: round; }
@@ -422,7 +424,6 @@
   .cm-person { grid-template-columns: 1fr; padding: 22px; }
   .cm-person > :first-child { grid-row: auto; }
   .cm-avatar { width: 72px; height: 72px; }
-  .cm-avatar-mark { font-size: 2.1rem; }
   .cm-faq details p { margin-left: 0; }
   .cm-cta .hero-actions .btn { flex: 1 1 100%; }
   .cm-bot.cm-bot-peek { top: -96px; right: 6%; }

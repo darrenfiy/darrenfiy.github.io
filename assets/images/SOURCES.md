@@ -112,6 +112,9 @@ center-cropped to the size below.
 `og/og-cometime.jpg` (1200×630) is a headless-Chrome render of a share card built from this page's own hero markup,
 `cometime.css` and `cometime.js`; its source HTML is in the Drive folder above.
 
+The page also reuses the card portraits `card/alisha.webp` and `card/darren.webp` (Darren asked on 2026-11-04 to use
+his card image here).
+
 The three robots on the page are not images: `services/cometime/cometime.js` draws them as SVG, redrawn as ink
 silhouettes from the recurring cast of the FoZone page posts (round white robot, square teal robot, tall grey robot;
 for example `2026-10-09-desk-2000.jpg`). No post image is copied.

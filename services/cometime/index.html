@@ -143,49 +143,7 @@
       <p class="cm-swipe" aria-hidden="true">往右滑看四步 →</p>
     </section>
 
-    <!-- 04 價格 -->
-    <section class="cm-sheet cm-paper reveal" id="price">
-      <div class="cm-price">
-        <div class="cm-price-card">
-          <svg class="cm-seal" viewBox="0 0 60 100" aria-hidden="true">
-            <defs>
-              <filter id="cm-seal-rough" x="0" y="0" width="100%" height="100%">
-                <feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="7" result="n"/>
-                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.3" result="m"/>
-                <feComposite in="SourceGraphic" in2="m" operator="in"/>
-              </filter>
-            </defs>
-            <g filter="url(#cm-seal-rough)" fill="#b23e28">
-              <rect x="4" y="4" width="52" height="92" rx="6" fill="none" stroke="#b23e28" stroke-width="4.5"/>
-              <text x="30" y="36" text-anchor="middle">限</text>
-              <text x="30" y="62" text-anchor="middle">五</text>
-              <text x="30" y="88" text-anchor="middle">名</text>
-            </g>
-          </svg>
-          <span class="cm-label">PRICE／聯名優惠價</span>
-          <p class="cm-amount"><small>NT$</small>8,888</p>
-          <p class="cm-price-was">原價 <s>NT$15,600</s>，前 5 名省 NT$6,712。</p>
-          <ul class="check-list cm-checks">
-            <li>90 分鐘一對一品牌定位諮詢</li>
-            <li>文案從諮詢整理，你確認</li>
-            <li>一頁式網站，換上你的顏色、照片與文字</li>
-            <li>基本 SEO；LINE、表單或預約按鈕</li>
-            <li>兩輪範圍內修改，網頁檔案交給你</li>
-          </ul>
-          <a class="btn btn-primary" href="https://line.me/R/ti/p/@941hfdmj">LINE 傳「聯名款」給 Alisha</a>
-        </div>
-        <div>
-          <ul class="cm-compare">
-            <li><span class="k">一般行情</span><span class="v">NT$10,000–50,000</span><span class="src">台灣一頁式網站常見報價，多半不含文案。資料：<a href="https://www.pro360.com.tw/price/one_page_web" target="_blank" rel="noopener">PRO360 達人網</a></span></li>
-            <li><span class="k">分開買（原價）</span><span class="v">NT$15,600</span><span class="src"><a href="https://mamasan.three-quarters.net/cometime/" target="_blank" rel="noopener">Co Me Time 諮詢</a> NT$3,600＋<a href="../#one-page">四分之三一頁式服務頁</a> NT$12,000</span></li>
-            <li class="best"><span class="k">聯名優惠價（限 5 名）</span><span class="v">NT$8,888</span></li>
-          </ul>
-          <p class="cm-ai">AI 省下排版、寫初稿、上線檢查的時間；省下來的，直接還給你。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 05 誰陪你做 -->
+    <!-- 04 誰陪你做 -->
     <section class="cm-who reveal" id="about">
       <div class="cm-head">
         <div>
@@ -201,9 +159,9 @@
           <p>喜歡聽一個人說話，從看似零散的想法裡，找到值得被看見的東西。俄文系、莫斯科留學，在日本生活十多年，做過不同產業的工作。<a href="https://mamasan.three-quarters.net/cometime/" target="_blank" rel="noopener">Co Me Time</a> 是她的一對一諮詢。</p>
         </article>
         <article class="cm-person">
-          <span class="cm-avatar cm-avatar-mark" aria-hidden="true">¾</span>
+          <img class="cm-avatar" src="../../assets/images/card/darren.webp" width="400" height="400" alt="大倫 Darren 的頭像（AI 生成）" loading="lazy">
           <h3>Darren<small>把方向與品質</small></h3>
-          <p>四分之三的創辦人。網站怎麼排、話說得對不對、上線前好不好讀，最後由他看過。</p>
+          <p>四分之三的技師。網站怎麼排、話說得對不對、上線前好不好讀，最後由他看過。</p>
         </article>
         <article class="cm-person cm-person-bots">
           <div class="cm-bot-row">
@@ -217,7 +175,7 @@
       </div>
     </section>
 
-    <!-- 06 作品 -->
+    <!-- 05 作品 -->
     <section class="cm-sheet cm-paper reveal" id="works">
       <div class="cm-head">
         <div>
@@ -244,7 +202,7 @@
       </div>
     </section>
 
-    <!-- 07 問答 -->
+    <!-- 06 問答 -->
     <section class="cm-faq reveal" id="faq">
       <div class="cm-head">
         <div>
@@ -285,6 +243,48 @@
           <summary>這頁的照片是真的嗎？</summary>
           <p>咖啡、筆記本、草圖那幾張是 AI 生成的示意照；手機和瀏覽器裡的畫面，都是實際上線的作品。</p>
         </details>
+      </div>
+    </section>
+
+    <!-- 07 價格：放在最後（mamasan 11-04：一頁式的價格放最後，不放中間） -->
+    <section class="cm-sheet cm-paper reveal" id="price">
+      <div class="cm-price">
+        <div class="cm-price-card">
+          <svg class="cm-seal" viewBox="0 0 60 100" aria-hidden="true">
+            <defs>
+              <filter id="cm-seal-rough" x="0" y="0" width="100%" height="100%">
+                <feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="7" result="n"/>
+                <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -0.9 1.3" result="m"/>
+                <feComposite in="SourceGraphic" in2="m" operator="in"/>
+              </filter>
+            </defs>
+            <g filter="url(#cm-seal-rough)" fill="#b23e28">
+              <rect x="4" y="4" width="52" height="92" rx="6" fill="none" stroke="#b23e28" stroke-width="4.5"/>
+              <text x="30" y="36" text-anchor="middle">限</text>
+              <text x="30" y="62" text-anchor="middle">五</text>
+              <text x="30" y="88" text-anchor="middle">名</text>
+            </g>
+          </svg>
+          <span class="cm-label">PRICE／聯名優惠價</span>
+          <p class="cm-amount"><small>NT$</small>8,888</p>
+          <p class="cm-price-was">原價 <s>NT$15,600</s>，前 5 名省 NT$6,712。</p>
+          <ul class="check-list cm-checks">
+            <li>90 分鐘一對一品牌定位諮詢</li>
+            <li>文案從諮詢整理，你確認</li>
+            <li>一頁式網站，換上你的顏色、照片與文字</li>
+            <li>基本 SEO；LINE、表單或預約按鈕</li>
+            <li>兩輪範圍內修改，網頁檔案交給你</li>
+          </ul>
+          <a class="btn btn-primary" href="https://line.me/R/ti/p/@941hfdmj">LINE 傳「聯名款」給 Alisha</a>
+        </div>
+        <div>
+          <ul class="cm-compare">
+            <li><span class="k">一般行情</span><span class="v">NT$10,000–50,000</span><span class="src">台灣一頁式網站常見報價，多半不含文案。資料：<a href="https://www.pro360.com.tw/price/one_page_web" target="_blank" rel="noopener">PRO360 達人網</a></span></li>
+            <li><span class="k">分開買（原價）</span><span class="v">NT$15,600</span><span class="src"><a href="https://mamasan.three-quarters.net/cometime/" target="_blank" rel="noopener">Co Me Time 諮詢</a> NT$3,600＋<a href="../#one-page">四分之三一頁式服務頁</a> NT$12,000</span></li>
+            <li class="best"><span class="k">聯名優惠價（限 5 名）</span><span class="v">NT$8,888</span></li>
+          </ul>
+          <p class="cm-ai">AI 省下排版、寫初稿、上線檢查的時間；省下來的，直接還給你。</p>
+        </div>
       </div>
     </section>
 

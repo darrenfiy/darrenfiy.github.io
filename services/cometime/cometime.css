@@ -162,22 +162,6 @@
   padding-top: 24px;
   border-top: 1px solid var(--cm-on-dark-line);
 }
-.cm-hero-price { margin: 0; font-family: var(--serif); font-size: 1.05rem; color: var(--cm-on-dark-muted); }
-.cm-hero-price strong { margin: 0 6px; font-size: 1.9rem; font-weight: 500; color: var(--cm-on-dark); font-variant-numeric: tabular-nums; }
-.cm-was { white-space: nowrap; }
-.cm-chip {
-  display: inline-block;
-  margin-left: 10px;
-  padding: 1px 10px;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  font-family: var(--sans);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  vertical-align: middle;
-  white-space: nowrap;
-  color: var(--cm-on-dark);
-}
 .cm-hero-caption { position: relative; margin: 14px 0 0; font-size: 0.8rem; color: var(--cm-on-dark-muted); }
 
 /* ---------- 02 也許你也是 ---------- */
@@ -287,7 +271,11 @@
 .cm-faq summary::before { content: "Q"; font-size: 1.35rem; color: var(--gold); }
 .cm-faq summary::after { content: "＋"; justify-self: end; color: var(--muted); transition: transform 0.2s; }
 .cm-faq details[open] summary::after { transform: rotate(45deg); }
-.cm-faq details p { margin: -6px 0 22px 3.2rem; color: var(--muted); }
+.cm-faq summary h3 { margin: 0; font: inherit; }
+.cm-faq-a { margin: -6px 0 22px 3.2rem; color: var(--muted); }
+.cm-faq-a > * { margin: 0; }
+.cm-faq-a > * + * { margin-top: 8px; }
+.cm-faq-a ul { padding-left: 1.2em; }
 
 /* ---------- 08 行動 ---------- */
 
@@ -424,7 +412,7 @@
   .cm-person { grid-template-columns: 1fr; padding: 22px; }
   .cm-person > :first-child { grid-row: auto; }
   .cm-avatar { width: 72px; height: 72px; }
-  .cm-faq details p { margin-left: 0; }
+  .cm-faq-a { margin-left: 0; }
   .cm-cta .hero-actions .btn { flex: 1 1 100%; }
   .cm-bot.cm-bot-peek { top: -96px; right: 6%; }
 }

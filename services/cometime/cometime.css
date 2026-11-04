@@ -236,6 +236,7 @@
 .cm-person h3 { margin: 18px 0 8px; font-weight: 500; font-size: 1.2rem; letter-spacing: 0.04em; }
 .cm-person h3 small { margin-left: 10px; font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.12em; color: var(--copper); }
 .cm-person p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+.cm-person p + p { margin-top: 10px; }
 .cm-avatar { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 4px #fffaf3, 0 0 0 5px rgba(180, 138, 74, 0.5); }
 .cm-bot-row { display: flex; align-items: flex-end; gap: 10px; height: 92px; }
 .cm-bot-row .cm-bot[data-bot="round"] { --bot-w: 56px; }
@@ -364,7 +365,7 @@
   .cm-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px 22px; }
   .cm-who-grid { grid-template-columns: 1fr; }
   .cm-person { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 4px 20px; align-items: start; }
-  .cm-person > :first-child { grid-row: span 2; }
+  .cm-person > :first-child { grid-row: span 3; }
   .cm-person h3 { margin-top: 4px; }
   .cm-person-bots { grid-template-columns: 1fr; }
   .cm-person-bots > :first-child { grid-row: auto; }

@@ -42,7 +42,7 @@ scope and reference prices.
   `mamasan.three-quarters.net/cometime/` together; the list lives in darrenfiy-studio
   `OFFERINGS/mamasan-partner-menu/cometime-joint-packages.md`. Since 2026-11-04 its FAQ is also a source LINE FoZone
   reads, under the same `faq-v1` contract as `/faq/` plus `data-fozone-topic` on `<main>`; the joint-package Q&A lives
-  only here, not in `/faq/`. The hero carries no price (mamasan: prices go last)
+  only here, not in `/faq/`. The hero carries no price, and neither does the share preview (`<title>`, `description`, `og:*`, `og-cometime.jpg`), because LINE and Telegram show it first (mamasan: prices go last)
 - `/faq/` - "what is it, where is it" for the books, the Hub and its works, the protocol, research and open events; each answer
   points to that thing's own page instead of restating it. It is also the second source LINE FoZone reads
   (`data-fozone-corpus="faq-v1"`); the markup contract is Control-Room

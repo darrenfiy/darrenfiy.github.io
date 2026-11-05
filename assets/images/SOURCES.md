@@ -110,7 +110,9 @@ center-cropped to the size below.
 `https://mamasan.three-quarters.net/cometime/` taken 2026-11-04 with Manus `scripts/reusable_tools/site_screenshot.mjs`.
 
 `og/og-cometime.jpg` (1200×630) is a headless-Chrome render of a share card built from this page's own hero markup,
-`cometime.css` and `cometime.js`; its source HTML is in the Drive folder above.
+`cometime.css` and `cometime.js`; its source HTML is in the Drive folder above. Remade 2026-11-05 without the price
+(mamasan: the price comes last, so a share preview must not show it); the page's `og:image` URL carries `?v=20261105`
+so LINE / Telegram / Facebook fetch the new image instead of a cached one.
 
 The page also reuses the card portraits `card/alisha.webp` and `card/darren.webp` (Darren asked on 2026-11-04 to use
 his card image here).

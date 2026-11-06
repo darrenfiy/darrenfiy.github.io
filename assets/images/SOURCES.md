@@ -107,7 +107,7 @@ center-cropped to the size below.
 | `blank-card.webp` (720×900) | `card.png`, 4:5 | `fcd0e2460d7331f63b67e6fb8dcf4aa6bbe428e999106a9234ec588362c8944a` |
 
 `work-cometime.webp` (1200×750) is a headless-Chrome screenshot of the first screen of
-`https://mamasan.three-quarters.net/cometime/` taken 2026-11-04 with Manus `scripts/reusable_tools/site_screenshot.mjs`.
+`https://mamasan.three-quarters.net/cometime/` retaken 2026-11-06 when that page became the candle version, with Manus `scripts/reusable_tools/site_screenshot.mjs`.
 
 `og/og-cometime.jpg` (1200×630) is a headless-Chrome render of a share card built from this page's own hero markup,
 `cometime.css` and `cometime.js`; its source HTML is in the Drive folder above. Remade 2026-11-05 without the price
